@@ -96,6 +96,17 @@ export default function AdminProducts() {
 
   const pageCount = Math.max(1, Math.ceil((list.data?.total ?? 0) / PAGE_SIZE));
 
+  const removeProduct = async (p: Product) => {
+    if (!window.confirm(`Delete “${p.name}”? This also removes its images. This cannot be undone.`)) return;
+    try {
+      await deleteProduct(p);
+      toast.success('Product deleted');
+      list.reload();
+    } catch (e) {
+      toast.error('Could not delete product', friendlyError(e));
+    }
+  };
+
   return (
     <>
       <AdminPageHeader
@@ -146,7 +157,39 @@ export default function AdminProducts() {
       ) : !list.data?.items.length ? (
         <EmptyState title="No products found" description="Adjust the filters or create a new product." />
       ) : (
-        <div className={cn('card overflow-x-auto', list.loading && 'opacity-60')}>
+        <>
+        <ul className={cn('space-y-3 md:hidden', list.loading && 'opacity-60')}>
+          {list.data.items.map((p) => (
+            <li key={p.id} className="card p-4">
+              <div className="flex gap-3">
+                <ImageWithFallback src={p.images[0]?.url} alt="" className="h-20 w-16 shrink-0 rounded-lg object-cover" />
+                <div className="min-w-0 flex-1">
+                  <Link to={`/admin/products/${p.id}/edit`} className="line-clamp-2 font-medium text-white">{p.name}</Link>
+                  <p className="mt-0.5 text-xs text-ink-500">{p.sku} · {p.category?.name ?? 'Uncategorized'}</p>
+                  <div className="mt-1.5 flex flex-wrap items-center gap-2">
+                    <span className="text-sm font-semibold text-white">{formatCurrency(p.price, p.currency)}</span>
+                    {p.salePrice !== null && <s className="text-xs text-ink-500">{formatCurrency(p.regularPrice, p.currency)}</s>}
+                    <span className={cn('rounded-md px-2 py-0.5 text-xs font-semibold capitalize', STATUS_STYLES[p.status])}>{p.status}</span>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-3 flex items-center justify-between gap-3 border-t border-ink-800 pt-3">
+                <div className="flex items-center gap-2 text-xs text-ink-400">
+                  Stock <StockCell key={`m-${p.id}-${p.inventoryQuantity}`} product={p} onSaved={list.reload} />
+                </div>
+                <div className="flex gap-2">
+                  <Link to={`/admin/products/${p.id}/edit`} className="btn-secondary px-3 py-2">
+                    <Pencil className="h-4 w-4" aria-hidden="true" /> Edit
+                  </Link>
+                  <button type="button" className="btn-danger px-3 py-2" onClick={() => removeProduct(p)} aria-label={`Delete ${p.name}`}>
+                    <Trash2 className="h-4 w-4" aria-hidden="true" /> Delete
+                  </button>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <div className={cn('card hidden overflow-x-auto md:block', list.loading && 'opacity-60')}>
           <table className="table-admin min-w-[860px]">
             <thead>
               <tr>
@@ -186,16 +229,7 @@ export default function AdminProducts() {
                         type="button"
                         className="icon-btn h-8 w-8 hover:text-rose-300"
                         aria-label={`Delete ${p.name}`}
-                        onClick={async () => {
-                          if (!window.confirm(`Delete “${p.name}”? This also removes its images. This cannot be undone.`)) return;
-                          try {
-                            await deleteProduct(p);
-                            toast.success('Product deleted');
-                            list.reload();
-                          } catch (e) {
-                            toast.error('Could not delete product', friendlyError(e));
-                          }
-                        }}
+                        onClick={() => removeProduct(p)}
                       >
                         <Trash2 className="h-4 w-4" />
                       </button>
@@ -206,6 +240,7 @@ export default function AdminProducts() {
             </tbody>
           </table>
         </div>
+        </>
       )}
       <Pagination
         page={page}

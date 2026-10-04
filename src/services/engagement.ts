@@ -76,6 +76,8 @@ export async function saveSiteSettings(settings: SiteSettings): Promise<void> {
 export const COMMUNITY_SLOTS = 8;
 
 export const emptySiteImages = (): SiteImages => ({
+  logo: null,
+  favicon: null,
   hero: null,
   heroStage: null,
   heroLeft: null,
@@ -96,6 +98,8 @@ export async function fetchSiteImages(): Promise<SiteImages> {
   const v = (data?.value ?? {}) as Record<string, unknown>;
   const community = Array.isArray(v.community) ? v.community : [];
   return {
+    logo: str(v.logo),
+    favicon: str(v.favicon),
     hero: str(v.hero),
     heroStage: str(v.heroStage),
     heroLeft: str(v.heroLeft),

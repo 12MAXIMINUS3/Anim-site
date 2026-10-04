@@ -23,12 +23,14 @@ interface SlotProps {
   custom: boolean;
   kind?: 'image' | 'video';
   aspect?: string;
+  /** Shown when there is no preview image. */
+  emptyText?: string;
   onUpload: (file: File) => Promise<void>;
   onDelete: () => Promise<void>;
 }
 
 /** One replaceable image (or video) with preview, upload/replace and delete. */
-function Slot({ label, hint, preview, custom, kind = 'image', aspect = 'aspect-[4/5]', onUpload, onDelete }: SlotProps) {
+function Slot({ label, hint, preview, custom, kind = 'image', aspect = 'aspect-[4/5]', emptyText = 'Nothing set', onUpload, onDelete }: SlotProps) {
   const input = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState<'upload' | 'delete' | null>(null);
 
@@ -54,7 +56,7 @@ function Slot({ label, hint, preview, custom, kind = 'image', aspect = 'aspect-[
             <ImageWithFallback src={preview} alt="" className="absolute inset-0 h-full w-full object-cover" />
           )
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center text-xs text-ink-500">Nothing set</div>
+          <div className="absolute inset-0 flex items-center justify-center text-xs text-ink-500">{emptyText}</div>
         )}
         <span
           className={cn(
@@ -175,6 +177,13 @@ export default function AdminSiteImages() {
           </p>
           <Link to="/admin/products" className="btn-secondary px-3 py-2">Manage product photos</Link>
         </div>
+
+        <Section title="Logo & browser icon" description="The logo appears in the header, footer, sign-in pages and admin. Use a transparent PNG or SVG, ideally wide (about 4:1). The browser icon shows on the tab — a square image works best.">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <Slot label="Store logo" hint="Replaces the built-in N logo" aspect="aspect-[4/1]" preview={images.logo} emptyText="Built-in logo in use" custom={!!images.logo} onUpload={setSingle('logo')} onDelete={clearSingle('logo')} />
+            <Slot label="Browser-tab icon" hint="Square, e.g. 512 × 512" aspect="aspect-square" preview={images.favicon ?? '/favicon.svg'} custom={!!images.favicon} onUpload={setSingle('favicon')} onDelete={clearSingle('favicon')} />
+          </div>
+        </Section>
 
         <Section
           title="Home page — hero banner"

@@ -246,6 +246,10 @@ export interface SiteSettings {
 
 /** Admin-managed images for site-wide slots (null = use the built-in default). */
 export interface SiteImages {
+  /** Store logo shown in the header, footer, login and admin (replaces the built-in logo). */
+  logo: string | null;
+  /** Browser-tab icon. */
+  favicon: string | null;
   /** Full hero banner image (used when no hero figures are set). */
   hero: string | null;
   /** Background behind the three hero figures. */

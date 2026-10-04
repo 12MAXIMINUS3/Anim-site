@@ -27,6 +27,13 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     void refresh();
   }, [refresh]);
 
+  useEffect(() => {
+    const link = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
+    if (!link) return;
+    link.href = images.favicon ?? '/favicon.svg';
+    link.type = images.favicon ? '' : 'image/svg+xml';
+  }, [images.favicon]);
+
   const value = useMemo(() => ({ settings, images, refresh }), [settings, images, refresh]);
   return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>;
 }

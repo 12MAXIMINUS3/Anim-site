@@ -95,6 +95,7 @@ interface Character {
   giant: boolean; // looming silhouette in the background
   trim: boolean; // wave trim on coat hem
   orbitCards: boolean; // glowing cards circling the figure
+  magicCircle: boolean; // glowing geometric circle behind the figure
 }
 
 /**
@@ -130,7 +131,7 @@ export const SERIES_THEMES: Record<string, Partial<Character>> = {
   // gentle, cosy girl with a woven fruit basket (no zodiac animals, no ribbons)
   'fruits-basket': { hair: '#9ad7b0', hairStyle: 'bob', outfit: 'skirt', primary: '#e8916b', secondary: '#fbe7c6', accessory: 'basket', headPiece: 'none', expression: 'smile', armAngle: -40, fx: '#fdba74' },
   // card mage with glowing cards circling her (no winged star wand, no frilly hat)
-  'cardcaptor-sakura': { hair: '#d7d9e6', hairStyle: 'bob', outfit: 'gown', primary: '#23305e', secondary: '#e3b65c', accessory: 'orb', headPiece: 'none', orbitCards: true, expression: 'open', fx: '#67e8f9' },
+  'cardcaptor-sakura': { hair: '#c8a2f0', hairStyle: 'twintails', eyes: '#d97706', outfit: 'skirt', primary: '#1f4e5a', secondary: '#f2c66d', accessory: 'staff', headPiece: 'none', expression: 'open', armAngle: -28, magicCircle: true, fx: '#f472b6' },
 };
 
 function makeCharacter(seed: string, kind: FigureKind, fx: string, theme?: Partial<Character>): Character {
@@ -160,6 +161,7 @@ function makeCharacter(seed: string, kind: FigureKind, fx: string, theme?: Parti
     giant: false,
     trim: false,
     orbitCards: false,
+    magicCircle: false,
   };
   const c: Character = theme ? { ...base, ...theme } : base;
   if (kind === 'chibi') c.cape = false;
@@ -443,7 +445,36 @@ function fullBody(c: Character, id: string, kind: FigureKind): string {
         .join('')
     : '';
 
+  const circle = c.magicCircle
+    ? (() => {
+        const cx = 400;
+        const cy = 470;
+        const ring = (r: number, w: number, o: number) => `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${c.fx}" stroke-width="${w}" opacity="${o}"/>`;
+        const square = (rot: number) => `<rect x="${cx - 150}" y="${cy - 150}" width="300" height="300" fill="none" stroke="${c.fx}" stroke-width="2.5" opacity=".7" transform="rotate(${rot} ${cx} ${cy})"/>`;
+        const ticks = Array.from({ length: 36 }, (_, i) => {
+          const a = (i / 36) * Math.PI * 2;
+          const r1 = 238;
+          const r2 = i % 3 === 0 ? 256 : 248;
+          return `<line x1="${f(cx + Math.cos(a) * r1)}" y1="${f(cy + Math.sin(a) * r1)}" x2="${f(cx + Math.cos(a) * r2)}" y2="${f(cy + Math.sin(a) * r2)}" stroke="${c.fx}" stroke-width="2" opacity=".75"/>`;
+        }).join('');
+        const nodes = [0, 1, 2, 3, 4, 5]
+          .map((i) => {
+            const a = (i / 6) * Math.PI * 2 - Math.PI / 2;
+            const x = cx + Math.cos(a) * 196;
+            const y = cy + Math.sin(a) * 196;
+            return `<circle cx="${f(x)}" cy="${f(y)}" r="20" fill="#1a0f24" stroke="${c.fx}" stroke-width="2.5" opacity=".9"/><circle cx="${f(x)}" cy="${f(y)}" r="6" fill="${c.fx}" opacity=".85"/>`;
+          })
+          .join('');
+        return `<g>
+          <circle cx="${cx}" cy="${cy}" r="270" fill="${c.fx}" opacity=".12" filter="url(#${id}-soft)"/>
+          ${ring(262, 4, 0.85)}${ring(232, 2, 0.6)}${ring(176, 3, 0.75)}${ring(110, 2, 0.5)}
+          ${ticks}${square(0)}${square(45)}${nodes}
+        </g>`;
+      })()
+    : '';
+
   return `<g>
+    ${circle}
     ${aura}
     ${orbit}
     ${wings}

@@ -51,6 +51,7 @@
     <ellipse cx="400" cy="800" rx="218" ry="36" fill="#262038"/>
     <ellipse cx="400" cy="800" rx="218" ry="36" fill="none" stroke="#62e38a" stroke-opacity=".55" stroke-width="2.5"/>
     <ellipse cx="400" cy="800" rx="196" ry="28" fill="none" stroke="#fff" stroke-opacity=".06" stroke-width="8"/><g>
+    
     <path d="M400 150 C290 230 240 420 262 600 C278 712 330 790 400 806 C470 790 522 712 538 600 C560 420 510 230 400 150Z" fill="#62e38a" opacity=".22" filter="url(#phs0tbk-soft)"/>
        <path d="M400 168 C306 246 262 420 280 596 C294 700 340 776 400 790 C460 776 506 700 520 596 C538 420 494 246 400 168Z" fill="none" stroke="#62e38a" stroke-width="3" opacity=".55"/>
     

@@ -8,6 +8,7 @@ import { Skeleton } from '@/components/ui/States';
 import { NewsletterForm } from '@/components/layout/NewsletterForm';
 import { communityImagePath, heroFigurePaths, heroImagePath, homeVideoPath } from '@/data/seedProducts';
 import { ANIME_SERIES, HERO_SERIES, seriesHref } from '@/data/series';
+import { useSettings } from '@/context/SettingsContext';
 
 export function SectionHeading({ eyebrow, title, action, id }: { eyebrow?: string; title: string; action?: ReactNode; id?: string }) {
   return (
@@ -23,7 +24,25 @@ export function SectionHeading({ eyebrow, title, action, id }: { eyebrow?: strin
   );
 }
 
+/** Home images: admin-chosen (Admin → Site images) or the built-in defaults. */
+function useHomeImages() {
+  const { images } = useSettings();
+  const defaults = heroFigurePaths();
+  return {
+    hero: images.hero ?? heroImagePath(),
+    heroStage: images.heroStage ?? '/images/hero/hero-stage.svg',
+    figures: {
+      left: images.heroLeft ?? defaults.left,
+      center: images.heroCenter ?? defaults.center,
+      right: images.heroRight ?? defaults.right,
+    },
+    homeVideo: images.homeVideo ?? homeVideoPath(),
+    community: (i: number) => images.community[i] ?? communityImagePath(i),
+  };
+}
+
 export function Hero() {
+  const home = useHomeImages();
   return (
     <section className="relative overflow-hidden border-b border-ink-800" aria-labelledby="hero-heading">
       <HeroBackgroundVideo />
@@ -72,11 +91,11 @@ export function Hero() {
         </div>
         <div className="relative">
           <div className="absolute -inset-6 rounded-[2rem] bg-gradient-to-tr from-nova-600/30 via-transparent to-pulse-400/20 blur-2xl" aria-hidden="true" />
-          {Object.values(heroFigurePaths()).some(Boolean) ? (
-            <HeroStage />
+          {Object.values(home.figures).some(Boolean) ? (
+            <HeroStage figures={home.figures} stage={home.heroStage} />
           ) : (
             <ImageWithFallback
-              src={heroImagePath()}
+              src={home.hero}
               alt="Original placeholder artwork of three stylized collectible figures on glowing pedestals"
               loading="eager"
               className="relative aspect-[6/5] w-full rounded-[2rem] border border-ink-700 object-cover shadow-2xl"
@@ -204,12 +223,13 @@ export function NewsletterSection() {
 const HANDLES = ['@shelfof_stars', '@neonronin_fan', '@petalknight.club', '@abyssal.archive', '@minimaxi', '@ember.display', '@vitrine.vibes', '@clockwork.corner'];
 
 export function CommunityStrip() {
+  const home = useHomeImages();
   return (
     <div>
       <ul className="scrollbar-none -mx-4 flex snap-x gap-3 overflow-x-auto px-4 sm:mx-0 sm:grid sm:grid-cols-4 sm:px-0 lg:grid-cols-8">
         {HANDLES.map((h, i) => (
           <li key={h} className="group relative w-40 shrink-0 snap-start overflow-hidden rounded-2xl sm:w-auto">
-            <ImageWithFallback src={communityImagePath(i)} alt={`Community shelf photo shared by ${h}`} className="aspect-square w-full object-cover transition duration-500 group-hover:scale-110" />
+            <ImageWithFallback src={home.community(i)} alt={`Community shelf photo shared by ${h}`} className="aspect-square w-full object-cover transition duration-500 group-hover:scale-110" />
             <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-950/90 to-transparent px-3 pb-2 pt-6 text-[11px] font-medium text-ink-200">{h}</span>
           </li>
         ))}
@@ -260,11 +280,10 @@ const HERO_SLOTS = [
   { key: 'center', x: 50, base: 83.5, width: 31, z: 2 },
 ] as const;
 
-function HeroStage() {
-  const figures = heroFigurePaths();
+function HeroStage({ figures, stage }: { figures: { left: string | null; center: string | null; right: string | null }; stage: string }) {
   return (
     <div className="relative aspect-[6/5] w-full overflow-hidden rounded-[2rem] border border-ink-700 shadow-2xl">
-      <img src="/images/hero/hero-stage.svg" alt="" className="absolute inset-0 h-full w-full object-cover" />
+      <img src={stage} alt="" className="absolute inset-0 h-full w-full object-cover" />
       {HERO_SLOTS.map(({ key, x, base, width, z }) => {
         const src = figures[key];
         if (!src) return null;
@@ -315,7 +334,7 @@ function HeroStage() {
  * A dark purple overlay keeps text readable; paused for reduced-motion users.
  */
 function HeroBackgroundVideo() {
-  const src = homeVideoPath();
+  const src = useHomeImages().homeVideo;
   const ref = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     const video = ref.current;

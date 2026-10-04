@@ -13,6 +13,7 @@ export const supabase: SupabaseClient | null = isSupabaseConfigured
   : null;
 
 export const PRODUCT_IMAGES_BUCKET = 'product-images';
+export const SITE_IMAGES_BUCKET = 'site-images';
 
 export function requireSupabase(): SupabaseClient {
   if (!supabase) {

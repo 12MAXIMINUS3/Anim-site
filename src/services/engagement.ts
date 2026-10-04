@@ -1,4 +1,4 @@
-import type { Review, SiteSettings } from '@/types';
+import type { Review, SiteImages, SiteSettings } from '@/types';
 import { requireSupabase, supabase, throwIfError } from '@/lib/supabase';
 import { seedSettings } from '@/data/seedProducts';
 import { mapReview } from './mappers';
@@ -70,5 +70,43 @@ export async function saveSiteSettings(settings: SiteSettings): Promise<void> {
     value: settings[k],
   }));
   const { error } = await requireSupabase().from('site_settings').upsert(rows, { onConflict: 'key' });
+  throwIfError(error);
+}
+
+export const COMMUNITY_SLOTS = 8;
+
+export const emptySiteImages = (): SiteImages => ({
+  hero: null,
+  heroStage: null,
+  heroLeft: null,
+  heroCenter: null,
+  heroRight: null,
+  homeVideo: null,
+  community: Array.from({ length: COMMUNITY_SLOTS }, () => null),
+});
+
+const str = (v: unknown) => (typeof v === 'string' && v.trim() ? v : null);
+
+/** Site-wide images chosen in Admin → Site images (stored in site_settings as `site_images`). */
+export async function fetchSiteImages(): Promise<SiteImages> {
+  const base = emptySiteImages();
+  if (!supabase) return base;
+  const { data, error } = await supabase.from('site_settings').select('value').eq('key', 'site_images').maybeSingle();
+  throwIfError(error);
+  const v = (data?.value ?? {}) as Record<string, unknown>;
+  const community = Array.isArray(v.community) ? v.community : [];
+  return {
+    hero: str(v.hero),
+    heroStage: str(v.heroStage),
+    heroLeft: str(v.heroLeft),
+    heroCenter: str(v.heroCenter),
+    heroRight: str(v.heroRight),
+    homeVideo: str(v.homeVideo),
+    community: base.community.map((_, i) => str(community[i])),
+  };
+}
+
+export async function saveSiteImages(images: SiteImages): Promise<void> {
+  const { error } = await requireSupabase().from('site_settings').upsert({ key: 'site_images', value: images }, { onConflict: 'key' });
   throwIfError(error);
 }

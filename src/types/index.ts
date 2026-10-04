@@ -243,3 +243,18 @@ export interface SiteSettings {
   currency: string;
   shippingMessage: string;
 }
+
+/** Admin-managed images for site-wide slots (null = use the built-in default). */
+export interface SiteImages {
+  /** Full hero banner image (used when no hero figures are set). */
+  hero: string | null;
+  /** Background behind the three hero figures. */
+  heroStage: string | null;
+  heroLeft: string | null;
+  heroCenter: string | null;
+  heroRight: string | null;
+  /** Looping background video behind the home hero. */
+  homeVideo: string | null;
+  /** "From the community" gallery, 8 slots. */
+  community: Array<string | null>;
+}

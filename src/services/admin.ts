@@ -10,7 +10,7 @@ import type {
   Profile,
   UserRole,
 } from '@/types';
-import { PRODUCT_IMAGES_BUCKET, requireSupabase, throwIfError } from '@/lib/supabase';
+import { PRODUCT_IMAGES_BUCKET, requireSupabase, SITE_IMAGES_BUCKET, throwIfError } from '@/lib/supabase';
 import { mapBrand, mapCategory, mapOrder, mapProduct, mapProfile, PRODUCT_SELECT } from './mappers';
 import { invalidateTaxonomyCache } from './supabaseCatalog';
 import { sanitizeSearch } from './catalogTypes';
@@ -351,4 +351,43 @@ export async function adminListCustomers(f: { search: string; page: number; page
 export async function setUserRole(userId: string, role: UserRole): Promise<void> {
   const { error } = await requireSupabase().from('profiles').update({ role }).eq('id', userId);
   throwIfError(error);
+}
+
+// ─────────────────────────────── Site images ──────────────────────────────
+
+const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
+const MAX_VIDEO_BYTES = 50 * 1024 * 1024;
+
+/** Uploads a file for a site-wide image slot and returns its public URL. */
+export async function uploadSiteFile(file: File, folder: string, kind: 'image' | 'video' = 'image'): Promise<string> {
+  const isVideo = file.type.startsWith('video/');
+  if (kind === 'image' && !file.type.startsWith('image/')) throw new Error(`${file.name} is not an image.`);
+  if (kind === 'video' && !isVideo) throw new Error(`${file.name} is not a video (use MP4 or WebM).`);
+  if (file.size > (isVideo ? MAX_VIDEO_BYTES : MAX_IMAGE_BYTES)) {
+    throw new Error(`${file.name} is larger than ${isVideo ? 50 : 10} MB.`);
+  }
+  const ext = file.name.split('.').pop()?.toLowerCase() ?? (isVideo ? 'mp4' : 'jpg');
+  const base = file.name.replace(/\.[^.]+$/, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40) || 'file';
+  const path = `${folder}/${Date.now()}-${base}.${ext}`;
+  const sb = requireSupabase();
+  const up = await sb.storage.from(SITE_IMAGES_BUCKET).upload(path, file, { cacheControl: '31536000', upsert: false, contentType: file.type });
+  throwIfError(up.error);
+  return sb.storage.from(SITE_IMAGES_BUCKET).getPublicUrl(path).data.publicUrl;
+}
+
+/** Deletes a previously uploaded site file (ignores built-in default images). */
+export async function deleteSiteFile(url: string | null | undefined): Promise<void> {
+  if (!url) return;
+  const marker = `/storage/v1/object/public/${SITE_IMAGES_BUCKET}/`;
+  const i = url.indexOf(marker);
+  if (i < 0) return;
+  const { error } = await requireSupabase().storage.from(SITE_IMAGES_BUCKET).remove([decodeURIComponent(url.slice(i + marker.length))]);
+  throwIfError(error);
+}
+
+/** Sets (or clears, with null) a category's tile image. */
+export async function setCategoryImage(id: string, url: string | null): Promise<void> {
+  const { error } = await requireSupabase().from('categories').update({ image_url: url }).eq('id', id);
+  throwIfError(error);
+  invalidateTaxonomyCache();
 }

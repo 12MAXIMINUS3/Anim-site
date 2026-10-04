@@ -16,7 +16,6 @@ import {
   placeholderCategoryPath,
   placeholderProductPath,
   productImagePaths,
-  reviewsForSeedProduct,
   seedBrands,
   seedCategories,
   seedProducts,
@@ -427,20 +426,9 @@ function buildSql(): string {
     lines.push('');
   }
 
-  lines.push('-- Example reviews (seeded reviews have no user_id)');
+  lines.push('-- Sample reviews were removed by the store owner; clear any left from older seeds.');
   lines.push(
     `delete from public.reviews where user_id is null and product_id in (select id from public.products where slug in (${slugList}));`,
-  );
-  lines.push('insert into public.reviews (product_id, author_name, rating, title, body, is_approved, created_at) values');
-  lines.push(
-    seedProducts
-      .flatMap((p, i) =>
-        reviewsForSeedProduct(i).map(
-          (r, k) =>
-            `  ((select id from public.products where slug = ${q(p.slug)}), ${q(r.authorName)}, ${r.rating}, ${q(r.title)}, ${q(r.body)}, true, now() - interval '${Math.max(1, p.daysAgo - k * 2 - 1)} days')`,
-        ),
-      )
-      .join(',\n') + ';',
   );
   lines.push('');
 

@@ -1141,11 +1141,12 @@ export const seedReviewPool: SeedReview[] = [
   { authorName: 'Ibrahim A.', rating: 4, title: 'Sturdy and well made', body: 'No leaning after weeks on display. Base is heavy and the joints are tight.' },
 ];
 
-/** Returns the example reviews assigned to the product at `index`. */
-/** Example reviews for the seed product at `index` (none for sample listings). */
-export function reviewsForSeedProduct(index: number): SeedReview[] {
-  return seedProducts[index]?.sample ? [] : reviewsForProduct(index);
+/** Example reviews for the seed product at `index`. The store owner removed all sample reviews, so none are seeded. */
+export function reviewsForSeedProduct(_index: number): SeedReview[] {
+  return [];
 }
+
+/** Returns the example reviews assigned to the product at `index` (kept for reference; not seeded). */
 
 export function reviewsForProduct(index: number): SeedReview[] {
   const count = 2 + (index % 3);

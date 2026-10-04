@@ -45,11 +45,13 @@
       <stop offset="1" stop-color="#f472b6"/>
     </linearGradient>
     <filter id="p9xbq0a-soft" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="12"/></filter></defs><ellipse cx="400" cy="470" rx="250" ry="330" fill="#f472b6" opacity=".14" filter="url(#p9xbq0a-soft)"/>
-    <path d="M300 0 L500 0 L640 820 L160 820Z" fill="#fff" opacity=".025"/><g><g transform="translate(400 800) scale(1.12) translate(-400 -800)"><ellipse cx="400" cy="858" rx="236" ry="40" fill="#000" opacity=".5"/>
+    <path d="M300 0 L500 0 L640 820 L160 820Z" fill="#fff" opacity=".025"/>
+    <g><g transform="translate(400 800) scale(1.12) translate(-400 -800)"><ellipse cx="400" cy="858" rx="236" ry="40" fill="#000" opacity=".5"/>
     <path d="M182 800 L182 836 Q400 880 618 836 L618 800Z" fill="url(#p9xbq0a-base)"/>
     <ellipse cx="400" cy="800" rx="218" ry="36" fill="#262038"/>
     <ellipse cx="400" cy="800" rx="218" ry="36" fill="none" stroke="#f472b6" stroke-opacity=".55" stroke-width="2.5"/>
     <ellipse cx="400" cy="800" rx="196" ry="28" fill="none" stroke="#fff" stroke-opacity=".06" stroke-width="8"/><g>
+    
     
     <g transform="translate(400 300)"><path d="M-68 -12 C-84 -100 84 -100 68 -12 L74 52 Q66 78 44 72 L-44 72 Q-66 78 -74 52Z" fill="url(#p9xbq0a-hair)"/></g>
     <path d="M346 404 C300 520 250 660 214 780 Q330 800 400 760 Q470 800 586 780 C550 660 500 520 454 404Z" fill="#867d6b"/>
@@ -62,8 +64,10 @@
     <path d="M360 520 C332 566 304 612 292 646 Q400 672 508 646 C496 612 468 566 440 520Z" fill="url(#p9xbq0a-cloth)"/>
           <path d="M379 524 L312.5 656" stroke="#4f1428" stroke-width="2.5" opacity=".5"/><path d="M389.5 524 L356.25 656" stroke="#4f1428" stroke-width="2.5" opacity=".5"/><path d="M400 524 L400 656" stroke="#4f1428" stroke-width="2.5" opacity=".5"/><path d="M410.5 524 L443.75 656" stroke="#4f1428" stroke-width="2.5" opacity=".5"/><path d="M421 524 L487.5 656" stroke="#4f1428" stroke-width="2.5" opacity=".5"/>
           <path d="M292 646 Q400 672 508 646" stroke="#f3e3c3" stroke-width="5" fill="none"/>
+    
     <path d="M344 408 Q318 470 328 548" stroke="#6e1c37" stroke-width="26" fill="none" stroke-linecap="round"/>
     <circle cx="328" cy="556" r="12" fill="#fde4d6"/>
+    
     
     <rect x="388" y="356" width="24" height="40" fill="#e9d2c5"/>
     <path d="M338 412 Q350 394 374 390 L426 390 Q450 394 462 412 L454 470 Q442 506 442 522 L358 522 Q358 506 346 470Z" fill="url(#p9xbq0a-cloth)"/>
@@ -72,6 +76,7 @@
     <rect x="354" y="508" width="92" height="16" rx="4" fill="#f3e3c3"/>
     <rect x="392" y="506" width="16" height="20" rx="3" fill="#9e947f"/>
     <path d="M368 450 Q400 462 432 450" stroke="#4f1428" stroke-width="2.5" fill="none" opacity=".6"/>
+    
     
     <g transform="translate(400 300)"><g>
     <path d="M-52 -6 C-54 32 -30 62 0 72 C30 62 54 32 52 -6 C52 -60 -52 -60 -52 -6Z" fill="#fde4d6"/>

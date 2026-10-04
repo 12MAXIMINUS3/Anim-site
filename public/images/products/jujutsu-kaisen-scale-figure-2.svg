@@ -26,9 +26,9 @@
   <rect width="800" height="1000" fill="url(#pmzdeot-grid)"/>
   <circle cx="400" cy="460" r="260" fill="#8b5cf6" opacity=".16" filter="url(#pmzdeot-glow)"/>
   <defs><linearGradient id="pmzdeot-hair" x1="0" y1="0" x2="0.4" y2="1">
-      <stop offset="0" stop-color="#6ddbb3"/>
-      <stop offset=".55" stop-color="#3ccf9a"/>
-      <stop offset="1" stop-color="#247c5c"/>
+      <stop offset="0" stop-color="#63866b"/>
+      <stop offset=".55" stop-color="#2f5d3a"/>
+      <stop offset="1" stop-color="#1c3823"/>
     </linearGradient>
     <radialGradient id="pmzdeot-iris" cx="50%" cy="30%" r="70%">
       <stop offset="0" stop-color="#791515"/>
@@ -36,49 +36,51 @@
       <stop offset="1" stop-color="#ec8888"/>
     </radialGradient>
     <linearGradient id="pmzdeot-cloth" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#f6f4fc"/>
-      <stop offset=".6" stop-color="#f4f1fb"/>
-      <stop offset="1" stop-color="#929197"/>
+      <stop offset="0" stop-color="#864754"/>
+      <stop offset=".6" stop-color="#6b1f2e"/>
+      <stop offset="1" stop-color="#40131c"/>
     </linearGradient>
     <linearGradient id="pmzdeot-blade" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#ffffff"/>
-      <stop offset="1" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#a35cff"/>
     </linearGradient>
-    <filter id="pmzdeot-soft" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="12"/></filter></defs><g transform="translate(400 400) scale(1.75) translate(-400 -380)"><ellipse cx="400" cy="470" rx="250" ry="330" fill="#22d3ee" opacity=".14" filter="url(#pmzdeot-soft)"/>
-    <path d="M300 0 L500 0 L640 820 L160 820Z" fill="#fff" opacity=".025"/><g><g transform="translate(400 800) scale(1.12) translate(-400 -800)"><ellipse cx="400" cy="858" rx="236" ry="40" fill="#000" opacity=".5"/>
+    <filter id="pmzdeot-soft" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="12"/></filter></defs><g transform="translate(400 400) scale(1.75) translate(-400 -380)"><ellipse cx="400" cy="470" rx="250" ry="330" fill="#a35cff" opacity=".14" filter="url(#pmzdeot-soft)"/>
+    <path d="M300 0 L500 0 L640 820 L160 820Z" fill="#fff" opacity=".025"/>
+    <g><g transform="translate(400 800) scale(1.12) translate(-400 -800)"><ellipse cx="400" cy="858" rx="236" ry="40" fill="#000" opacity=".5"/>
     <path d="M182 800 L182 836 Q400 880 618 836 L618 800Z" fill="url(#pmzdeot-base)"/>
     <ellipse cx="400" cy="800" rx="218" ry="36" fill="#262038"/>
-    <ellipse cx="400" cy="800" rx="218" ry="36" fill="none" stroke="#22d3ee" stroke-opacity=".55" stroke-width="2.5"/>
+    <ellipse cx="400" cy="800" rx="218" ry="36" fill="none" stroke="#a35cff" stroke-opacity=".55" stroke-width="2.5"/>
     <ellipse cx="400" cy="800" rx="196" ry="28" fill="none" stroke="#fff" stroke-opacity=".06" stroke-width="8"/><g>
     
-    <g transform="translate(400 300)"><path d="M30 -70 C110 -70 130 20 112 123.4 C104 185.0 132 205.6 116 235.6 C78 164.5 84 82.2 60 -10Z" fill="url(#pmzdeot-hair)"/>
-        <circle cx="62" cy="-58" r="10" fill="#7c3aed"/>
-        <path d="M-64 -10 C-80 -96 80 -96 64 -10 L62 30 L-62 30Z" fill="url(#pmzdeot-hair)"/></g>
     
-    <path d="M361.0 610 L391.0 610 L384.0 770 L360.0 770Z" fill="#1f1a2e"/>
-              <path d="M356.0 718 L388.0 718 L390.0 788 Q372.0 796 350.0 790Z" fill="#442082"/>
-              <path d="M409.0 610 L439.0 610 L440.0 770 L416.0 770Z" fill="#1f1a2e"/>
-              <path d="M412.0 718 L444.0 718 L446.0 788 Q428.0 796 406.0 790Z" fill="#442082"/>
+    <g transform="translate(400 300)"><path d="M-68 -12 C-84 -100 84 -100 68 -12 L74 52 Q66 78 44 72 L-44 72 Q-66 78 -74 52Z" fill="url(#pmzdeot-hair)"/></g>
+    
+    <path d="M361.0 610 L391.0 610 L384.0 770 L360.0 770Z" fill="#46141e"/>
+              <path d="M356.0 718 L388.0 718 L390.0 788 Q372.0 796 350.0 790Z" fill="#75613a"/>
+              <path d="M409.0 610 L439.0 610 L440.0 770 L416.0 770Z" fill="#46141e"/>
+              <path d="M412.0 718 L444.0 718 L446.0 788 Q428.0 796 406.0 790Z" fill="#75613a"/>
               
-    <path d="M360 520 C332 566 304 612 292 646 Q400 672 508 646 C496 612 468 566 440 520Z" fill="url(#pmzdeot-cloth)"/>
-          <path d="M379 524 L312.5 656" stroke="#9f9da3" stroke-width="2.5" opacity=".5"/><path d="M389.5 524 L356.25 656" stroke="#9f9da3" stroke-width="2.5" opacity=".5"/><path d="M400 524 L400 656" stroke="#9f9da3" stroke-width="2.5" opacity=".5"/><path d="M410.5 524 L443.75 656" stroke="#9f9da3" stroke-width="2.5" opacity=".5"/><path d="M421 524 L487.5 656" stroke="#9f9da3" stroke-width="2.5" opacity=".5"/>
-          <path d="M292 646 Q400 672 508 646" stroke="#7c3aed" stroke-width="5" fill="none"/>
-    <path d="M344 408 Q318 470 328 548" stroke="#dcd9e2" stroke-width="26" fill="none" stroke-linecap="round"/>
+    <path d="M352 470 C320 600 300 700 292 770 L372 770 L388 540 L412 540 L428 770 L508 770 C500 700 480 600 448 470Z" fill="url(#pmzdeot-cloth)"/>
+          <path d="M388 540 L372 770 M412 540 L428 770" stroke="#d4b06a" stroke-width="4"/>
+    
+    <path d="M344 408 Q318 470 328 548" stroke="#601c29" stroke-width="26" fill="none" stroke-linecap="round"/>
     <circle cx="328" cy="556" r="12" fill="#f8d5c2"/>
+    
     
     <rect x="388" y="356" width="24" height="40" fill="#e4c4b2"/>
     <path d="M338 412 Q350 394 374 390 L426 390 Q450 394 462 412 L454 470 Q442 506 442 522 L358 522 Q358 506 346 470Z" fill="url(#pmzdeot-cloth)"/>
-    <path d="M374 390 L400 436 L426 390" fill="#7c3aed" opacity=".9"/>
+    <path d="M374 390 L400 436 L426 390" fill="#d4b06a" opacity=".9"/>
     <path d="M378 390 L400 428 L422 390" fill="#f8d5c2"/>
-    <rect x="354" y="508" width="92" height="16" rx="4" fill="#7c3aed"/>
-    <rect x="392" y="506" width="16" height="20" rx="3" fill="#51269a"/>
-    <path d="M368 450 Q400 462 432 450" stroke="#9f9da3" stroke-width="2.5" fill="none" opacity=".6"/>
+    <rect x="354" y="508" width="92" height="16" rx="4" fill="#d4b06a"/>
+    <rect x="392" y="506" width="16" height="20" rx="3" fill="#8a7245"/>
+    <path d="M368 450 Q400 462 432 450" stroke="#46141e" stroke-width="2.5" fill="none" opacity=".6"/>
+    
     
     <g transform="translate(400 300)"><g>
     <path d="M-52 -6 C-54 32 -30 62 0 72 C30 62 54 32 52 -6 C52 -60 -52 -60 -52 -6Z" fill="#f8d5c2"/>
     <path d="M-52 -6 C-52 6 -46 14 -40 18 Q0 4 40 18 C46 14 52 6 52 -6 C40 -18 -40 -18 -52 -6Z" fill="#dabbab" opacity=".55"/>
-    <path d="M-34 -24 Q-22 -31 -10 -26" stroke="#278764" stroke-width="2.6" fill="none" stroke-linecap="round"/>
-    <path d="M34 -24 Q22 -31 10 -26" stroke="#278764" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+    <path d="M-34 -24 Q-22 -31 -10 -26" stroke="#1f3c26" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+    <path d="M34 -24 Q22 -31 10 -26" stroke="#1f3c26" stroke-width="2.6" fill="none" stroke-linecap="round"/>
     <g>
     <path d="M-34 2 Q-21 -14 -8 -2 Q-9 22 -21 27 Q-33 22 -34 2Z" fill="#fff"/>
     <ellipse cx="-21" cy="9" rx="11.5" ry="16" fill="url(#pmzdeot-iris)"/>
@@ -107,14 +109,15 @@
          <path d="M-62 -8 C-72 30 -68 74 -58 104 C-50 74 -48 30 -46 -2Z" fill="url(#pmzdeot-hair)"/>
          <path d="M62 -8 C72 30 68 74 58 104 C50 74 48 30 46 -2Z" fill="url(#pmzdeot-hair)"/>
     <path d="M-40 -56 Q0 -74 40 -56" stroke="#fff" stroke-opacity=".35" stroke-width="5" fill="none" stroke-linecap="round"/>
-    <path d="M-64 -40 Q0 -86 64 -40" stroke="#7c3aed" stroke-width="9" fill="none"/>
+    
   </g></g>
-    <path d="M456 408 L425.2 354.2 L365.6 317.5" stroke="#dcd9e2" stroke-width="24" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M456 408 L425.2 354.2 L365.6 317.5" stroke="#601c29" stroke-width="24" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
     <circle cx="365.6" cy="317.5" r="12" fill="#f8d5c2"/>
     
-    <path d="M365.6 317.5 L305.6 247.5 A90 90 0 0 1 425.6 247.5Z" fill="#7c3aed" stroke="#5729a6" stroke-width="2"/>
-        <line x1="365.6" y1="317.5" x2="309.6" y2="245.5" stroke="#51269a" stroke-width="1.5"/><line x1="365.6" y1="317.5" x2="337.6" y2="238.5" stroke="#51269a" stroke-width="1.5"/><line x1="365.6" y1="317.5" x2="365.6" y2="231.5" stroke="#51269a" stroke-width="1.5"/><line x1="365.6" y1="317.5" x2="393.6" y2="238.5" stroke="#51269a" stroke-width="1.5"/><line x1="365.6" y1="317.5" x2="421.6" y2="245.5" stroke="#51269a" stroke-width="1.5"/>
+    <circle cx="365.6" cy="277.5" r="26" fill="#a35cff" opacity=".85"/>
+        <circle cx="365.6" cy="277.5" r="56" fill="#a35cff" opacity=".3" filter="url(#pmzdeot-soft)"/>
+        <circle cx="357.6" cy="269.5" r="7" fill="#fff" opacity=".8"/>
     
-  </g></g></g><circle cx="550.0" cy="338.2" r="3.1" fill="#22d3ee" opacity="0.6"/><circle cx="619.7" cy="344.3" r="3.6" fill="#22d3ee" opacity="0.5"/><path d="M601.8 636.2 L603.6 641.9 L601.8 647.7 L600.1 641.9Z" fill="#fff" opacity="0.6"/><circle cx="541.0" cy="275.0" r="4.9" fill="#22d3ee" opacity="0.4"/><path d="M620.8 696.4 L624.0 707.3 L620.8 718.3 L617.5 707.3Z" fill="#fff" opacity="0.9"/><circle cx="277.7" cy="313.5" r="4.3" fill="#22d3ee" opacity="0.3"/><path d="M684.7 189.6 L688.2 201.4 L684.7 213.2 L681.1 201.4Z" fill="#fff" opacity="0.7"/><path d="M367.6 435.0 L370.3 443.9 L367.6 452.9 L364.9 443.9Z" fill="#fff" opacity="0.5"/><circle cx="553.1" cy="364.3" r="2.6" fill="#22d3ee" opacity="0.4"/><path d="M171.3 342.5 L174.4 352.5 L171.3 362.6 L168.3 352.5Z" fill="#fff" opacity="0.5"/><circle cx="326.7" cy="480.2" r="4.4" fill="#22d3ee" opacity="0.5"/><circle cx="376.8" cy="289.0" r="5.4" fill="#22d3ee" opacity="0.4"/><circle cx="179.8" cy="281.3" r="3.3" fill="#22d3ee" opacity="0.3"/><circle cx="325.7" cy="382.2" r="2.3" fill="#22d3ee" opacity="0.5"/><path d="M423.6 187.2 L426.4 196.4 L423.6 205.7 L420.8 196.4Z" fill="#fff" opacity="0.7"/><circle cx="234.4" cy="278.9" r="2.1" fill="#22d3ee" opacity="0.3"/></g>
+  </g></g></g><circle cx="550.0" cy="338.2" r="3.1" fill="#a35cff" opacity="0.6"/><circle cx="619.7" cy="344.3" r="3.6" fill="#a35cff" opacity="0.5"/><path d="M601.8 636.2 L603.6 641.9 L601.8 647.7 L600.1 641.9Z" fill="#fff" opacity="0.6"/><circle cx="541.0" cy="275.0" r="4.9" fill="#a35cff" opacity="0.4"/><path d="M620.8 696.4 L624.0 707.3 L620.8 718.3 L617.5 707.3Z" fill="#fff" opacity="0.9"/><circle cx="277.7" cy="313.5" r="4.3" fill="#a35cff" opacity="0.3"/><path d="M684.7 189.6 L688.2 201.4 L684.7 213.2 L681.1 201.4Z" fill="#fff" opacity="0.7"/><path d="M367.6 435.0 L370.3 443.9 L367.6 452.9 L364.9 443.9Z" fill="#fff" opacity="0.5"/><circle cx="553.1" cy="364.3" r="2.6" fill="#a35cff" opacity="0.4"/><path d="M171.3 342.5 L174.4 352.5 L171.3 362.6 L168.3 352.5Z" fill="#fff" opacity="0.5"/><circle cx="326.7" cy="480.2" r="4.4" fill="#a35cff" opacity="0.5"/><circle cx="376.8" cy="289.0" r="5.4" fill="#a35cff" opacity="0.4"/><circle cx="179.8" cy="281.3" r="3.3" fill="#a35cff" opacity="0.3"/><circle cx="325.7" cy="382.2" r="2.3" fill="#a35cff" opacity="0.5"/><path d="M423.6 187.2 L426.4 196.4 L423.6 205.7 L420.8 196.4Z" fill="#fff" opacity="0.7"/><circle cx="234.4" cy="278.9" r="2.1" fill="#a35cff" opacity="0.3"/></g>
   <rect y="930" width="800" height="70" fill="url(#pmzdeot-floor)"/>
 </svg>

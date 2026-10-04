@@ -23,7 +23,8 @@ import {
   seedSettings,
   type SeedProduct,
 } from '../src/data/seedProducts.ts';
-import { drawFigure } from './figure-art.ts';
+import { drawFigure, type DrawOptions } from './figure-art.ts';
+import { ANIME_SERIES } from '../src/data/series.ts';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const out = (rel: string, content: string) => {
@@ -90,7 +91,7 @@ const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 
 
 /** A stylized figure group drawn in an 800×1000 coordinate space. */
-function figureGroup(kind: Kind, seed: string, pal: [string, string, string], id: string, opts: { detail?: boolean } = {}): string {
+function figureGroup(kind: Kind, seed: string, pal: [string, string, string], id: string, opts: DrawOptions = {}): string {
   if (kind === 'figure' || kind === 'statue' || kind === 'chibi' || kind === 'action') {
     const fig = drawFigure(kind, seed, id, pal[2], opts);
     return `<defs>${fig.defs}</defs>${fig.art}`;
@@ -253,13 +254,15 @@ function defs(id: string, pal: [string, string, string]) {
 }
 
 function productSvg(p: SeedProduct, view: 1 | 2): string {
-  const kind = KIND_BY_CATEGORY[p.category] ?? 'figure';
+  const series = ANIME_SERIES.find((s) => s.name === p.franchise && s.slug !== 'uncategorized');
+  const acrylic = Boolean(p.sample && p.slug.endsWith('acrylic-stand'));
+  const kind: Kind = acrylic ? 'chibi' : KIND_BY_CATEGORY[p.category] ?? 'figure';
   const base = PALETTES[(FRANCHISE_PALETTE[p.franchise ?? ''] ?? hash(p.slug)) % PALETTES.length];
   const pal: [string, string, string] = view === 1 ? base : [base[0], base[1], base[2]];
   const id = `p${hash(p.slug + view).toString(36)}`;
   const isCharacter = kind === 'figure' || kind === 'statue' || kind === 'chibi' || kind === 'action';
   // Same character in both views (seeded by slug); view 2 is a close-up detail shot.
-  const figure = figureGroup(kind, p.slug, pal, id, { detail: view === 2 && isCharacter });
+  const figure = figureGroup(kind, p.slug, pal, id, { detail: view === 2 && isCharacter, theme: series?.slug, acrylic });
   const art = view === 2 && !isCharacter ? `<g transform="translate(800 0) scale(-1 1)">${figure}</g>` : figure;
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="${esc(p.name)} — original artwork">
   ${defs(id, pal)}

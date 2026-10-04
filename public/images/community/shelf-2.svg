@@ -45,7 +45,8 @@
       <stop offset="1" stop-color="#f0abfc"/>
     </linearGradient>
     <filter id="g1-soft" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="12"/></filter></defs><ellipse cx="400" cy="470" rx="250" ry="330" fill="#f0abfc" opacity=".14" filter="url(#g1-soft)"/>
-    <path d="M300 0 L500 0 L640 820 L160 820Z" fill="#fff" opacity=".025"/><g><ellipse cx="400" cy="858" rx="236" ry="40" fill="#000" opacity=".5"/>
+    <path d="M300 0 L500 0 L640 820 L160 820Z" fill="#fff" opacity=".025"/>
+    <g><ellipse cx="400" cy="858" rx="236" ry="40" fill="#000" opacity=".5"/>
     <path d="M182 800 L182 836 Q400 880 618 836 L618 800Z" fill="url(#g1-base)"/>
     <ellipse cx="400" cy="800" rx="218" ry="36" fill="#262038"/>
     <ellipse cx="400" cy="800" rx="218" ry="36" fill="none" stroke="#f0abfc" stroke-opacity=".55" stroke-width="2.5"/>

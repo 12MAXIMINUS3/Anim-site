@@ -45,11 +45,13 @@
       <stop offset="1" stop-color="#22d3ee"/>
     </linearGradient>
     <filter id="p1hk77fb-soft" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="12"/></filter></defs><ellipse cx="400" cy="470" rx="250" ry="330" fill="#22d3ee" opacity=".14" filter="url(#p1hk77fb-soft)"/>
-    <path d="M300 0 L500 0 L640 820 L160 820Z" fill="#fff" opacity=".025"/><g><g transform="translate(400 800) scale(1.12) translate(-400 -800)"><ellipse cx="400" cy="858" rx="236" ry="40" fill="#000" opacity=".5"/>
+    <path d="M300 0 L500 0 L640 820 L160 820Z" fill="#fff" opacity=".025"/>
+    <g><g transform="translate(400 800) scale(1.12) translate(-400 -800)"><ellipse cx="400" cy="858" rx="236" ry="40" fill="#000" opacity=".5"/>
     <path d="M182 800 L182 836 Q400 880 618 836 L618 800Z" fill="url(#p1hk77fb-base)"/>
     <ellipse cx="400" cy="800" rx="218" ry="36" fill="#262038"/>
     <ellipse cx="400" cy="800" rx="218" ry="36" fill="none" stroke="#22d3ee" stroke-opacity=".55" stroke-width="2.5"/>
     <ellipse cx="400" cy="800" rx="196" ry="28" fill="none" stroke="#fff" stroke-opacity=".06" stroke-width="8"/><g>
+    
     
     <g transform="translate(400 300)"><path d="M-66 -18 C-84 -96 84 -96 66 -18 C86 50 92.0 130.7 70.0 217.9 Q40 247.9 18 207.9 L0 231.9 L-18 207.9 Q-40 247.9 -70 217.9 C-92 130.7 -86 50 -66 -18Z" fill="url(#p1hk77fb-hair)"/></g>
     
@@ -60,8 +62,10 @@
               
     <path d="M352 470 C320 600 300 700 292 770 L372 770 L388 540 L412 540 L428 770 L508 770 C500 700 480 600 448 470Z" fill="url(#p1hk77fb-cloth)"/>
           <path d="M388 540 L372 770 M412 540 L428 770" stroke="#e2445c" stroke-width="4"/>
+    
     <path d="M344 408 Q318 470 328 548" stroke="#1c1c29" stroke-width="26" fill="none" stroke-linecap="round"/>
     <circle cx="328" cy="556" r="12" fill="#f1c3a6"/>
+    
     
     <rect x="388" y="356" width="24" height="40" fill="#deb399"/>
     <path d="M338 412 Q350 394 374 390 L426 390 Q450 394 462 412 L454 470 Q442 506 442 522 L358 522 Q358 506 346 470Z" fill="url(#p1hk77fb-cloth)"/>
@@ -70,6 +74,7 @@
     <rect x="354" y="508" width="92" height="16" rx="4" fill="#e2445c"/>
     <rect x="392" y="506" width="16" height="20" rx="3" fill="#932c3c"/>
     <path d="M368 450 Q400 462 432 450" stroke="#14141e" stroke-width="2.5" fill="none" opacity=".6"/>
+    
     
     <g transform="translate(400 300)"><g>
     <path d="M-52 -6 C-54 32 -30 62 0 72 C30 62 54 32 52 -6 C52 -60 -52 -60 -52 -6Z" fill="#f1c3a6"/>

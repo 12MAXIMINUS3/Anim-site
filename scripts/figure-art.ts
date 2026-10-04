@@ -69,8 +69,8 @@ const SKIN = ['#fde4d6', '#f8d5c2', '#f1c3a6', '#d9a37f', '#b07a56'];
 
 type HairStyle = 'long' | 'twintails' | 'ponytail' | 'bob' | 'spiky';
 type Outfit = 'gown' | 'skirt' | 'coat' | 'armor';
-type Accessory = 'sword' | 'staff' | 'orb' | 'fan' | 'book' | 'none';
-type HeadPiece = 'ribbon' | 'pin' | 'ears' | 'tiara' | 'headband' | 'none';
+type Accessory = 'sword' | 'staff' | 'orb' | 'fan' | 'book' | 'shuriken' | 'axe' | 'card' | 'none';
+type HeadPiece = 'ribbon' | 'pin' | 'ears' | 'tiara' | 'headband' | 'plate' | 'tricorn' | 'helmet' | 'none';
 type Expression = 'smile' | 'open' | 'calm' | 'wink';
 
 interface Character {
@@ -89,14 +89,49 @@ interface Character {
   cape: boolean;
   wings: boolean;
   fx: string; // effect colour
+  scarf: string | null;
+  shield: boolean;
+  aura: boolean;
+  giant: boolean; // looming silhouette in the background
+  trim: boolean; // wave trim on coat hem
 }
 
-function makeCharacter(seed: string, kind: FigureKind, fx: string): Character {
+/**
+ * Genre themes for the anime-series sections of the shop. Each is an ORIGINAL
+ * archetype (soldier, mage, ninja, pirate…) with colours, hair and outfits
+ * deliberately chosen NOT to resemble any existing character from that series.
+ */
+export const SERIES_THEMES: Record<string, Partial<Character>> = {
+  // field soldier with a looming giant silhouette in the background
+  'attack-on-titan': { hair: '#a0522d', hairStyle: 'ponytail', outfit: 'coat', primary: '#3d5a6c', secondary: '#c9b37e', accessory: 'sword', headPiece: 'none', giant: true, fx: '#e2a35a' },
+  // young mage with a star-emblem spell book
+  'black-clover': { hair: '#c26b2f', hairStyle: 'twintails', outfit: 'gown', primary: '#1f5f5b', secondary: '#e6c35c', accessory: 'book', headPiece: 'pin', cape: true, fx: '#7ef0c8' },
+  // spirit swordsman with a pale-blue glow
+  bleach: { hair: '#d9dde8', hairStyle: 'long', outfit: 'coat', primary: '#26355e', secondary: '#9fb8e8', accessory: 'sword', headPiece: 'none', fx: '#9fd8ff' },
+  // hunter in an indigo coat with wave trim and a flame-effect blade
+  'demon-slayer': { hair: '#1f4f5a', hairStyle: 'bob', outfit: 'coat', primary: '#3b3f8f', secondary: '#e8eef5', accessory: 'sword', headPiece: 'none', trim: true, fx: '#ff8a3d' },
+  // martial artist powering up with an energy aura
+  'dragon-ball': { hair: '#e98bb5', hairStyle: 'ponytail', outfit: 'coat', primary: '#5b3a8c', secondary: '#f2e6c9', accessory: 'none', headPiece: 'headband', aura: true, armAngle: -120, fx: '#62e38a' },
+  // student sorcerer holding a glowing energy orb
+  'jujutsu-kaisen': { hair: '#2f5d3a', hairStyle: 'bob', outfit: 'coat', primary: '#6b1f2e', secondary: '#d4b06a', accessory: 'orb', headPiece: 'none', fx: '#a35cff' },
+  // caped hero-in-training in a power pose
+  'my-hero-academia': { hair: '#1b1b24', hairStyle: 'bob', outfit: 'armor', primary: '#c62f3a', secondary: '#f3f4f6', accessory: 'none', headPiece: 'none', cape: true, aura: true, armAngle: -95, fx: '#ffd166' },
+  // ninja with a plain metal-plate headband, scarf and throwing star
+  'naruto-boruto': { hair: '#6b4fa8', hairStyle: 'ponytail', outfit: 'coat', primary: '#2f4a4a', secondary: '#9aa5b1', accessory: 'shuriken', headPiece: 'plate', scarf: '#d6c27a', fx: '#7ad3ff' },
+  // pirate adventurer with a feathered tricorn and cutlass
+  'one-piece': { hair: '#ece8e1', hairStyle: 'long', outfit: 'coat', primary: '#16606b', secondary: '#d9a441', accessory: 'sword', headPiece: 'tricorn', fx: '#ffd27a' },
+  // Viking warrior with helmet, round shield and axe
+  'vinland-saga': { hair: '#4a3226', hairStyle: 'long', outfit: 'coat', primary: '#6b4e32', secondary: '#b0b6bf', accessory: 'axe', headPiece: 'helmet', shield: true, fx: '#8fd3ff' },
+  // card duelist with a glowing creature card
+  'yu-gi-oh': { hair: '#b8a4f0', hairStyle: 'bob', outfit: 'coat', primary: '#eef0f6', secondary: '#6d4bd8', accessory: 'card', headPiece: 'none', fx: '#c084fc' },
+};
+
+function makeCharacter(seed: string, kind: FigureKind, fx: string, theme?: Partial<Character>): Character {
   const r = rng(seed);
   const [primary, secondary] = r.pick(OUTFIT);
   const outfit: Outfit = kind === 'action' ? 'armor' : r.pick(['gown', 'skirt', 'skirt', 'coat'] as const);
   const hairStyle: HairStyle = kind === 'action' ? r.pick(['spiky', 'bob', 'ponytail'] as const) : r.pick(['long', 'twintails', 'ponytail', 'bob', 'long', 'spiky'] as const);
-  return {
+  const base: Character = {
     hair: r.pick(HAIR),
     hairStyle,
     hairLen: r.range(120, 300),
@@ -112,7 +147,15 @@ function makeCharacter(seed: string, kind: FigureKind, fx: string): Character {
     cape: kind !== 'chibi' && r.next() < 0.35,
     wings: kind === 'statue' && r.next() < 0.6,
     fx,
+    scarf: null,
+    shield: false,
+    aura: false,
+    giant: false,
+    trim: false,
   };
+  const c: Character = theme ? { ...base, ...theme } : base;
+  if (kind === 'chibi') c.cape = false;
+  return c;
 }
 
 // ─────────────────────────────── head ─────────────────────────────────────
@@ -182,6 +225,20 @@ function head(c: Character, id: string): string {
         return `<path d="M-40 -78 L-30 -98 L-16 -84 L0 -106 L16 -84 L30 -98 L40 -78Z" fill="#f5d77a" stroke="#fff6cf" stroke-width="1.5"/><circle cx="0" cy="-90" r="5" fill="${c.eyes}"/>`;
       case 'headband':
         return `<path d="M-64 -40 Q0 -86 64 -40" stroke="${c.secondary}" stroke-width="9" fill="none"/>`;
+      case 'plate':
+        return `<path d="M-66 -38 Q0 -84 66 -38" stroke="${c.secondary}" stroke-width="13" fill="none"/>
+          <rect x="-22" y="-76" width="44" height="22" rx="4" fill="#cfd6de" stroke="#7d8a99" stroke-width="2"/>
+          <path d="M62 -40 C84 -30 96 -10 104 10 M62 -44 C90 -40 108 -26 120 -8" stroke="${c.secondary}" stroke-width="7" fill="none" stroke-linecap="round"/>`;
+      case 'tricorn':
+        return `<path d="M-96 -66 Q0 -34 96 -66 L66 -98 Q0 -150 -66 -98Z" fill="#1d1d2a"/>
+          <path d="M-96 -66 Q0 -34 96 -66" stroke="${c.secondary}" stroke-width="4" fill="none"/>
+          <path d="M30 -118 C70 -150 110 -130 120 -100 C96 -116 64 -118 36 -104Z" fill="#f2efe8" opacity=".9"/>`;
+      case 'helmet':
+        return `<path d="M-68 -34 C-68 -122 68 -122 68 -34Z" fill="${c.secondary}"/>
+          <path d="M-68 -34 L68 -34" stroke="${shade(c.secondary, -0.35)}" stroke-width="6"/>
+          <path d="M0 -112 L0 -34" stroke="${shade(c.secondary, -0.25)}" stroke-width="5"/>
+          <rect x="-5" y="-38" width="10" height="34" rx="3" fill="${shade(c.secondary, -0.2)}"/>
+          ${[-48, -24, 24, 48].map((x) => `<circle cx="${x}" cy="-44" r="3" fill="${shade(c.secondary, 0.4)}"/>`).join('')}`;
       default:
         return '';
     }
@@ -236,6 +293,23 @@ function accessory(c: Character, id: string, hx: number, hy: number): string {
         ${[-40, -20, 0, 20, 40].map((d) => `<line x1="${f(hx)}" y1="${f(hy)}" x2="${f(hx + d * 1.4)}" y2="${f(hy - 86 + Math.abs(d) * 0.35)}" stroke="${shade(c.secondary, -0.35)}" stroke-width="1.5"/>`).join('')}`;
     case 'book':
       return `<g transform="translate(${f(hx)} ${f(hy - 20)}) rotate(-12)"><rect x="-30" y="-22" width="60" height="44" rx="4" fill="${c.secondary}"/><rect x="-26" y="-18" width="52" height="36" rx="2" fill="#f8f4e8"/><line x1="0" y1="-18" x2="0" y2="18" stroke="#c9bfa5" stroke-width="2"/><circle cx="0" cy="-34" r="16" fill="${c.fx}" opacity=".5" filter="url(#${id}-soft)"/></g>`;
+    case 'shuriken':
+      return `<g transform="translate(${f(hx)} ${f(hy - 34)}) rotate(20)">
+        <path d="M0 -28 L7 -7 L28 0 L7 7 L0 28 L-7 7 L-28 0 L-7 -7Z" fill="#d3dbe5" stroke="#7d8a99" stroke-width="2"/>
+        <circle r="5" fill="#5b6675"/>
+        <circle r="34" fill="${c.fx}" opacity=".25" filter="url(#${id}-soft)"/>
+      </g>`;
+    case 'axe':
+      return `<line x1="${f(hx - 6)}" y1="${f(hy + 70)}" x2="${f(hx + 12)}" y2="${f(hy - 130)}" stroke="#5a3d28" stroke-width="8" stroke-linecap="round"/>
+        <path d="M${f(hx + 10)} ${f(hy - 126)} Q${f(hx + 66)} ${f(hy - 140)} ${f(hx + 72)} ${f(hy - 90)} Q${f(hx + 40)} ${f(hy - 96)} ${f(hx + 8)} ${f(hy - 84)}Z" fill="#cfd6de" stroke="#7d8a99" stroke-width="2"/>`;
+    case 'card':
+      return `<g transform="translate(${f(hx)} ${f(hy - 52)}) rotate(-10)">
+        <rect x="-44" y="-58" width="88" height="116" rx="8" fill="${c.fx}" opacity=".35" filter="url(#${id}-soft)"/>
+        <rect x="-26" y="-36" width="52" height="72" rx="5" fill="#2a1f4a" stroke="${c.fx}" stroke-width="3"/>
+        <rect x="-19" y="-28" width="38" height="34" rx="3" fill="${c.fx}" opacity=".7"/>
+        <path d="M-6 -11 L0 -22 L6 -11 L0 0Z" fill="#fff" opacity=".85"/>
+        <rect x="-19" y="12" width="38" height="16" rx="2" fill="#f1ecff" opacity=".8"/>
+      </g>`;
     default:
       return '';
   }
@@ -319,15 +393,37 @@ function fullBody(c: Character, id: string, kind: FigureKind): string {
         .join('') + `<ellipse cx="400" cy="400" rx="230" ry="150" fill="${c.fx}" opacity=".18" filter="url(#${id}-soft)"/>`
     : '';
 
+  const aura = c.aura
+    ? `<path d="M400 150 C290 230 240 420 262 600 C278 712 330 790 400 806 C470 790 522 712 538 600 C560 420 510 230 400 150Z" fill="${c.fx}" opacity=".22" filter="url(#${id}-soft)"/>
+       <path d="M400 168 C306 246 262 420 280 596 C294 700 340 776 400 790 C460 776 506 700 520 596 C538 420 494 246 400 168Z" fill="none" stroke="${c.fx}" stroke-width="3" opacity=".55"/>`
+    : '';
+  const scarf = c.scarf
+    ? `<path d="M370 392 Q400 414 430 392 L434 410 Q400 432 366 410Z" fill="${c.scarf}"/>
+       <path d="M424 404 C470 420 520 398 566 428 C524 446 470 446 422 424Z" fill="${shade(c.scarf, -0.15)}"/>`
+    : '';
+  const shield = c.shield
+    ? `<circle cx="316" cy="540" r="58" fill="${shade(c.primary, -0.25)}" stroke="${c.secondary}" stroke-width="7"/>
+       <path d="M316 482 L316 598 M258 540 L374 540" stroke="${shade(c.primary, -0.45)}" stroke-width="3"/>
+       <circle cx="316" cy="540" r="13" fill="${c.secondary}"/>`
+    : '';
+  const trim =
+    c.trim && c.outfit === 'coat'
+      ? `<path d="M296 756 q17 -14 34 0 t34 0 t34 0 M436 756 q17 -14 34 0 t34 0" stroke="${c.secondary}" stroke-width="5" fill="none"/>`
+      : '';
+
   return `<g>
+    ${aura}
     ${wings}
     <g transform="translate(400 300)">${backHair(c, id)}</g>
     ${cape}
     ${legs}
     ${lower}
+    ${trim}
     ${leftArm}
+    ${shield}
     <rect x="388" y="356" width="24" height="40" fill="${shade(c.skin, -0.08)}"/>
     ${torso}
+    ${scarf}
     ${shoulderPads}
     <g transform="translate(400 300)">${head(c, id)}</g>
     ${rightArm}
@@ -407,9 +503,19 @@ export function characterDefs(id: string, c: Character): string {
  * Returns `{ defs, art }` for a figure. `art` is in the 800×1000 space;
  * `detail` zooms into the upper body for a second product angle.
  */
-export function drawFigure(kind: FigureKind, seed: string, id: string, fx: string, opts: { detail?: boolean } = {}) {
+export interface DrawOptions {
+  detail?: boolean;
+  /** Series theme key from SERIES_THEMES. */
+  theme?: string;
+  /** Render as a chibi printed on a clear acrylic stand. */
+  acrylic?: boolean;
+}
+
+export function drawFigure(kind: FigureKind, seed: string, id: string, baseFx: string, opts: DrawOptions = {}) {
   const r = rng(seed + ':fx');
-  const c = makeCharacter(seed, kind, fx);
+  const theme = opts.theme ? SERIES_THEMES[opts.theme] : undefined;
+  const c = makeCharacter(seed, kind, baseFx, theme);
+  const fx = c.fx;
   const particles = Array.from({ length: 16 }, () => {
     const x = r.range(110, 690);
     const y = r.range(120, 720);
@@ -420,13 +526,22 @@ export function drawFigure(kind: FigureKind, seed: string, id: string, fx: strin
   }).join('');
 
   let body: string;
-  if (kind === 'chibi') body = `${pedestal(id, fx)}${chibiBody(c, id)}`;
+  if (kind === 'chibi' && opts.acrylic) {
+    body = `<ellipse cx="400" cy="846" rx="190" ry="26" fill="#000" opacity=".45"/>
+      <rect x="236" y="168" width="328" height="640" rx="44" fill="#ffffff" opacity=".07" stroke="#e0e7ff" stroke-opacity=".6" stroke-width="3"/>
+      ${chibiBody(c, id)}
+      <path d="M262 200 L330 200 L262 300Z" fill="#fff" opacity=".12"/>
+      <rect x="236" y="168" width="328" height="640" rx="44" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="1"/>
+      <rect x="250" y="804" width="300" height="30" rx="10" fill="#cfd8ff" opacity=".35" stroke="#e0e7ff" stroke-opacity=".6"/>
+      <rect x="330" y="808" width="140" height="8" rx="4" fill="#fff" opacity=".35"/>`;
+  } else if (kind === 'chibi') body = `${pedestal(id, fx)}${chibiBody(c, id)}`;
   else if (kind === 'statue') body = `${sculptedBase(id, c)}<g transform="translate(24 32) scale(.94)">${fullBody(c, id, kind)}</g>`;
   else body = `<g transform="translate(400 800) scale(1.12) translate(-400 -800)">${pedestal(id, fx)}${fullBody(c, id, kind)}</g>`;
 
   // Studio rim light + glow behind the figure.
   const backdrop = `<ellipse cx="400" cy="470" rx="250" ry="330" fill="${fx}" opacity=".14" filter="url(#${id}-soft)"/>
-    <path d="M300 0 L500 0 L640 820 L160 820Z" fill="#fff" opacity=".025"/>`;
+    <path d="M300 0 L500 0 L640 820 L160 820Z" fill="#fff" opacity=".025"/>
+    ${c.giant ? `<path d="M560 110 C604 80 664 96 672 146 C680 186 652 206 642 226 L708 300 L728 600 L664 600 L644 380 L622 640 L520 640 L520 380 L500 600 L436 600 L470 300 L538 226 C518 206 508 164 560 110Z" fill="#05050a" opacity=".55" filter="url(#${id}-soft)"/>` : ''}`;
 
   const art = `${backdrop}<g>${body}</g>${particles}`;
   const framed = opts.detail

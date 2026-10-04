@@ -30,9 +30,9 @@ export function Dialog({ open, onClose, title, hideTitle, variant = 'center', si
 
   const panel =
     variant === 'center'
-      ? cn('relative m-auto flex max-h-[92vh] w-[calc(100%-2rem)] flex-col rounded-2xl', sizeClass[size])
+      ? cn('relative m-auto flex max-h-[92dvh] w-[calc(100%-2rem)] flex-col rounded-2xl', sizeClass[size])
       : cn(
-          'fixed inset-y-0 flex w-full max-w-md flex-col',
+          'fixed inset-y-0 flex h-[100dvh] w-full max-w-md flex-col pb-safe',
           variant === 'right' ? 'right-0 border-l' : 'left-0 border-r',
         );
 

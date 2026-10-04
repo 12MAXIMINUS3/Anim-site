@@ -14,7 +14,7 @@ export function Toaster() {
     <div
       aria-live="polite"
       aria-relevant="additions"
-      className="pointer-events-none fixed inset-x-0 bottom-4 z-[60] flex flex-col items-center gap-2 px-4 sm:bottom-6 sm:right-6 sm:items-end"
+      className="pointer-events-none fixed inset-x-0 bottom-4 z-[60] mb-safe flex flex-col items-center gap-2 px-4 sm:bottom-6 sm:right-6 sm:items-end"
     >
       {toasts.map((t) => (
         <div

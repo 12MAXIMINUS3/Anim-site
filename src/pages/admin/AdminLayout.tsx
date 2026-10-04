@@ -48,11 +48,11 @@ export default function AdminLayout() {
   );
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen min-h-[100dvh]">
       <a href="#admin-main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-nova-600 focus:px-4 focus:py-2">
         Skip to content
       </a>
-      <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-ink-800 bg-ink-900/60 p-5 lg:flex">
+      <aside className="sticky top-0 hidden h-screen h-[100dvh] w-64 shrink-0 flex-col border-r border-ink-800 bg-ink-900/60 p-5 lg:flex">
         <Logo className="mb-8" />
         {nav}
         <p className="mt-auto truncate text-xs text-ink-500">Signed in as {profile?.fullName || user?.email}</p>

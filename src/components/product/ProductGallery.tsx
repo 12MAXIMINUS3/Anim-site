@@ -1,4 +1,4 @@
-import { useState, type MouseEvent } from 'react';
+import { useRef, useState, type MouseEvent, type TouchEvent } from 'react';
 import { ChevronLeft, ChevronRight, Expand } from 'lucide-react';
 import type { ProductImage } from '@/types';
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback';
@@ -12,6 +12,25 @@ export function ProductGallery({ images, name }: { images: ProductImage[]; name:
   const list = images.length ? images : [{ id: 'none', url: '', alt: name, position: 0, storagePath: null }];
   const current = list[Math.min(index, list.length - 1)];
   const go = (dir: 1 | -1) => setIndex((i) => (i + dir + list.length) % list.length);
+
+  // Swipe between images on touch screens.
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const swiped = useRef(false);
+  const onTouchStart = (e: TouchEvent) => {
+    touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    swiped.current = false;
+  };
+  const onTouchEnd = (e: TouchEvent) => {
+    const start = touchStart.current;
+    touchStart.current = null;
+    if (!start || list.length < 2) return;
+    const dx = e.changedTouches[0].clientX - start.x;
+    const dy = e.changedTouches[0].clientY - start.y;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+      swiped.current = true;
+      go(dx < 0 ? 1 : -1);
+    }
+  };
 
   const onMove = (e: MouseEvent<HTMLButtonElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -40,13 +59,19 @@ export function ProductGallery({ images, name }: { images: ProductImage[]; name:
         </div>
       )}
 
-      <div className="relative aspect-[4/5] flex-1 self-start">
+      <div className="relative aspect-[4/5] w-full md:w-auto md:flex-1 md:self-start" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
         <button
           type="button"
-          onClick={() => setLightbox(true)}
+          onClick={() => {
+            if (swiped.current) {
+              swiped.current = false;
+              return;
+            }
+            setLightbox(true);
+          }}
           onMouseMove={onMove}
           onMouseLeave={() => setZoom(null)}
-          className="group absolute inset-0 block h-full w-full cursor-zoom-in overflow-hidden rounded-2xl border border-ink-800 bg-ink-850"
+          className="group absolute inset-0 block h-full w-full cursor-zoom-in touch-pan-y overflow-hidden rounded-2xl border border-ink-800 bg-ink-850"
           aria-label={`Open full-size image: ${current.alt || name}`}
         >
           <ImageWithFallback
@@ -80,7 +105,7 @@ export function ProductGallery({ images, name }: { images: ProductImage[]; name:
             if (e.key === 'ArrowLeft') go(-1);
           }}
         >
-          <ImageWithFallback src={current.url} alt={current.alt || name} className="mx-auto max-h-[75vh] w-auto rounded-xl object-contain" />
+          <ImageWithFallback src={current.url} alt={current.alt || name} className="mx-auto max-h-[70dvh] w-auto rounded-xl object-contain" />
           {list.length > 1 && (
             <div className="mt-4 flex justify-center gap-3">
               <button type="button" className="btn-secondary" onClick={() => go(-1)}>

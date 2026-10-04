@@ -128,7 +128,7 @@ export function SearchBox({ autoFocus, onNavigate, className }: { autoFocus?: bo
 
       {showPanel && (
         <div className="absolute left-0 right-0 top-full z-40 mt-2 overflow-hidden rounded-2xl border border-ink-700 bg-ink-900 shadow-2xl">
-          <ul id={listId} role="listbox" aria-label="Search suggestions" className="max-h-[70vh] overflow-y-auto py-2">
+          <ul id={listId} role="listbox" aria-label="Search suggestions" className="max-h-[60dvh] overflow-y-auto py-2">
             {results.categories.map((c, i) => (
               <li
                 key={c.id}

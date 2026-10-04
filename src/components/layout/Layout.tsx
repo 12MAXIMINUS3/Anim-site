@@ -20,7 +20,7 @@ export function Layout() {
   }, [location.pathname, setMobileNav]);
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen min-h-[100dvh] flex-col">
       <a href="#main-content" className="sr-only z-50 rounded-lg bg-nova-600 px-4 py-2 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
         Skip to content
       </a>

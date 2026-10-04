@@ -17,7 +17,7 @@ export function CookieConsent() {
   };
 
   return (
-    <div role="region" aria-label="Cookie consent" className="fixed inset-x-3 bottom-3 z-40 sm:inset-x-auto sm:left-6 sm:max-w-md">
+    <div role="region" aria-label="Cookie consent" className="fixed inset-x-3 bottom-3 z-40 mb-safe sm:inset-x-auto sm:left-6 sm:max-w-md">
       <div className="card flex flex-col gap-4 p-5 shadow-2xl backdrop-blur">
         <div className="flex gap-3">
           <Cookie className="h-6 w-6 shrink-0 text-amber-300" aria-hidden="true" />

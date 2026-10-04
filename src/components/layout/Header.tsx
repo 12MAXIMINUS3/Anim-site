@@ -112,7 +112,7 @@ export function Header() {
       )}
     >
       <div className="container-page flex h-16 items-center gap-3 lg:h-20">
-        <button type="button" className="icon-btn -ml-2 lg:hidden" onClick={() => setMobileNav(true)} aria-label="Open menu">
+        <button type="button" className="icon-btn -ml-2 shrink-0 lg:hidden" onClick={() => setMobileNav(true)} aria-label="Open menu">
           <Menu className="h-5 w-5" />
         </button>
         <Logo />
@@ -132,11 +132,14 @@ export function Header() {
 
         <SearchBox className="ml-auto hidden w-full max-w-xs md:block lg:hidden xl:block xl:max-w-sm" />
 
-        <div className="ml-auto flex items-center gap-1 md:ml-2">
+        <div className="ml-auto flex shrink-0 items-center gap-0.5 sm:gap-1 md:ml-2">
           <button type="button" className="icon-btn md:hidden lg:inline-flex xl:hidden" onClick={() => setMobileSearch((v) => !v)} aria-label={mobileSearch ? 'Close search' : 'Open search'} aria-expanded={mobileSearch}>
             {mobileSearch ? <X className="h-5 w-5" /> : <Search className="h-5 w-5" />}
           </button>
-          <AccountMenu />
+          {/* On phones the account links live in the slide-out menu. */}
+          <div className="hidden sm:block">
+            <AccountMenu />
+          </div>
           <Link to="/wishlist" className="icon-btn relative" aria-label={`Wishlist, ${wishCount} item${wishCount === 1 ? '' : 's'}`}>
             <Heart className="h-5 w-5" />
             {wishCount > 0 && (

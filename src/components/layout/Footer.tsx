@@ -19,7 +19,7 @@ export function Footer() {
   const { settings } = useSettings();
   const { data: categories } = useAsync(() => catalog.listCategories(), []);
   const year = new Date().getFullYear();
-  const linkCls = 'text-sm text-ink-300 hover:text-white';
+  const linkCls = 'inline-block py-1.5 text-sm text-ink-300 hover:text-white sm:py-0';
 
   return (
     <footer className="mt-24 border-t border-ink-800 bg-ink-950">
@@ -61,7 +61,7 @@ export function Footer() {
 
         <nav aria-label="Shop categories">
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">Shop</h2>
-          <ul className="space-y-2.5">
+          <ul className="space-y-1 sm:space-y-2.5">
             <li><Link to="/shop" className={linkCls}>All products</Link></li>
             {(categories ?? []).map((c) => (
               <li key={c.id}>
@@ -75,7 +75,7 @@ export function Footer() {
 
         <nav aria-label="Anime series">
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">Anime</h2>
-          <ul className="space-y-2.5">
+          <ul className="space-y-1 sm:space-y-2.5">
             {ANIME_SERIES.map((s) => (
               <li key={s.slug}>
                 <Link to={seriesHref(s)} className={linkCls}>
@@ -88,7 +88,7 @@ export function Footer() {
 
         <nav aria-label="Help and policies">
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">Help</h2>
-          <ul className="space-y-2.5">
+          <ul className="space-y-1 sm:space-y-2.5">
             {[...HELP_LINKS, ...LEGAL_LINKS].map((l) => (
               <li key={l.to}>
                 <Link to={l.to} className={linkCls}>

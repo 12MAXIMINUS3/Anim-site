@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Dragon Ball Acrylic Display Stand — original artwork">
+  <defs>
+    <radialGradient id="p1cgujy-bg" cx="50%" cy="40%" r="75%">
+      <stop offset="0" stop-color="#f59e0b" stop-opacity=".55"/>
+      <stop offset=".55" stop-color="#1e1206"/>
+      <stop offset="1" stop-color="#07070b"/>
+    </radialGradient>
+    <linearGradient id="p1cgujy-body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f59e0b"/>
+      <stop offset="1" stop-color="#f472b6"/>
+    </linearGradient>
+    <linearGradient id="p1cgujy-base" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2e2945"/>
+      <stop offset="1" stop-color="#110f1a"/>
+    </linearGradient>
+    <filter id="p1cgujy-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+    <linearGradient id="p1cgujy-floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#07070b" stop-opacity="0"/>
+      <stop offset="1" stop-color="#07070b" stop-opacity=".7"/>
+    </linearGradient>
+    <pattern id="p1cgujy-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".04"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="1000" fill="url(#p1cgujy-bg)"/>
+  <rect width="800" height="1000" fill="url(#p1cgujy-grid)"/>
+  <circle cx="400" cy="460" r="260" fill="#f59e0b" opacity=".16" filter="url(#p1cgujy-glow)"/>
+  <g>
+      <circle cx="400" cy="470" r="240" fill="#f59e0b" opacity=".12"/>
+      <ellipse cx="260" cy="790" rx="62" ry="14" fill="#e0e7ff" opacity=".25" stroke="#e0e7ff" stroke-opacity=".6" stroke-width="3"/>
+          <path d="M260 790 L260 660.2638 L290 554.116" stroke="#e0e7ff" stroke-opacity=".75" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="260" cy="660.2638" r="12" fill="#f59e0b"/>
+          <rect x="278" y="536.116" width="34" height="22" rx="6" fill="#f472b6"/><ellipse cx="400" cy="790" rx="62" ry="14" fill="#e0e7ff" opacity=".25" stroke="#e0e7ff" stroke-opacity=".6" stroke-width="3"/>
+          <path d="M400 790 L400 571.3408999999999 L430 392.438" stroke="#e0e7ff" stroke-opacity=".75" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="400" cy="571.3408999999999" r="12" fill="#f59e0b"/>
+          <rect x="418" y="374.438" width="34" height="22" rx="6" fill="#f472b6"/><ellipse cx="540" cy="790" rx="62" ry="14" fill="#e0e7ff" opacity=".25" stroke="#e0e7ff" stroke-opacity=".6" stroke-width="3"/>
+          <path d="M540 790 L540 572.0911 L570 393.802" stroke="#e0e7ff" stroke-opacity=".75" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="540" cy="572.0911" r="12" fill="#f59e0b"/>
+          <rect x="558" y="375.802" width="34" height="22" rx="6" fill="#f472b6"/>
+      <rect x="170" y="808" width="460" height="16" rx="8" fill="#f472b6" opacity=".35"/>
+      <circle cx="405" cy="270" r="5.9" fill="#f472b6" opacity="0.83"/><circle cx="566" cy="441" r="6.2" fill="#f472b6" opacity="0.46"/><circle cx="622" cy="253" r="5.5" fill="#f472b6" opacity="0.37"/><circle cx="602" cy="643" r="3.0" fill="#f472b6" opacity="0.62"/><circle cx="434" cy="530" r="4.3" fill="#f472b6" opacity="0.53"/><circle cx="237" cy="145" r="2.4" fill="#f472b6" opacity="0.42"/><circle cx="661" cy="236" r="2.7" fill="#f472b6" opacity="0.51"/><circle cx="647" cy="263" r="2.0" fill="#f472b6" opacity="0.92"/><circle cx="518" cy="594" r="5.9" fill="#f472b6" opacity="0.62"/><circle cx="455" cy="424" r="6.3" fill="#f472b6" opacity="0.60"/><circle cx="282" cy="230" r="6.0" fill="#f472b6" opacity="0.61"/><circle cx="238" cy="368" r="4.9" fill="#f472b6" opacity="0.69"/><circle cx="312" cy="547" r="3.1" fill="#f472b6" opacity="0.80"/><circle cx="412" cy="198" r="4.6" fill="#f472b6" opacity="0.61"/>
+    </g>
+  <rect y="930" width="800" height="70" fill="url(#p1cgujy-floor)"/>
+</svg>

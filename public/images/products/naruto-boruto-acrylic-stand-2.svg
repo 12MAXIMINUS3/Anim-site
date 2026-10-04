@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Naruto / Boruto Acrylic Display Stand — original artwork">
+  <defs>
+    <radialGradient id="p1rsgh2b-bg" cx="50%" cy="40%" r="75%">
+      <stop offset="0" stop-color="#6366f1" stop-opacity=".55"/>
+      <stop offset=".55" stop-color="#0d1330"/>
+      <stop offset="1" stop-color="#07070b"/>
+    </radialGradient>
+    <linearGradient id="p1rsgh2b-body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#f0abfc"/>
+    </linearGradient>
+    <linearGradient id="p1rsgh2b-base" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2e2945"/>
+      <stop offset="1" stop-color="#110f1a"/>
+    </linearGradient>
+    <filter id="p1rsgh2b-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+    <linearGradient id="p1rsgh2b-floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#07070b" stop-opacity="0"/>
+      <stop offset="1" stop-color="#07070b" stop-opacity=".7"/>
+    </linearGradient>
+    <pattern id="p1rsgh2b-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".04"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="1000" fill="url(#p1rsgh2b-bg)"/>
+  <rect width="800" height="1000" fill="url(#p1rsgh2b-grid)"/>
+  <circle cx="400" cy="460" r="260" fill="#6366f1" opacity=".16" filter="url(#p1rsgh2b-glow)"/>
+  <g transform="translate(800 0) scale(-1 1)"><g>
+      <circle cx="400" cy="470" r="240" fill="#6366f1" opacity=".12"/>
+      <ellipse cx="260" cy="790" rx="62" ry="14" fill="#e0e7ff" opacity=".25" stroke="#e0e7ff" stroke-opacity=".6" stroke-width="3"/>
+          <path d="M260 790 L260 559.2893 L290 370.526" stroke="#e0e7ff" stroke-opacity=".75" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="260" cy="559.2893" r="12" fill="#6366f1"/>
+          <rect x="278" y="352.526" width="34" height="22" rx="6" fill="#f0abfc"/><ellipse cx="400" cy="790" rx="62" ry="14" fill="#e0e7ff" opacity=".25" stroke="#e0e7ff" stroke-opacity=".6" stroke-width="3"/>
+          <path d="M400 790 L400 642.2832 L430 521.424" stroke="#e0e7ff" stroke-opacity=".75" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="400" cy="642.2832" r="12" fill="#6366f1"/>
+          <rect x="418" y="503.424" width="34" height="22" rx="6" fill="#f0abfc"/><ellipse cx="540" cy="790" rx="62" ry="14" fill="#e0e7ff" opacity=".25" stroke="#e0e7ff" stroke-opacity=".6" stroke-width="3"/>
+          <path d="M540 790 L540 639.8148 L570 516.9359999999999" stroke="#e0e7ff" stroke-opacity=".75" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="540" cy="639.8148" r="12" fill="#6366f1"/>
+          <rect x="558" y="498.9359999999999" width="34" height="22" rx="6" fill="#f0abfc"/>
+      <rect x="170" y="808" width="460" height="16" rx="8" fill="#f0abfc" opacity=".35"/>
+      <circle cx="426" cy="610" r="6.7" fill="#f0abfc" opacity="0.84"/><circle cx="212" cy="141" r="6.7" fill="#f0abfc" opacity="0.43"/><circle cx="546" cy="157" r="5.3" fill="#f0abfc" opacity="0.87"/><circle cx="623" cy="229" r="2.2" fill="#f0abfc" opacity="0.84"/><circle cx="514" cy="679" r="3.9" fill="#f0abfc" opacity="0.85"/><circle cx="171" cy="588" r="2.0" fill="#f0abfc" opacity="0.66"/><circle cx="668" cy="425" r="6.9" fill="#f0abfc" opacity="0.76"/><circle cx="164" cy="519" r="6.9" fill="#f0abfc" opacity="0.58"/><circle cx="445" cy="242" r="2.7" fill="#f0abfc" opacity="0.73"/><circle cx="603" cy="251" r="6.8" fill="#f0abfc" opacity="0.54"/><circle cx="610" cy="221" r="6.3" fill="#f0abfc" opacity="0.79"/><circle cx="289" cy="446" r="4.7" fill="#f0abfc" opacity="0.89"/><circle cx="677" cy="595" r="6.0" fill="#f0abfc" opacity="0.57"/><circle cx="422" cy="193" r="6.8" fill="#f0abfc" opacity="0.77"/>
+    </g></g>
+  <rect y="930" width="800" height="70" fill="url(#p1rsgh2b-floor)"/>
+</svg>

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Dust-Guard Acrylic Cube 30 cm — original artwork">
+  <defs>
+    <radialGradient id="pkd9n20-bg" cx="50%" cy="40%" r="75%">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity=".55"/>
+      <stop offset=".55" stop-color="#061c26"/>
+      <stop offset="1" stop-color="#07070b"/>
+    </radialGradient>
+    <linearGradient id="pkd9n20-body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="pkd9n20-base" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2e2945"/>
+      <stop offset="1" stop-color="#110f1a"/>
+    </linearGradient>
+    <filter id="pkd9n20-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+    <linearGradient id="pkd9n20-floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#07070b" stop-opacity="0"/>
+      <stop offset="1" stop-color="#07070b" stop-opacity=".7"/>
+    </linearGradient>
+    <pattern id="pkd9n20-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".04"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="1000" fill="url(#pkd9n20-bg)"/>
+  <rect width="800" height="1000" fill="url(#pkd9n20-grid)"/>
+  <circle cx="400" cy="460" r="260" fill="#22d3ee" opacity=".16" filter="url(#pkd9n20-glow)"/>
+  <g>
+      <rect x="220" y="170" width="360" height="640" rx="14" fill="#22d3ee" fill-opacity=".08" stroke="#e0e7ff" stroke-opacity=".55" stroke-width="4"/>
+      <rect x="236" y="186" width="40" height="608" fill="#fff" opacity=".06"/>
+      <rect x="226" y="390" width="348" height="8" fill="#e0e7ff" opacity=".35"/><rect x="226" y="560" width="348" height="8" fill="#e0e7ff" opacity=".35"/>
+      <ellipse cx="300" cy="390" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M300 302.104 q -26 52.7376 -22 87.896 h 44 q 4 -35.1584 -22 -87.896z" fill="#818cf8" opacity=".85"/>
+              <circle cx="300" cy="290.104" r="14" fill="#ede9fe"/><ellipse cx="400" cy="390" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M400 308.584 q -26 48.849599999999995 -22 81.416 h 44 q 4 -32.5664 -22 -81.416z" fill="#22d3ee" opacity=".85"/>
+              <circle cx="400" cy="296.584" r="14" fill="#ede9fe"/><ellipse cx="500" cy="390" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M500 325.548 q -26 38.6712 -22 64.452 h 44 q 4 -25.7808 -22 -64.452z" fill="#818cf8" opacity=".85"/>
+              <circle cx="500" cy="313.548" r="14" fill="#ede9fe"/><ellipse cx="300" cy="560" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M300 495.072 q -26 38.956799999999994 -22 64.928 h 44 q 4 -25.9712 -22 -64.928z" fill="#818cf8" opacity=".85"/>
+              <circle cx="300" cy="483.072" r="14" fill="#ede9fe"/><ellipse cx="400" cy="560" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M400 506.276 q -26 32.2344 -22 53.724000000000004 h 44 q 4 -21.489600000000003 -22 -53.724000000000004z" fill="#22d3ee" opacity=".85"/>
+              <circle cx="400" cy="494.276" r="14" fill="#ede9fe"/><ellipse cx="500" cy="560" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M500 474.604 q -26 51.2376 -22 85.396 h 44 q 4 -34.1584 -22 -85.396z" fill="#818cf8" opacity=".85"/>
+              <circle cx="500" cy="462.604" r="14" fill="#ede9fe"/><ellipse cx="300" cy="730" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M300 679.256 q -26 30.446399999999997 -22 50.744 h 44 q 4 -20.297600000000003 -22 -50.744z" fill="#818cf8" opacity=".85"/>
+              <circle cx="300" cy="667.256" r="14" fill="#ede9fe"/><ellipse cx="400" cy="730" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M400 649.652 q -26 48.2088 -22 80.348 h 44 q 4 -32.1392 -22 -80.348z" fill="#22d3ee" opacity=".85"/>
+              <circle cx="400" cy="637.652" r="14" fill="#ede9fe"/><ellipse cx="500" cy="730" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M500 645.72 q -26 50.568 -22 84.28 h 44 q 4 -33.712 -22 -84.28z" fill="#818cf8" opacity=".85"/>
+              <circle cx="500" cy="633.72" r="14" fill="#ede9fe"/>
+      <rect x="200" y="806" width="400" height="40" rx="8" fill="#15121f" stroke="#818cf8" stroke-width="2"/>
+      <rect x="230" y="822" width="340" height="6" rx="3" fill="#818cf8" opacity=".9"/>
+      <ellipse cx="400" cy="826" rx="220" ry="20" fill="#818cf8" opacity=".18"/>
+    </g>
+  <rect y="930" width="800" height="70" fill="url(#pkd9n20-floor)"/>
+</svg>

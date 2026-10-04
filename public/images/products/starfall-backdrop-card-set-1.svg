@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Starfall Requiem Backdrop Card Set — original artwork">
+  <defs>
+    <radialGradient id="plvnxnq-bg" cx="50%" cy="40%" r="75%">
+      <stop offset="0" stop-color="#8b5cf6" stop-opacity=".55"/>
+      <stop offset=".55" stop-color="#150c2e"/>
+      <stop offset="1" stop-color="#07070b"/>
+    </radialGradient>
+    <linearGradient id="plvnxnq-body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="plvnxnq-base" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2e2945"/>
+      <stop offset="1" stop-color="#110f1a"/>
+    </linearGradient>
+    <filter id="plvnxnq-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+    <linearGradient id="plvnxnq-floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#07070b" stop-opacity="0"/>
+      <stop offset="1" stop-color="#07070b" stop-opacity=".7"/>
+    </linearGradient>
+    <pattern id="plvnxnq-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".04"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="1000" fill="url(#plvnxnq-bg)"/>
+  <rect width="800" height="1000" fill="url(#plvnxnq-grid)"/>
+  <circle cx="400" cy="460" r="260" fill="#8b5cf6" opacity=".16" filter="url(#plvnxnq-glow)"/>
+  <g>
+      <circle cx="400" cy="470" r="240" fill="#8b5cf6" opacity=".12"/>
+      <ellipse cx="260" cy="790" rx="62" ry="14" fill="#e0e7ff" opacity=".25" stroke="#e0e7ff" stroke-opacity=".6" stroke-width="3"/>
+          <path d="M260 790 L260 668.2377 L290 568.614" stroke="#e0e7ff" stroke-opacity=".75" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="260" cy="668.2377" r="12" fill="#8b5cf6"/>
+          <rect x="278" y="550.614" width="34" height="22" rx="6" fill="#22d3ee"/><ellipse cx="400" cy="790" rx="62" ry="14" fill="#e0e7ff" opacity=".25" stroke="#e0e7ff" stroke-opacity=".6" stroke-width="3"/>
+          <path d="M400 790 L400 593.7017 L430 433.094" stroke="#e0e7ff" stroke-opacity=".75" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="400" cy="593.7017" r="12" fill="#8b5cf6"/>
+          <rect x="418" y="415.094" width="34" height="22" rx="6" fill="#22d3ee"/><ellipse cx="540" cy="790" rx="62" ry="14" fill="#e0e7ff" opacity=".25" stroke="#e0e7ff" stroke-opacity=".6" stroke-width="3"/>
+          <path d="M540 790 L540 646.5787 L570 529.2339999999999" stroke="#e0e7ff" stroke-opacity=".75" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="540" cy="646.5787" r="12" fill="#8b5cf6"/>
+          <rect x="558" y="511.2339999999999" width="34" height="22" rx="6" fill="#22d3ee"/>
+      <rect x="170" y="808" width="460" height="16" rx="8" fill="#22d3ee" opacity=".35"/>
+      <circle cx="177" cy="228" r="2.1" fill="#22d3ee" opacity="0.43"/><circle cx="602" cy="143" r="5.6" fill="#22d3ee" opacity="0.39"/><circle cx="486" cy="507" r="6.9" fill="#22d3ee" opacity="0.87"/><circle cx="657" cy="411" r="4.8" fill="#22d3ee" opacity="0.69"/><circle cx="231" cy="649" r="4.1" fill="#22d3ee" opacity="0.78"/><circle cx="500" cy="552" r="6.3" fill="#22d3ee" opacity="0.83"/><circle cx="220" cy="569" r="3.4" fill="#22d3ee" opacity="0.48"/><circle cx="308" cy="223" r="3.8" fill="#22d3ee" opacity="0.94"/><circle cx="442" cy="652" r="3.3" fill="#22d3ee" opacity="0.37"/><circle cx="494" cy="565" r="2.6" fill="#22d3ee" opacity="0.48"/><circle cx="673" cy="407" r="4.0" fill="#22d3ee" opacity="0.94"/><circle cx="336" cy="615" r="4.9" fill="#22d3ee" opacity="0.69"/><circle cx="678" cy="275" r="4.3" fill="#22d3ee" opacity="0.50"/><circle cx="624" cy="544" r="5.3" fill="#22d3ee" opacity="0.64"/>
+    </g>
+  <rect y="930" width="800" height="70" fill="url(#plvnxnq-floor)"/>
+</svg>

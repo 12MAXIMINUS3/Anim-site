@@ -1,0 +1,30 @@
+/** Countries offered in address forms (ISO 3166-1 alpha-2). Extend as needed. */
+export const COUNTRIES: Array<{ code: string; name: string }> = [
+  { code: 'US', name: 'United States' },
+  { code: 'CA', name: 'Canada' },
+  { code: 'GB', name: 'United Kingdom' },
+  { code: 'IE', name: 'Ireland' },
+  { code: 'AU', name: 'Australia' },
+  { code: 'NZ', name: 'New Zealand' },
+  { code: 'DE', name: 'Germany' },
+  { code: 'FR', name: 'France' },
+  { code: 'ES', name: 'Spain' },
+  { code: 'IT', name: 'Italy' },
+  { code: 'NL', name: 'Netherlands' },
+  { code: 'SE', name: 'Sweden' },
+  { code: 'JP', name: 'Japan' },
+  { code: 'KR', name: 'South Korea' },
+  { code: 'SG', name: 'Singapore' },
+  { code: 'PH', name: 'Philippines' },
+  { code: 'IN', name: 'India' },
+  { code: 'BR', name: 'Brazil' },
+  { code: 'MX', name: 'Mexico' },
+  { code: 'ZA', name: 'South Africa' },
+  { code: 'NG', name: 'Nigeria' },
+  { code: 'CM', name: 'Cameroon' },
+  { code: 'KE', name: 'Kenya' },
+  { code: 'GH', name: 'Ghana' },
+  { code: 'AE', name: 'United Arab Emirates' },
+];
+
+export const countryName = (code: string) => COUNTRIES.find((c) => c.code === code)?.name ?? code;

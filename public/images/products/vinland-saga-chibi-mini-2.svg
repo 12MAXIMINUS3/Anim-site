@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Vinland Saga Chibi Mini Figure — original artwork">
+  <defs>
+    <radialGradient id="pij5bxa-bg" cx="50%" cy="40%" r="75%">
+      <stop offset="0" stop-color="#a78bfa" stop-opacity=".55"/>
+      <stop offset=".55" stop-color="#120c26"/>
+      <stop offset="1" stop-color="#07070b"/>
+    </radialGradient>
+    <linearGradient id="pij5bxa-body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a78bfa"/>
+      <stop offset="1" stop-color="#fde68a"/>
+    </linearGradient>
+    <linearGradient id="pij5bxa-base" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2e2945"/>
+      <stop offset="1" stop-color="#110f1a"/>
+    </linearGradient>
+    <filter id="pij5bxa-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+    <linearGradient id="pij5bxa-floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#07070b" stop-opacity="0"/>
+      <stop offset="1" stop-color="#07070b" stop-opacity=".7"/>
+    </linearGradient>
+    <pattern id="pij5bxa-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".04"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="1000" fill="url(#pij5bxa-bg)"/>
+  <rect width="800" height="1000" fill="url(#pij5bxa-grid)"/>
+  <circle cx="400" cy="460" r="260" fill="#a78bfa" opacity=".16" filter="url(#pij5bxa-glow)"/>
+  <defs><linearGradient id="pij5bxa-hair" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#5f5970"/>
+      <stop offset=".55" stop-color="#2a2140"/>
+      <stop offset="1" stop-color="#191426"/>
+    </linearGradient>
+    <radialGradient id="pij5bxa-iris" cx="50%" cy="30%" r="70%">
+      <stop offset="0" stop-color="#875706"/>
+      <stop offset=".6" stop-color="#f59e0b"/>
+      <stop offset="1" stop-color="#faca79"/>
+    </radialGradient>
+    <linearGradient id="pij5bxa-cloth" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4b576f"/>
+      <stop offset=".6" stop-color="#24324f"/>
+      <stop offset="1" stop-color="#161e2f"/>
+    </linearGradient>
+    <linearGradient id="pij5bxa-blade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#fde68a"/>
+    </linearGradient>
+    <filter id="pij5bxa-soft" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="12"/></filter></defs><g transform="translate(400 470) scale(1.55) translate(-400 -470)"><ellipse cx="400" cy="470" rx="250" ry="330" fill="#fde68a" opacity=".14" filter="url(#pij5bxa-soft)"/>
+    <path d="M300 0 L500 0 L640 820 L160 820Z" fill="#fff" opacity=".025"/><g><ellipse cx="400" cy="858" rx="236" ry="40" fill="#000" opacity=".5"/>
+    <path d="M182 800 L182 836 Q400 880 618 836 L618 800Z" fill="url(#pij5bxa-base)"/>
+    <ellipse cx="400" cy="800" rx="218" ry="36" fill="#262038"/>
+    <ellipse cx="400" cy="800" rx="218" ry="36" fill="none" stroke="#fde68a" stroke-opacity=".55" stroke-width="2.5"/>
+    <ellipse cx="400" cy="800" rx="196" ry="28" fill="none" stroke="#fff" stroke-opacity=".06" stroke-width="8"/><g>
+    <g transform="translate(400 430) scale(1.9)"><path d="M-66 -18 C-84 -96 84 -96 66 -18 C86 50 92.0 67.2 70.0 112.0 Q40 142.0 18 102.0 L0 126.0 L-18 102.0 Q-40 142.0 -70 112.0 C-92 67.2 -86 50 -66 -18Z" fill="url(#pij5bxa-hair)"/></g>
+    <path d="M372 700 L370 778 Q384 790 396 780 L396 700Z M404 700 L404 780 Q416 790 430 778 L428 700Z" fill="#45748b"/>
+    <path d="M352 588 Q400 566 448 588 L462 712 Q400 728 338 712Z" fill="url(#pij5bxa-cloth)"/>
+    <rect x="350" y="650" width="100" height="12" rx="4" fill="#7dd3fc"/>
+    <path d="M356 600 Q330 630 334 664" stroke="#202d47" stroke-width="22" fill="none" stroke-linecap="round"/>
+    <circle cx="334" cy="670" r="12" fill="#f1c3a6"/>
+    <path d="M444 600 Q462 600 470 600" stroke="#202d47" stroke-width="22" fill="none" stroke-linecap="round"/>
+    <circle cx="470" cy="600" r="12" fill="#f1c3a6"/>
+    <g transform="translate(400 430) scale(1.9)"><g>
+    <path d="M-52 -6 C-54 32 -30 62 0 72 C30 62 54 32 52 -6 C52 -60 -52 -60 -52 -6Z" fill="#f1c3a6"/>
+    <path d="M-52 -6 C-52 6 -46 14 -40 18 Q0 4 40 18 C46 14 52 6 52 -6 C40 -18 -40 -18 -52 -6Z" fill="#d4ac92" opacity=".55"/>
+    <path d="M-34 -24 Q-22 -31 -10 -26" stroke="#1b152a" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+    <path d="M34 -24 Q22 -31 10 -26" stroke="#1b152a" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+    <g>
+    <path d="M-34 2 Q-21 -14 -8 -2 Q-9 22 -21 27 Q-33 22 -34 2Z" fill="#fff"/>
+    <ellipse cx="-21" cy="9" rx="11.5" ry="16" fill="url(#pij5bxa-iris)"/>
+    <ellipse cx="-21" cy="11" rx="5.5" ry="8.5" fill="#160f24"/>
+    <circle cx="-17" cy="2" r="4.6" fill="#fff"/>
+    <circle cx="-25" cy="17" r="2.2" fill="#fff" opacity=".85"/>
+    <path d="M-37 0 Q-21 -19 -6 -5" stroke="#1d1428" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <path d="M-37 0 l-6 -5" stroke="#1d1428" stroke-width="3" stroke-linecap="round"/>
+    <path d="M-12 25 Q-21 29 -29 23" stroke="#5a4366" stroke-width="1.4" fill="none" opacity=".6"/>
+  </g>
+    <path d="M8 4 Q21 14 34 4" stroke="#2a1e3a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M1 30 l2 5" stroke="#a98974" stroke-width="1.6" stroke-linecap="round"/>
+    <ellipse cx="-31" cy="33" rx="9" ry="4" fill="#f58aa4" opacity=".45"/>
+    <ellipse cx="31" cy="33" rx="9" ry="4" fill="#f58aa4" opacity=".45"/>
+    <path d="M-8 45 Q0 52 8 45" stroke="#9a4a56" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    <path d="M-62 -4 C-70 -72 -30 -90 0 -88 C30 -90 70 -72 62 -4 L54 0 L46 -26 L38 8 L26 -24 L14 4 L4 -30 L-8 6 L-18 -26 L-30 8 L-40 -24 L-50 2Z" fill="url(#pij5bxa-hair)"/>
+         <path d="M-62 -8 C-72 30 -68 74 -58 104 C-50 74 -48 30 -46 -2Z" fill="url(#pij5bxa-hair)"/>
+         <path d="M62 -8 C72 30 68 74 58 104 C50 74 48 30 46 -2Z" fill="url(#pij5bxa-hair)"/>
+    <path d="M-40 -56 Q0 -74 40 -56" stroke="#fff" stroke-opacity=".35" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M-50 -52 l6 -14 l6 14 l14 2 l-11 9 l4 14 l-13 -8 l-13 8 l4 -14 l-11 -9Z" fill="#7dd3fc" stroke="#fff" stroke-opacity=".5"/>
+  </g></g>
+    <g transform="translate(470 600) scale(.55) translate(-470 -600)"><path d="M470.0 600.0 L410.0 530.0 A90 90 0 0 1 530.0 530.0Z" fill="#7dd3fc" stroke="#5894b0" stroke-width="2"/>
+        <line x1="470.0" y1="600.0" x2="414.0" y2="528.0" stroke="#5189a4" stroke-width="1.5"/><line x1="470.0" y1="600.0" x2="442.0" y2="521.0" stroke="#5189a4" stroke-width="1.5"/><line x1="470.0" y1="600.0" x2="470.0" y2="514.0" stroke="#5189a4" stroke-width="1.5"/><line x1="470.0" y1="600.0" x2="498.0" y2="521.0" stroke="#5189a4" stroke-width="1.5"/><line x1="470.0" y1="600.0" x2="526.0" y2="528.0" stroke="#5189a4" stroke-width="1.5"/></g>
+  </g></g><circle cx="503.8" cy="574.5" r="3.9" fill="#fde68a" opacity="0.6"/><path d="M659.7 454.7 L662.8 464.9 L659.7 475.0 L656.7 464.9Z" fill="#fff" opacity="0.6"/><circle cx="585.4" cy="670.8" r="2.7" fill="#fde68a" opacity="0.5"/><circle cx="620.3" cy="205.4" r="5.2" fill="#fde68a" opacity="0.6"/><path d="M358.1 382.7 L361.1 392.9 L358.1 403.1 L355.0 392.9Z" fill="#fff" opacity="0.7"/><circle cx="175.3" cy="221.9" r="3.8" fill="#fde68a" opacity="0.7"/><path d="M649.9 621.0 L652.7 630.6 L649.9 640.2 L647.0 630.6Z" fill="#fff" opacity="0.4"/><circle cx="593.2" cy="133.8" r="2.8" fill="#fde68a" opacity="0.5"/><circle cx="553.7" cy="221.9" r="2.7" fill="#fde68a" opacity="0.5"/><path d="M145.6 305.9 L148.7 316.3 L145.6 326.6 L142.4 316.3Z" fill="#fff" opacity="0.7"/><path d="M239.9 362.9 L242.1 370.2 L239.9 377.6 L237.7 370.2Z" fill="#fff" opacity="0.5"/><path d="M466.7 183.7 L468.0 188.1 L466.7 192.5 L465.3 188.1Z" fill="#fff" opacity="0.9"/><circle cx="373.1" cy="604.2" r="3.0" fill="#fde68a" opacity="0.4"/><circle cx="547.3" cy="220.0" r="5.3" fill="#fde68a" opacity="0.4"/><circle cx="407.3" cy="199.0" r="3.4" fill="#fde68a" opacity="0.5"/><path d="M257.1 176.2 L259.8 185.3 L257.1 194.3 L254.4 185.3Z" fill="#fff" opacity="0.5"/></g>
+  <rect y="930" width="800" height="70" fill="url(#pij5bxa-floor)"/>
+</svg>

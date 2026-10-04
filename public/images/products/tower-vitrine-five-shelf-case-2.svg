@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Tower Vitrine 5-Shelf Case — original artwork">
+  <defs>
+    <radialGradient id="p175wy51-bg" cx="50%" cy="40%" r="75%">
+      <stop offset="0" stop-color="#d946ef" stop-opacity=".55"/>
+      <stop offset=".55" stop-color="#1c0a24"/>
+      <stop offset="1" stop-color="#07070b"/>
+    </radialGradient>
+    <linearGradient id="p175wy51-body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d946ef"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="p175wy51-base" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2e2945"/>
+      <stop offset="1" stop-color="#110f1a"/>
+    </linearGradient>
+    <filter id="p175wy51-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+    <linearGradient id="p175wy51-floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#07070b" stop-opacity="0"/>
+      <stop offset="1" stop-color="#07070b" stop-opacity=".7"/>
+    </linearGradient>
+    <pattern id="p175wy51-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".04"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="1000" fill="url(#p175wy51-bg)"/>
+  <rect width="800" height="1000" fill="url(#p175wy51-grid)"/>
+  <circle cx="400" cy="460" r="260" fill="#d946ef" opacity=".16" filter="url(#p175wy51-glow)"/>
+  <g transform="translate(800 0) scale(-1 1)"><g>
+      <rect x="220" y="170" width="360" height="640" rx="14" fill="#d946ef" fill-opacity=".08" stroke="#e0e7ff" stroke-opacity=".55" stroke-width="4"/>
+      <rect x="236" y="186" width="40" height="608" fill="#fff" opacity=".06"/>
+      <rect x="226" y="390" width="348" height="8" fill="#e0e7ff" opacity=".35"/><rect x="226" y="560" width="348" height="8" fill="#e0e7ff" opacity=".35"/>
+      <ellipse cx="300" cy="390" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M300 313.11199999999997 q -26 46.1328 -22 76.888 h 44 q 4 -30.755200000000002 -22 -76.888z" fill="#a78bfa" opacity=".85"/>
+              <circle cx="300" cy="301.11199999999997" r="14" fill="#ede9fe"/><ellipse cx="400" cy="390" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M400 313.308 q -26 46.0152 -22 76.69200000000001 h 44 q 4 -30.676800000000004 -22 -76.69200000000001z" fill="#d946ef" opacity=".85"/>
+              <circle cx="400" cy="301.308" r="14" fill="#ede9fe"/><ellipse cx="500" cy="390" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M500 320.464 q -26 41.7216 -22 69.536 h 44 q 4 -27.814400000000003 -22 -69.536z" fill="#a78bfa" opacity=".85"/>
+              <circle cx="500" cy="308.464" r="14" fill="#ede9fe"/><ellipse cx="300" cy="560" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M300 487.61199999999997 q -26 43.4328 -22 72.388 h 44 q 4 -28.955200000000005 -22 -72.388z" fill="#a78bfa" opacity=".85"/>
+              <circle cx="300" cy="475.61199999999997" r="14" fill="#ede9fe"/><ellipse cx="400" cy="560" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M400 505.748 q -26 32.5512 -22 54.252 h 44 q 4 -21.7008 -22 -54.252z" fill="#d946ef" opacity=".85"/>
+              <circle cx="400" cy="493.748" r="14" fill="#ede9fe"/><ellipse cx="500" cy="560" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M500 491.224 q -26 41.2656 -22 68.776 h 44 q 4 -27.5104 -22 -68.776z" fill="#a78bfa" opacity=".85"/>
+              <circle cx="500" cy="479.224" r="14" fill="#ede9fe"/><ellipse cx="300" cy="730" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M300 671.928 q -26 34.8432 -22 58.072 h 44 q 4 -23.228800000000003 -22 -58.072z" fill="#a78bfa" opacity=".85"/>
+              <circle cx="300" cy="659.928" r="14" fill="#ede9fe"/><ellipse cx="400" cy="730" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M400 673.988 q -26 33.6072 -22 56.012 h 44 q 4 -22.4048 -22 -56.012z" fill="#d946ef" opacity=".85"/>
+              <circle cx="400" cy="661.988" r="14" fill="#ede9fe"/><ellipse cx="500" cy="730" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M500 643.9 q -26 51.66 -22 86.1 h 44 q 4 -34.44 -22 -86.1z" fill="#a78bfa" opacity=".85"/>
+              <circle cx="500" cy="631.9" r="14" fill="#ede9fe"/>
+      <rect x="200" y="806" width="400" height="40" rx="8" fill="#15121f" stroke="#a78bfa" stroke-width="2"/>
+      <rect x="230" y="822" width="340" height="6" rx="3" fill="#a78bfa" opacity=".9"/>
+      <ellipse cx="400" cy="826" rx="220" ry="20" fill="#a78bfa" opacity=".18"/>
+    </g></g>
+  <rect y="930" width="800" height="70" fill="url(#p175wy51-floor)"/>
+</svg>

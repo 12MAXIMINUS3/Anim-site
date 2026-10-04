@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Mini Shelf Riser Set (3 pcs) — original artwork">
+  <defs>
+    <radialGradient id="pjndi8l-bg" cx="50%" cy="40%" r="75%">
+      <stop offset="0" stop-color="#f59e0b" stop-opacity=".55"/>
+      <stop offset=".55" stop-color="#1e1206"/>
+      <stop offset="1" stop-color="#07070b"/>
+    </radialGradient>
+    <linearGradient id="pjndi8l-body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f59e0b"/>
+      <stop offset="1" stop-color="#f472b6"/>
+    </linearGradient>
+    <linearGradient id="pjndi8l-base" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2e2945"/>
+      <stop offset="1" stop-color="#110f1a"/>
+    </linearGradient>
+    <filter id="pjndi8l-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+    <linearGradient id="pjndi8l-floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#07070b" stop-opacity="0"/>
+      <stop offset="1" stop-color="#07070b" stop-opacity=".7"/>
+    </linearGradient>
+    <pattern id="pjndi8l-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".04"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="1000" fill="url(#pjndi8l-bg)"/>
+  <rect width="800" height="1000" fill="url(#pjndi8l-grid)"/>
+  <circle cx="400" cy="460" r="260" fill="#f59e0b" opacity=".16" filter="url(#pjndi8l-glow)"/>
+  <g>
+      <rect x="220" y="170" width="360" height="640" rx="14" fill="#f59e0b" fill-opacity=".08" stroke="#e0e7ff" stroke-opacity=".55" stroke-width="4"/>
+      <rect x="236" y="186" width="40" height="608" fill="#fff" opacity=".06"/>
+      <rect x="226" y="390" width="348" height="8" fill="#e0e7ff" opacity=".35"/><rect x="226" y="560" width="348" height="8" fill="#e0e7ff" opacity=".35"/>
+      <ellipse cx="300" cy="390" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M300 319.808 q -26 42.1152 -22 70.19200000000001 h 44 q 4 -28.076800000000006 -22 -70.19200000000001z" fill="#f472b6" opacity=".85"/>
+              <circle cx="300" cy="307.808" r="14" fill="#ede9fe"/><ellipse cx="400" cy="390" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M400 317.396 q -26 43.5624 -22 72.604 h 44 q 4 -29.041600000000003 -22 -72.604z" fill="#f59e0b" opacity=".85"/>
+              <circle cx="400" cy="305.396" r="14" fill="#ede9fe"/><ellipse cx="500" cy="390" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M500 318.832 q -26 42.7008 -22 71.168 h 44 q 4 -28.467200000000005 -22 -71.168z" fill="#f472b6" opacity=".85"/>
+              <circle cx="500" cy="306.832" r="14" fill="#ede9fe"/><ellipse cx="300" cy="560" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M300 508.404 q -26 30.957599999999996 -22 51.596 h 44 q 4 -20.6384 -22 -51.596z" fill="#f472b6" opacity=".85"/>
+              <circle cx="300" cy="496.404" r="14" fill="#ede9fe"/><ellipse cx="400" cy="560" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M400 500.272 q -26 35.8368 -22 59.728 h 44 q 4 -23.8912 -22 -59.728z" fill="#f59e0b" opacity=".85"/>
+              <circle cx="400" cy="488.272" r="14" fill="#ede9fe"/><ellipse cx="500" cy="560" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M500 487.64 q -26 43.416 -22 72.36 h 44 q 4 -28.944000000000003 -22 -72.36z" fill="#f472b6" opacity=".85"/>
+              <circle cx="500" cy="475.64" r="14" fill="#ede9fe"/><ellipse cx="300" cy="730" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M300 650.628 q -26 47.6232 -22 79.372 h 44 q 4 -31.748800000000003 -22 -79.372z" fill="#f472b6" opacity=".85"/>
+              <circle cx="300" cy="638.628" r="14" fill="#ede9fe"/><ellipse cx="400" cy="730" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M400 672.932 q -26 34.2408 -22 57.068 h 44 q 4 -22.8272 -22 -57.068z" fill="#f59e0b" opacity=".85"/>
+              <circle cx="400" cy="660.932" r="14" fill="#ede9fe"/><ellipse cx="500" cy="730" rx="30" ry="6" fill="#000" opacity=".4"/>
+              <path d="M500 648.636 q -26 48.818400000000004 -22 81.364 h 44 q 4 -32.5456 -22 -81.364z" fill="#f472b6" opacity=".85"/>
+              <circle cx="500" cy="636.636" r="14" fill="#ede9fe"/>
+      <rect x="200" y="806" width="400" height="40" rx="8" fill="#15121f" stroke="#f472b6" stroke-width="2"/>
+      <rect x="230" y="822" width="340" height="6" rx="3" fill="#f472b6" opacity=".9"/>
+      <ellipse cx="400" cy="826" rx="220" ry="20" fill="#f472b6" opacity=".18"/>
+    </g>
+  <rect y="930" width="800" height="70" fill="url(#pjndi8l-floor)"/>
+</svg>

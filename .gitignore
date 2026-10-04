@@ -1,0 +1,12 @@
+node_modules
+dist
+.env
+.env.local
+.env.*.local
+*.log
+.DS_Store
+.vercel
+
+# Third-party images — not owned by this project, never commit
+all-images/
+anim images/

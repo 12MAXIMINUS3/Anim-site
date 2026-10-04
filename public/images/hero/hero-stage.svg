@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1000" role="img" aria-label="Dark display stage with three glowing circular platforms">
+  <defs>
+    <radialGradient id="stage-bg" cx="50%" cy="40%" r="75%">
+      <stop offset="0" stop-color="#8b5cf6" stop-opacity=".55"/>
+      <stop offset=".55" stop-color="#150c2e"/>
+      <stop offset="1" stop-color="#07070b"/>
+    </radialGradient>
+    <linearGradient id="stage-body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="stage-base" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2e2945"/>
+      <stop offset="1" stop-color="#110f1a"/>
+    </linearGradient>
+    <filter id="stage-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+    <linearGradient id="stage-floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#07070b" stop-opacity="0"/>
+      <stop offset="1" stop-color="#07070b" stop-opacity=".7"/>
+    </linearGradient>
+    <pattern id="stage-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".04"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="1000" fill="url(#stage-bg)"/>
+  <rect width="1200" height="1000" fill="url(#stage-grid)"/>
+  <circle cx="600" cy="420" r="380" fill="#8b5cf6" opacity=".18" filter="url(#stage-glow)"/>
+  <circle cx="900" cy="300" r="200" fill="#22d3ee" opacity=".12" filter="url(#stage-glow)"/>
+  
+    <ellipse cx="290" cy="833.2" rx="148.5" ry="27" fill="#000" opacity=".5"/>
+    <rect x="155" y="790" width="270" height="35.1" rx="10" fill="url(#stage-base)"/>
+    <ellipse cx="290" cy="825.1" rx="135" ry="22.950000000000003" fill="#110f1a"/>
+    <ellipse cx="290" cy="790" rx="135" ry="22.950000000000003" fill="#2a2440" stroke="#22d3ee" stroke-opacity=".55" stroke-width="2.5"/>
+    <ellipse cx="290" cy="790" rx="124.2" ry="17.55" fill="none" stroke="#8b5cf6" stroke-opacity=".35" stroke-width="1.5"/>
+  
+    <ellipse cx="930" cy="830" rx="137.5" ry="25" fill="#000" opacity=".5"/>
+    <rect x="805" y="790" width="250" height="32.5" rx="10" fill="url(#stage-base)"/>
+    <ellipse cx="930" cy="822.5" rx="125" ry="21.25" fill="#110f1a"/>
+    <ellipse cx="930" cy="790" rx="125" ry="21.25" fill="#2a2440" stroke="#22d3ee" stroke-opacity=".55" stroke-width="2.5"/>
+    <ellipse cx="930" cy="790" rx="115" ry="16.25" fill="none" stroke="#8b5cf6" stroke-opacity=".35" stroke-width="1.5"/>
+  
+    <ellipse cx="600" cy="894" rx="220.00000000000003" ry="40" fill="#000" opacity=".5"/>
+    <rect x="400" y="830" width="400" height="52" rx="10" fill="url(#stage-base)"/>
+    <ellipse cx="600" cy="882" rx="200" ry="34" fill="#110f1a"/>
+    <ellipse cx="600" cy="830" rx="200" ry="34" fill="#2a2440" stroke="#22d3ee" stroke-opacity=".55" stroke-width="2.5"/>
+    <ellipse cx="600" cy="830" rx="184" ry="26" fill="none" stroke="#8b5cf6" stroke-opacity=".35" stroke-width="1.5"/>
+</svg>

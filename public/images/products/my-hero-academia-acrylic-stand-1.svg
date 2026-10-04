@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="My Hero Academia Acrylic Display Stand — original artwork">
+  <defs>
+    <radialGradient id="p1wf2nci-bg" cx="50%" cy="40%" r="75%">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity=".55"/>
+      <stop offset=".55" stop-color="#061c26"/>
+      <stop offset="1" stop-color="#07070b"/>
+    </radialGradient>
+    <linearGradient id="p1wf2nci-body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="p1wf2nci-base" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2e2945"/>
+      <stop offset="1" stop-color="#110f1a"/>
+    </linearGradient>
+    <filter id="p1wf2nci-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+    <linearGradient id="p1wf2nci-floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#07070b" stop-opacity="0"/>
+      <stop offset="1" stop-color="#07070b" stop-opacity=".7"/>
+    </linearGradient>
+    <pattern id="p1wf2nci-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".04"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="1000" fill="url(#p1wf2nci-bg)"/>
+  <rect width="800" height="1000" fill="url(#p1wf2nci-grid)"/>
+  <circle cx="400" cy="460" r="260" fill="#22d3ee" opacity=".16" filter="url(#p1wf2nci-glow)"/>
+  <g>
+      <circle cx="400" cy="470" r="240" fill="#22d3ee" opacity=".12"/>
+      <ellipse cx="260" cy="790" rx="62" ry="14" fill="#e0e7ff" opacity=".25" stroke="#e0e7ff" stroke-opacity=".6" stroke-width="3"/>
+          <path d="M260 790 L260 607.3625999999999 L290 457.932" stroke="#e0e7ff" stroke-opacity=".75" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="260" cy="607.3625999999999" r="12" fill="#22d3ee"/>
+          <rect x="278" y="439.932" width="34" height="22" rx="6" fill="#818cf8"/><ellipse cx="400" cy="790" rx="62" ry="14" fill="#e0e7ff" opacity=".25" stroke="#e0e7ff" stroke-opacity=".6" stroke-width="3"/>
+          <path d="M400 790 L400 652.7134 L430 540.388" stroke="#e0e7ff" stroke-opacity=".75" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="400" cy="652.7134" r="12" fill="#22d3ee"/>
+          <rect x="418" y="522.388" width="34" height="22" rx="6" fill="#818cf8"/><ellipse cx="540" cy="790" rx="62" ry="14" fill="#e0e7ff" opacity=".25" stroke="#e0e7ff" stroke-opacity=".6" stroke-width="3"/>
+          <path d="M540 790 L540 575.3580999999999 L570 399.74199999999996" stroke="#e0e7ff" stroke-opacity=".75" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="540" cy="575.3580999999999" r="12" fill="#22d3ee"/>
+          <rect x="558" y="381.74199999999996" width="34" height="22" rx="6" fill="#818cf8"/>
+      <rect x="170" y="808" width="460" height="16" rx="8" fill="#818cf8" opacity=".35"/>
+      <circle cx="374" cy="652" r="4.9" fill="#818cf8" opacity="0.41"/><circle cx="626" cy="143" r="2.9" fill="#818cf8" opacity="0.75"/><circle cx="582" cy="185" r="3.4" fill="#818cf8" opacity="0.83"/><circle cx="386" cy="388" r="2.2" fill="#818cf8" opacity="0.52"/><circle cx="566" cy="215" r="5.5" fill="#818cf8" opacity="0.35"/><circle cx="534" cy="660" r="2.9" fill="#818cf8" opacity="0.53"/><circle cx="523" cy="346" r="6.0" fill="#818cf8" opacity="0.74"/><circle cx="426" cy="599" r="5.5" fill="#818cf8" opacity="0.60"/><circle cx="311" cy="574" r="5.9" fill="#818cf8" opacity="0.44"/><circle cx="498" cy="313" r="4.8" fill="#818cf8" opacity="0.37"/><circle cx="311" cy="619" r="6.5" fill="#818cf8" opacity="0.82"/><circle cx="437" cy="365" r="3.3" fill="#818cf8" opacity="0.88"/><circle cx="278" cy="233" r="3.7" fill="#818cf8" opacity="0.44"/><circle cx="210" cy="495" r="6.2" fill="#818cf8" opacity="0.38"/>
+    </g>
+  <rect y="930" width="800" height="70" fill="url(#p1wf2nci-floor)"/>
+</svg>

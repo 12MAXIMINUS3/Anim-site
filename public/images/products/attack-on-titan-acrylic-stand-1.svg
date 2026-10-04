@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Attack on Titan Acrylic Display Stand — original artwork">
+  <defs>
+    <radialGradient id="p1biuk18-bg" cx="50%" cy="40%" r="75%">
+      <stop offset="0" stop-color="#a78bfa" stop-opacity=".55"/>
+      <stop offset=".55" stop-color="#120c26"/>
+      <stop offset="1" stop-color="#07070b"/>
+    </radialGradient>
+    <linearGradient id="p1biuk18-body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a78bfa"/>
+      <stop offset="1" stop-color="#fde68a"/>
+    </linearGradient>
+    <linearGradient id="p1biuk18-base" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2e2945"/>
+      <stop offset="1" stop-color="#110f1a"/>
+    </linearGradient>
+    <filter id="p1biuk18-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+    <linearGradient id="p1biuk18-floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#07070b" stop-opacity="0"/>
+      <stop offset="1" stop-color="#07070b" stop-opacity=".7"/>
+    </linearGradient>
+    <pattern id="p1biuk18-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".04"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="1000" fill="url(#p1biuk18-bg)"/>
+  <rect width="800" height="1000" fill="url(#p1biuk18-grid)"/>
+  <circle cx="400" cy="460" r="260" fill="#a78bfa" opacity=".16" filter="url(#p1biuk18-glow)"/>
+  <g>
+      <circle cx="400" cy="470" r="240" fill="#a78bfa" opacity=".12"/>
+      <ellipse cx="260" cy="790" rx="62" ry="14" fill="#e0e7ff" opacity=".25" stroke="#e0e7ff" stroke-opacity=".6" stroke-width="3"/>
+          <path d="M260 790 L260 568.1828 L290 386.696" stroke="#e0e7ff" stroke-opacity=".75" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="260" cy="568.1828" r="12" fill="#a78bfa"/>
+          <rect x="278" y="368.696" width="34" height="22" rx="6" fill="#fde68a"/><ellipse cx="400" cy="790" rx="62" ry="14" fill="#e0e7ff" opacity=".25" stroke="#e0e7ff" stroke-opacity=".6" stroke-width="3"/>
+          <path d="M400 790 L400 548.9801 L430 351.78200000000004" stroke="#e0e7ff" stroke-opacity=".75" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="400" cy="548.9801" r="12" fill="#a78bfa"/>
+          <rect x="418" y="333.78200000000004" width="34" height="22" rx="6" fill="#fde68a"/><ellipse cx="540" cy="790" rx="62" ry="14" fill="#e0e7ff" opacity=".25" stroke="#e0e7ff" stroke-opacity=".6" stroke-width="3"/>
+          <path d="M540 790 L540 624.9923 L570 489.986" stroke="#e0e7ff" stroke-opacity=".75" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="540" cy="624.9923" r="12" fill="#a78bfa"/>
+          <rect x="558" y="471.986" width="34" height="22" rx="6" fill="#fde68a"/>
+      <rect x="170" y="808" width="460" height="16" rx="8" fill="#fde68a" opacity=".35"/>
+      <circle cx="591" cy="620" r="2.8" fill="#fde68a" opacity="0.84"/><circle cx="616" cy="557" r="2.7" fill="#fde68a" opacity="0.46"/><circle cx="389" cy="697" r="4.6" fill="#fde68a" opacity="0.81"/><circle cx="277" cy="419" r="6.3" fill="#fde68a" opacity="0.42"/><circle cx="598" cy="341" r="2.4" fill="#fde68a" opacity="0.62"/><circle cx="402" cy="446" r="5.9" fill="#fde68a" opacity="0.44"/><circle cx="557" cy="641" r="3.3" fill="#fde68a" opacity="0.72"/><circle cx="648" cy="193" r="2.0" fill="#fde68a" opacity="0.44"/><circle cx="409" cy="485" r="4.3" fill="#fde68a" opacity="0.73"/><circle cx="363" cy="496" r="6.9" fill="#fde68a" opacity="0.57"/><circle cx="518" cy="637" r="3.3" fill="#fde68a" opacity="0.51"/><circle cx="486" cy="146" r="5.4" fill="#fde68a" opacity="0.92"/><circle cx="347" cy="351" r="4.7" fill="#fde68a" opacity="0.37"/><circle cx="650" cy="604" r="3.7" fill="#fde68a" opacity="0.73"/>
+    </g>
+  <rect y="930" width="800" height="70" fill="url(#p1biuk18-floor)"/>
+</svg>

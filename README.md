@@ -128,6 +128,12 @@ update public.profiles set role = 'admin' where email = 'you@example.com';
 
 Sign out and back in (or reload), then open `/admin`. After that, admins can promote other users from **Admin → Customers**.
 
+Alternatively, pre-authorise an email **before** it signs up — it becomes an admin automatically on registration:
+
+```sql
+insert into public.admin_invites (email) values ('you@example.com');
+```
+
 ### D. Build and deploy (Vercel)
 
 ```bash

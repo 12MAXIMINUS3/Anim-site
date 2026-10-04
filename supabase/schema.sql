@@ -304,6 +304,14 @@ as $$
   select exists (select 1 from public.profiles where id = auth.uid() and role = 'admin');
 $$;
 
+-- Emails that become admins automatically when they sign up.
+-- Add one with:  insert into public.admin_invites (email) values ('you@example.com');
+create table if not exists public.admin_invites (
+  email text primary key,
+  created_at timestamptz not null default now()
+);
+alter table public.admin_invites enable row level security; -- no policies: only definer functions read it
+
 create or replace function public.handle_new_user()
 returns trigger
 language plpgsql
@@ -311,8 +319,13 @@ security definer
 set search_path = public
 as $$
 begin
-  insert into public.profiles (id, email, full_name)
-  values (new.id, new.email, coalesce(new.raw_user_meta_data ->> 'full_name', ''))
+  insert into public.profiles (id, email, full_name, role)
+  values (
+    new.id,
+    new.email,
+    coalesce(new.raw_user_meta_data ->> 'full_name', ''),
+    case when exists (select 1 from public.admin_invites ai where lower(ai.email) = lower(new.email)) then 'admin' else 'customer' end
+  )
   on conflict (id) do nothing;
   return new;
 end;

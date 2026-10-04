@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { AlertTriangle, DollarSign, Package, ShoppingCart, Users } from 'lucide-react';
+import { AlertTriangle, DollarSign, Package, Plus, ShoppingCart, Users } from 'lucide-react';
 import { adminListOrders, getDashboardStats, getLowStock } from '@/services/admin';
 import { useAsync } from '@/hooks/useAsync';
 import { formatCurrency, formatDate } from '@/lib/format';
@@ -23,7 +23,20 @@ export default function AdminDashboard() {
 
   return (
     <>
-      <AdminPageHeader title="Dashboard" description="Store overview at a glance." />
+      <AdminPageHeader
+        title="Dashboard"
+        description="Store overview at a glance."
+        actions={
+          <div className="flex gap-2">
+            <Link to="/admin/products" className="btn-secondary">
+              <Package className="h-4 w-4" aria-hidden="true" /> Manage products
+            </Link>
+            <Link to="/admin/products/new" className="btn-primary">
+              <Plus className="h-4 w-4" aria-hidden="true" /> Add product
+            </Link>
+          </div>
+        }
+      />
       {stats.error ? (
         <ErrorState error={stats.error} onRetry={stats.reload} />
       ) : (

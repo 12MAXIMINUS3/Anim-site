@@ -8,6 +8,8 @@ interface SuccessState {
   total?: number;
   email?: string;
   paymentMethod?: string;
+  paymentPlan?: 'full' | 'installments';
+  paidToday?: number;
   itemCount?: number;
 }
 
@@ -17,6 +19,8 @@ export default function OrderSuccessPage() {
   const { state } = useLocation() as { state: SuccessState | null };
   const { user } = useAuth();
   const pending = state?.paymentMethod === 'bank_transfer';
+  const installments = state?.paymentPlan === 'installments';
+  const balance = state?.total !== undefined && state?.paidToday !== undefined ? Math.max(0, state.total - state.paidToday) : 0;
 
   return (
     <div className="container-page py-20">
@@ -32,6 +36,12 @@ export default function OrderSuccessPage() {
           {state?.total !== undefined && (
             <p className="mt-2 text-sm text-ink-300">
               {state.itemCount ? `${state.itemCount} item${state.itemCount === 1 ? '' : 's'} · ` : ''}Total {formatCurrency(state.total)}
+            </p>
+          )}
+          {installments && state?.paidToday !== undefined && (
+            <p className="mt-2 text-sm text-ink-200">
+              Paid today <strong className="text-white">{formatCurrency(state.paidToday)}</strong> · Balance{' '}
+              <strong className="text-orange-300">{formatCurrency(balance)}</strong> in 3 more payments
             </p>
           )}
         </div>

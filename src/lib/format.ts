@@ -43,6 +43,7 @@ export function slugify(value: string): string {
 
 export const ORDER_STATUS_LABELS: Record<string, string> = {
   pending: 'Pending',
+  partially_paid: 'Partially paid',
   paid_demo: 'Paid (demo)',
   processing: 'Processing',
   shipped: 'Shipped',

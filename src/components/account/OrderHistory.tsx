@@ -7,7 +7,7 @@ import { listMyOrders } from '@/services/account';
 import { useAsync } from '@/hooks/useAsync';
 import { formatCurrency, formatDate } from '@/lib/format';
 import { EmptyState, ErrorState, Skeleton } from '@/components/ui/States';
-import { OrderStatusBadge, OrderDetails } from './OrderDetails';
+import { OrderStatusBadge, OrderDetails, orderBalance } from './OrderDetails';
 import { cn } from '@/lib/cn';
 
 export function OrderHistory() {
@@ -48,12 +48,17 @@ export function OrderHistory() {
               <span className="text-sm text-ink-300">
                 {o.items.reduce((s, i) => s + i.quantity, 0)} item{o.items.reduce((s, i) => s + i.quantity, 0) === 1 ? '' : 's'}
               </span>
-              <span className="ml-auto font-semibold text-white">{formatCurrency(o.total, o.currency)}</span>
+              <span className="ml-auto text-right">
+                <span className="block font-semibold text-white">{formatCurrency(o.total, o.currency)}</span>
+                {orderBalance(o) > 0 && o.status !== 'cancelled' && (
+                  <span className="block text-xs text-orange-300">{formatCurrency(orderBalance(o), o.currency)} due</span>
+                )}
+              </span>
               <ChevronDown className={cn('h-5 w-5 text-ink-400 transition', isOpen && 'rotate-180')} aria-hidden="true" />
             </button>
             {isOpen && (
               <div className="border-t border-ink-800 p-5">
-                <OrderDetails order={o} />
+                <OrderDetails order={o} onPaid={reload} />
               </div>
             )}
           </li>

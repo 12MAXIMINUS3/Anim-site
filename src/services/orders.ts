@@ -1,5 +1,5 @@
 import type { CartLine, ShippingAddress } from '@/types';
-import type { PaymentMethodId, ShippingMethodId } from '@/lib/pricing';
+import type { PaymentMethodId, PaymentPlanId, ShippingMethodId } from '@/lib/pricing';
 import { requireSupabase, throwIfError } from '@/lib/supabase';
 
 export interface PlaceOrderInput {
@@ -9,6 +9,7 @@ export interface PlaceOrderInput {
   shippingAddress: ShippingAddress;
   shippingMethod: ShippingMethodId;
   paymentMethod: PaymentMethodId;
+  paymentPlan: PaymentPlanId;
   promoCode: string | null;
   notes?: string;
   lines: CartLine[];
@@ -35,9 +36,28 @@ export async function placeOrder(input: PlaceOrderInput): Promise<PlacedOrder> {
     p_items: input.lines.map((l) => ({ product_id: l.productId, variant_id: l.variantId, quantity: l.quantity })),
     p_promo_code: input.promoCode,
     p_notes: input.notes ?? null,
+    p_payment_plan: input.paymentPlan,
   });
   throwIfError(error);
   const row = Array.isArray(data) ? data[0] : data;
   if (!row) throw new Error('The order could not be created. Please try again.');
   return { orderId: row.order_id, orderNumber: row.order_number, total: Number(row.total) };
+}
+
+export interface PaymentResult {
+  amountPaid: number;
+  balance: number;
+  status: string;
+}
+
+/**
+ * Pays the next installment or the whole remaining balance of the signed-in
+ * customer's order (DEMO — nothing is charged). The amount is calculated by
+ * the `pay_order_balance` database function, not by the browser.
+ */
+export async function payOrderBalance(orderId: string, kind: 'installment' | 'balance', method: 'demo_card' | 'demo_wallet' = 'demo_card'): Promise<PaymentResult> {
+  const { data, error } = await requireSupabase().rpc('pay_order_balance', { p_order_id: orderId, p_kind: kind, p_method: method });
+  throwIfError(error);
+  const row = Array.isArray(data) ? data[0] : data;
+  return { amountPaid: Number(row?.amount_paid ?? 0), balance: Number(row?.balance ?? 0), status: String(row?.status ?? '') };
 }

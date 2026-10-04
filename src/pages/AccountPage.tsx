@@ -28,8 +28,8 @@ export default function AccountPage() {
   return (
     <>
       <PageHeader title={`Hi, ${profile?.fullName?.split(' ')[0] || user?.email?.split('@')[0] || 'collector'}`} crumbs={[{ label: 'Account' }]} description="Manage your profile, orders, addresses and wishlist." />
-      <div className="container-page grid gap-8 py-10 lg:grid-cols-[220px_1fr]">
-        <nav aria-label="Account sections">
+      <div className="container-page grid grid-cols-1 gap-8 py-10 lg:grid-cols-[220px_minmax(0,1fr)]">
+        <nav aria-label="Account sections" className="min-w-0">
           <ul className="scrollbar-none flex gap-2 overflow-x-auto lg:flex-col">
             {TABS.map(({ id, label, icon: Icon }) => (
               <li key={id}>
@@ -48,7 +48,7 @@ export default function AccountPage() {
             ))}
           </ul>
         </nav>
-        <section aria-label={TABS.find((t) => t.id === tab)?.label}>
+        <section className="min-w-0" aria-label={TABS.find((t) => t.id === tab)?.label}>
           {tab === 'profile' && <ProfileForm />}
           {tab === 'orders' && <OrderHistory />}
           {tab === 'addresses' && <AddressBook />}

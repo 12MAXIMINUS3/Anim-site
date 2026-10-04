@@ -177,7 +177,10 @@ create table if not exists public.orders (
   shipping_method text not null,
   payment_method text not null,
   status text not null default 'pending'
-    check (status in ('pending', 'paid_demo', 'processing', 'shipped', 'delivered', 'cancelled')),
+    check (status in ('pending', 'partially_paid', 'paid_demo', 'processing', 'shipped', 'delivered', 'cancelled')),
+  payment_plan text not null default 'full' check (payment_plan in ('full', 'installments')),
+  installment_count integer not null default 1 check (installment_count between 1 and 12),
+  amount_paid numeric(10, 2) not null default 0 check (amount_paid >= 0),
   subtotal numeric(10, 2) not null default 0,
   discount numeric(10, 2) not null default 0,
   shipping numeric(10, 2) not null default 0,
@@ -189,6 +192,30 @@ create table if not exists public.orders (
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+-- Upgrade path for databases created before installment plans existed.
+alter table public.orders add column if not exists payment_plan text not null default 'full';
+alter table public.orders add column if not exists installment_count integer not null default 1;
+alter table public.orders add column if not exists amount_paid numeric(10, 2) not null default 0;
+alter table public.orders drop constraint if exists orders_status_check;
+alter table public.orders add constraint orders_status_check
+  check (status in ('pending', 'partially_paid', 'paid_demo', 'processing', 'shipped', 'delivered', 'cancelled'));
+alter table public.orders drop constraint if exists orders_payment_plan_check;
+alter table public.orders add constraint orders_payment_plan_check check (payment_plan in ('full', 'installments'));
+
+-- Every payment received against an order (deposit, installment, balance, in-store).
+create table if not exists public.order_payments (
+  id uuid primary key default gen_random_uuid(),
+  order_id uuid not null references public.orders (id) on delete cascade,
+  amount numeric(10, 2) not null check (amount > 0),
+  method text not null,
+  kind text not null check (kind in ('full', 'deposit', 'installment', 'balance')),
+  note text,
+  recorded_by uuid references auth.users (id) on delete set null,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+create index if not exists order_payments_order_idx on public.order_payments (order_id, created_at);
 
 create table if not exists public.order_items (
   id uuid primary key default gen_random_uuid(),
@@ -279,7 +306,7 @@ begin
   foreach t in array array[
     'profiles', 'categories', 'brands', 'products', 'product_images', 'product_variants',
     'inventory', 'carts', 'cart_items', 'wishlists', 'addresses', 'orders', 'order_items',
-    'reviews', 'newsletter_subscribers', 'site_settings', 'contact_messages'
+    'reviews', 'newsletter_subscribers', 'site_settings', 'contact_messages', 'order_payments'
   ]
   loop
     execute format('drop trigger if exists set_updated_at on public.%I', t);
@@ -448,6 +475,71 @@ $$;
 -- Prices, discounts, shipping and stock are calculated server-side so the
 -- client cannot tamper with totals. Works for guests and signed-in users.
 -- ----------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
+-- Payments & installment plans (DEMO — no real money moves)
+--   Installments: any order can be paid in 4 equal payments
+--   (25% deposit at checkout + 3 more). Mirrored in src/lib/pricing.ts.
+-- ----------------------------------------------------------------------------
+create or replace function public._installment_amount(p_total numeric, p_paid numeric, p_count integer)
+returns numeric
+language sql
+immutable
+as $$
+  -- Equal share of the total, capped at what is still owed. If paying one share
+  -- would leave less than a cent, the payment covers the whole remainder.
+  select case
+    when (p_total - p_paid) - round(p_total / greatest(p_count, 1), 2) < 0.01 then p_total - p_paid
+    else round(p_total / greatest(p_count, 1), 2)
+  end;
+$$;
+
+-- Records a payment and moves the order between pending / partially paid / paid.
+create or replace function public._apply_order_payment(
+  p_order_id uuid, p_amount numeric, p_method text, p_kind text, p_note text default null
+)
+returns numeric
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_order public.orders%rowtype;
+  v_paid numeric(10, 2);
+begin
+  select * into v_order from public.orders where id = p_order_id for update;
+  if not found then
+    raise exception 'Order not found';
+  end if;
+  if v_order.status = 'cancelled' then
+    raise exception 'This order was cancelled';
+  end if;
+  if p_amount is null or p_amount <= 0 then
+    raise exception 'Payment amount must be greater than zero';
+  end if;
+  if p_amount > v_order.total - v_order.amount_paid + 0.001 then
+    raise exception 'Payment of % is more than the balance due (%)', p_amount, v_order.total - v_order.amount_paid;
+  end if;
+
+  insert into public.order_payments (order_id, amount, method, kind, note, recorded_by)
+  values (p_order_id, round(p_amount, 2), p_method, p_kind, nullif(trim(coalesce(p_note, '')), ''), auth.uid());
+
+  v_paid := v_order.amount_paid + round(p_amount, 2);
+  update public.orders
+     set amount_paid = v_paid,
+         status = case
+           when status in ('pending', 'partially_paid') and v_paid >= total then 'paid_demo'
+           when status = 'pending' and v_paid < total then 'partially_paid'
+           else status
+         end
+   where id = p_order_id;
+  return v_order.total - v_paid;
+end;
+$$;
+revoke all on function public._apply_order_payment(uuid, numeric, text, text, text) from public, anon, authenticated;
+
+-- Older 9-argument version (before payment plans) — removed so the RPC is unambiguous.
+drop function if exists public.create_order(text, text, text, jsonb, text, text, jsonb, text, text);
+
 create or replace function public.create_order(
   p_email text,
   p_full_name text,
@@ -457,7 +549,8 @@ create or replace function public.create_order(
   p_payment_method text,
   p_items jsonb,
   p_promo_code text default null,
-  p_notes text default null
+  p_notes text default null,
+  p_payment_plan text default 'full'
 )
 returns table (order_id uuid, order_number text, total numeric)
 language plpgsql
@@ -502,17 +595,25 @@ begin
   if p_payment_method not in ('demo_card', 'demo_wallet', 'bank_transfer') then
     raise exception 'Unknown payment method';
   end if;
+  if coalesce(p_payment_plan, 'full') not in ('full', 'installments') then
+    raise exception 'Unknown payment plan';
+  end if;
+  if p_payment_plan = 'installments' and auth.uid() is null then
+    raise exception 'Please sign in to pay in installments, so you can make the remaining payments from your account';
+  end if;
 
-  v_status := case when p_payment_method = 'bank_transfer' then 'pending' else 'paid_demo' end;
+  -- Status is settled by _apply_order_payment once totals are known.
+  v_status := 'pending';
   v_order_number := 'NFV-' || to_char(now(), 'YYMMDD') || '-' || upper(substr(md5(gen_random_uuid()::text), 1, 6));
 
   insert into public.orders (
     order_number, user_id, email, full_name, phone, shipping_address,
-    shipping_method, payment_method, status, currency, promo_code, notes
+    shipping_method, payment_method, status, currency, promo_code, notes, payment_plan, installment_count
   )
   values (
     v_order_number, auth.uid(), lower(trim(p_email)), trim(p_full_name), nullif(trim(coalesce(p_phone, '')), ''),
-    p_shipping_address, p_shipping_method, p_payment_method, v_status, 'USD', v_code, nullif(trim(coalesce(p_notes, '')), '')
+    p_shipping_address, p_shipping_method, p_payment_method, v_status, 'USD', v_code, nullif(trim(coalesce(p_notes, '')), ''),
+    coalesce(p_payment_plan, 'full'), case when p_payment_plan = 'installments' then 4 else 1 end
   )
   returning id into v_order_id;
 
@@ -604,9 +705,63 @@ begin
      set subtotal = v_subtotal, discount = v_discount, shipping = v_shipping, tax = v_tax, total = v_total
    where id = v_order_id;
 
+  -- Payment at checkout (demo). Bank transfers stay pending until the admin records the payment.
+  if p_payment_plan = 'installments' then
+    if p_payment_method <> 'bank_transfer' then
+      perform public._apply_order_payment(v_order_id, public._installment_amount(v_total, 0, 4), p_payment_method, 'deposit');
+    end if;
+  elsif p_payment_method <> 'bank_transfer' then
+    perform public._apply_order_payment(v_order_id, v_total, p_payment_method, 'full');
+  end if;
+
   return query select v_order_id, v_order_number, v_total;
 end;
 $$;
+
+-- ----------------------------------------------------------------------------
+-- RPC: customer pays the next installment or the full remaining balance (demo).
+-- The amount is calculated here, never trusted from the browser.
+-- ----------------------------------------------------------------------------
+create or replace function public.pay_order_balance(p_order_id uuid, p_kind text, p_method text default 'demo_card')
+returns table (amount_paid numeric, balance numeric, status text)
+language plpgsql
+security definer
+set search_path = public
+as $$
+#variable_conflict use_column
+declare
+  v_order public.orders%rowtype;
+  v_amount numeric(10, 2);
+begin
+  if auth.uid() is null then
+    raise exception 'Please sign in to make a payment';
+  end if;
+  select * into v_order from public.orders where id = p_order_id;
+  if not found or v_order.user_id is distinct from auth.uid() then
+    raise exception 'Order not found';
+  end if;
+  if p_kind not in ('installment', 'balance') then
+    raise exception 'Unknown payment type';
+  end if;
+  if p_method not in ('demo_card', 'demo_wallet') then
+    raise exception 'Unknown payment method';
+  end if;
+  if v_order.total - v_order.amount_paid <= 0 then
+    raise exception 'This order is already paid in full';
+  end if;
+
+  v_amount := case
+    when p_kind = 'balance' then v_order.total - v_order.amount_paid
+    else public._installment_amount(v_order.total, v_order.amount_paid, v_order.installment_count)
+  end;
+  perform public._apply_order_payment(p_order_id, v_amount, p_method, p_kind);
+
+  return query select o.amount_paid, o.total - o.amount_paid, o.status from public.orders o where o.id = p_order_id;
+end;
+$$;
+
+-- In-person payments are not offered; remove the function if an earlier version created it.
+drop function if exists public.admin_record_payment(uuid, numeric, text, text);
 
 -- ----------------------------------------------------------------------------
 -- RPC: admin dashboard stats
@@ -627,9 +782,10 @@ begin
     'active_products', (select count(*) from products where status = 'active'),
     'low_stock', (select count(*) from inventory i join products p on p.id = i.product_id
                    where p.status = 'active' and i.quantity <= i.low_stock_threshold),
-    'pending_orders', (select count(*) from orders where status in ('pending', 'paid_demo', 'processing')),
+    'pending_orders', (select count(*) from orders where status in ('pending', 'partially_paid', 'paid_demo', 'processing')),
+    'outstanding_balance', coalesce((select sum(total - amount_paid) from orders where status <> 'cancelled' and total > amount_paid), 0),
     'total_customers', (select count(*) from profiles where role = 'customer'),
-    'revenue_demo', coalesce((select sum(total) from orders where status <> 'cancelled'), 0)
+    'revenue_demo', coalesce((select sum(amount_paid) from orders where status <> 'cancelled'), 0)
   );
 end;
 $$;
@@ -655,7 +811,8 @@ end;
 $$;
 
 grant execute on function public.get_catalog_facets() to anon, authenticated;
-grant execute on function public.create_order(text, text, text, jsonb, text, text, jsonb, text, text) to anon, authenticated;
+grant execute on function public.create_order(text, text, text, jsonb, text, text, jsonb, text, text, text) to anon, authenticated;
+grant execute on function public.pay_order_balance(uuid, text, text) to authenticated;
 grant execute on function public.admin_dashboard_stats() to authenticated;
 grant execute on function public.admin_low_stock(integer) to authenticated;
 grant execute on function public.is_admin() to anon, authenticated;
@@ -676,6 +833,7 @@ alter table public.wishlists enable row level security;
 alter table public.addresses enable row level security;
 alter table public.orders enable row level security;
 alter table public.order_items enable row level security;
+alter table public.order_payments enable row level security;
 alter table public.reviews enable row level security;
 alter table public.newsletter_subscribers enable row level security;
 alter table public.site_settings enable row level security;
@@ -691,7 +849,7 @@ begin
      where schemaname = 'public'
        and tablename in (
          'profiles', 'categories', 'brands', 'products', 'product_images', 'product_variants', 'inventory',
-         'carts', 'cart_items', 'wishlists', 'addresses', 'orders', 'order_items', 'reviews',
+         'carts', 'cart_items', 'wishlists', 'addresses', 'orders', 'order_items', 'order_payments', 'reviews',
          'newsletter_subscribers', 'site_settings', 'contact_messages'
        )
   loop
@@ -770,6 +928,13 @@ create policy "order_items_select_own_or_admin" on public.order_items
     public.is_admin()
     or exists (select 1 from public.orders o where o.id = order_id and o.user_id = auth.uid())
   );
+-- order payments: owner and admin can read; writes only via security-definer RPCs
+create policy "order_payments_select_own_or_admin" on public.order_payments
+  for select using (
+    public.is_admin()
+    or exists (select 1 from public.orders o where o.id = order_id and o.user_id = auth.uid())
+  );
+
 create policy "order_items_admin_write" on public.order_items
   for all using (public.is_admin()) with check (public.is_admin());
 

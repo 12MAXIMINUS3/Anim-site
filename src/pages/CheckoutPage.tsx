@@ -3,12 +3,22 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { CreditCard, Landmark, Lock, ShoppingBag, Wallet } from 'lucide-react';
+import { CalendarClock, CreditCard, Landmark, Lock, ShoppingBag, Wallet } from 'lucide-react';
 import { selectSubtotal, useCartStore } from '@/store/cartStore';
-import { computeTotals, PAYMENT_METHODS, SHIPPING_METHODS, type PaymentMethodId, type ShippingMethodId } from '@/lib/pricing';
+import {
+  computeTotals,
+  dueToday,
+  INSTALLMENT_COUNT,
+  installmentSchedule,
+  PAYMENT_METHODS,
+  SHIPPING_METHODS,
+  type PaymentMethodId,
+  type PaymentPlanId,
+  type ShippingMethodId,
+} from '@/lib/pricing';
 import { addressFields, emailSchema, phoneSchema } from '@/lib/schemas';
 import { COUNTRIES } from '@/lib/countries';
-import { formatCurrency } from '@/lib/format';
+import { formatCurrency, formatDate } from '@/lib/format';
 import { friendlyError } from '@/lib/authErrors';
 import { isSupabaseConfigured } from '@/lib/supabase';
 import { useSeo } from '@/lib/seo';
@@ -31,6 +41,7 @@ const schema = z.object({
   ...addressFields,
   shippingMethod: z.enum(['standard', 'express', 'overnight']),
   paymentMethod: z.enum(['demo_card', 'demo_wallet', 'bank_transfer']),
+  paymentPlan: z.enum(['full', 'installments']),
   notes: z.string().max(500, 'Keep notes under 500 characters').optional(),
   saveAddress: z.boolean(),
   acknowledgeDemo: z.boolean().refine((v) => v, 'Please confirm you understand this is a demo checkout'),
@@ -76,6 +87,7 @@ export default function CheckoutPage() {
       country: 'US',
       shippingMethod: 'standard',
       paymentMethod: 'demo_card',
+      paymentPlan: 'full',
       notes: '',
       saveAddress: false,
       acknowledgeDemo: false,
@@ -113,7 +125,11 @@ export default function CheckoutPage() {
 
   const shippingMethod = watch('shippingMethod') as ShippingMethodId;
   const paymentMethod = watch('paymentMethod') as PaymentMethodId;
+  const paymentPlan = watch('paymentPlan') as PaymentPlanId;
   const totals = computeTotals(subtotal, promoCode, shippingMethod);
+  const schedule = installmentSchedule(totals.total);
+  const chargeToday = dueToday(totals.total, paymentPlan, paymentMethod);
+  const fmt = (n: number) => formatCurrency(n, settings.currency);
   const methodLabel = SHIPPING_METHODS.find((m) => m.id === shippingMethod)?.label;
 
   if (!isSupabaseConfigured) return <SetupRequired feature="checkout" />;
@@ -155,6 +171,7 @@ export default function CheckoutPage() {
         shippingAddress,
         shippingMethod: v.shippingMethod,
         paymentMethod: v.paymentMethod,
+        paymentPlan: v.paymentPlan,
         promoCode,
         notes: v.notes,
         lines,
@@ -164,7 +181,14 @@ export default function CheckoutPage() {
       }
       navigate(`/checkout/success/${order.orderNumber}`, {
         replace: true,
-        state: { total: order.total, email: v.email, paymentMethod: v.paymentMethod, itemCount: lines.reduce((s, l) => s + l.quantity, 0) },
+        state: {
+          total: order.total,
+          email: v.email,
+          paymentMethod: v.paymentMethod,
+          paymentPlan: v.paymentPlan,
+          paidToday: dueToday(order.total, v.paymentPlan, v.paymentMethod),
+          itemCount: lines.reduce((s, l) => s + l.quantity, 0),
+        },
       });
       clearCart();
     } catch (e) {
@@ -271,7 +295,59 @@ export default function CheckoutPage() {
             </fieldset>
 
             <fieldset className="card space-y-3 p-6">
-              <legend className="text-lg font-semibold text-white">Payment</legend>
+              <legend className="text-lg font-semibold text-white">How would you like to pay?</legend>
+              {(
+                [
+                  { id: 'full', title: 'Complete payment', text: `Pay ${fmt(totals.total)} today.` },
+                  {
+                    id: 'installments',
+                    title: `Pay in ${INSTALLMENT_COUNT} installments`,
+                    text: `${fmt(schedule[0].amount)} today, then ${INSTALLMENT_COUNT - 1} payments of about ${fmt(schedule[1].amount)} every 30 days. No extra fees. Ships once paid in full — or complete the balance any time.`,
+                  },
+                ] as Array<{ id: PaymentPlanId; title: string; text: string }>
+              ).map((o) => (
+                <label
+                  key={o.id}
+                  className={cn(
+                    'flex cursor-pointer items-start gap-3 rounded-xl border px-4 py-3 transition focus-within:ring-2 focus-within:ring-pulse-400',
+                    paymentPlan === o.id ? 'border-nova-400 bg-nova-500/10' : 'border-ink-700 hover:border-ink-500',
+                  )}
+                >
+                  <input
+                    type="radio"
+                    value={o.id}
+                    disabled={o.id === 'installments' && !user}
+                    className="mt-1 h-4 w-4 accent-nova-500"
+                    {...register('paymentPlan')}
+                  />
+                  <span>
+                    <span className="block text-sm font-semibold text-white">{o.title}</span>
+                    <span className="block text-xs text-ink-400">{o.text}</span>
+                    {o.id === 'installments' && !user && (
+                      <Link to="/login?redirect=/checkout" className="mt-1 inline-block text-xs font-semibold text-nova-300 hover:text-pulse-300">
+                        Sign in to pay in installments →
+                      </Link>
+                    )}
+                  </span>
+                </label>
+              ))}
+              {paymentPlan === 'installments' && (
+                <ol className="space-y-1.5 rounded-xl border border-ink-700 bg-ink-850/60 p-4 text-sm" aria-label="Installment schedule">
+                  {schedule.map((i) => (
+                    <li key={i.n} className="flex items-center justify-between gap-3">
+                      <span className="flex items-center gap-2 text-ink-300">
+                        <CalendarClock className="h-4 w-4 text-pulse-400" aria-hidden="true" />
+                        {i.n === 1 ? 'Today' : `Payment ${i.n} · by ${formatDate(i.due)}`}
+                      </span>
+                      <span className="font-semibold text-white">{fmt(i.amount)}</span>
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </fieldset>
+
+            <fieldset className="card space-y-3 p-6">
+              <legend className="text-lg font-semibold text-white">Payment method</legend>
               {PAYMENT_METHODS.map((m) => {
                 const Icon = PAYMENT_ICONS[m.id];
                 return (
@@ -344,10 +420,16 @@ export default function CheckoutPage() {
               </ul>
             </div>
             <OrderSummary totals={totals} currency={settings.currency} shippingLabel={methodLabel}>
+              {paymentPlan === 'installments' && (
+                <div className="flex justify-between rounded-xl bg-nova-500/10 px-3 py-2 text-sm">
+                  <span className="text-ink-200">Due today</span>
+                  <span className="font-semibold text-white">{fmt(chargeToday)}</span>
+                </div>
+              )}
               <FormAlert message={serverError} />
               <button type="submit" className="btn-primary w-full py-3 text-base" disabled={isSubmitting || refreshing}>
                 <Lock className="h-4 w-4" aria-hidden="true" />
-                {isSubmitting ? 'Placing order…' : `Place demo order · ${formatCurrency(totals.total, settings.currency)}`}
+                {isSubmitting ? 'Placing order…' : `Place demo order · ${chargeToday > 0 ? `${fmt(chargeToday)} today` : fmt(totals.total)}`}
               </button>
             </OrderSummary>
           </aside>

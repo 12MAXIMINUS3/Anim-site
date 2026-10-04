@@ -10,8 +10,8 @@ import { useSettings } from '@/context/SettingsContext';
 import { useWishlistStore } from '@/store/wishlistStore';
 import { useRecentlyViewedStore } from '@/store/recentlyViewedStore';
 import { availabilityLabel, careInstructions, displayBadge, isSoldOut, MAX_PER_LINE } from '@/lib/product';
-import { formatDate, formatReleaseMonth } from '@/lib/format';
-import { FREE_SHIPPING_THRESHOLD } from '@/lib/pricing';
+import { formatCurrency, formatDate, formatReleaseMonth } from '@/lib/format';
+import { FREE_SHIPPING_THRESHOLD, INSTALLMENT_COUNT, nextInstallmentAmount } from '@/lib/pricing';
 import { ProductGallery } from '@/components/product/ProductGallery';
 import { VariantSelector } from '@/components/product/VariantSelector';
 import { ReviewsSection } from '@/components/product/ReviewsSection';
@@ -175,6 +175,11 @@ export default function ProductPage() {
           </div>
 
           <Price amount={unitPrice} compareAt={compareAt} currency={product.currency} size="lg" showPercent />
+          <p className="-mt-2 text-sm text-ink-300">
+            or {INSTALLMENT_COUNT} payments of{' '}
+            <strong className="text-white">{formatCurrency(nextInstallmentAmount(unitPrice, 0), product.currency)}</strong> — pay in installments or complete
+            payment at checkout
+          </p>
 
           <p className="text-ink-300">{product.shortDescription}</p>
 

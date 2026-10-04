@@ -8,7 +8,7 @@ import { useDebounce } from '@/hooks/useDebounce';
 import { formatCurrency, formatDate, ORDER_STATUS_LABELS } from '@/lib/format';
 import { friendlyError } from '@/lib/authErrors';
 import { toast } from '@/store/toastStore';
-import { OrderDetails, OrderStatusBadge } from '@/components/account/OrderDetails';
+import { OrderDetails, OrderStatusBadge, orderBalance } from '@/components/account/OrderDetails';
 import { Pagination } from '@/components/ui/Pagination';
 import { EmptyState, ErrorState, Spinner } from '@/components/ui/States';
 import { AdminPageHeader } from './AdminLayout';
@@ -115,7 +115,13 @@ export default function AdminOrders() {
                     <span className="text-xs text-ink-500">{o.email}{o.userId ? '' : ' · guest'}</span>
                   </span>
                   <OrderStatusBadge status={o.status} />
-                  <span className="ml-auto font-semibold text-white">{formatCurrency(o.total, o.currency)}</span>
+                  <span className="ml-auto text-right">
+                    <span className="block font-semibold text-white">{formatCurrency(o.total, o.currency)}</span>
+                    <span className={cn('block text-xs', orderBalance(o) > 0 ? 'text-orange-300' : 'text-emerald-300')}>
+                      {o.paymentPlan === 'installments' ? 'Installments · ' : ''}
+                      {orderBalance(o) > 0 ? `${formatCurrency(orderBalance(o), o.currency)} due` : 'Paid in full'}
+                    </span>
+                  </span>
                   <StatusSelect order={o} onUpdated={list.reload} />
                 </div>
                 {isOpen && (

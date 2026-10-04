@@ -306,7 +306,7 @@ export async function adminListOrders(f: {
   page: number;
   pageSize: number;
 }): Promise<{ items: Order[]; total: number }> {
-  let req = requireSupabase().from('orders').select('*, items:order_items(*)', { count: 'exact' });
+  let req = requireSupabase().from('orders').select('*, items:order_items(*), payments:order_payments(*)', { count: 'exact' });
   if (f.status) req = req.eq('status', f.status);
   // Keep "-" and "@" so order numbers and emails can be searched.
   const raw = f.search.trim().replace(/[%,()*\\:"']/g, '');

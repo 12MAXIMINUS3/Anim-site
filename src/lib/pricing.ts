@@ -77,3 +77,47 @@ export function computeTotals(subtotal: number, promoCode: string | null, shippi
   const total = round2(subtotal - discount + (shipping ?? 0) + tax);
   return { subtotal: round2(subtotal), discount, shipping, tax, total, promo };
 }
+
+// ─────────────────────────── Payment plans ───────────────────────────
+// Mirrored in supabase/schema.sql (_installment_amount, create_order, pay_order_balance).
+
+export type PaymentPlanId = 'full' | 'installments';
+
+/** Number of equal payments in an installment plan (the first is paid at checkout). */
+export const INSTALLMENT_COUNT = 4;
+
+/** Days between installment due dates (shown to customers as a guide). */
+export const INSTALLMENT_INTERVAL_DAYS = 30;
+
+/** The next payment due: an equal share, or the whole remainder when that's all that's left. */
+export function nextInstallmentAmount(total: number, paid: number, count = INSTALLMENT_COUNT): number {
+  const remaining = round2(total - paid);
+  const share = round2(total / Math.max(count, 1));
+  return remaining - share < 0.01 ? remaining : share;
+}
+
+export interface InstallmentScheduleItem {
+  n: number;
+  amount: number;
+  /** ISO date the payment is due. */
+  due: string;
+}
+
+/** Equal payments starting `from` (default today), one per interval. */
+export function installmentSchedule(total: number, from: Date = new Date(), count = INSTALLMENT_COUNT): InstallmentScheduleItem[] {
+  const items: InstallmentScheduleItem[] = [];
+  let paid = 0;
+  for (let n = 1; n <= count; n++) {
+    const amount = nextInstallmentAmount(total, paid, count);
+    const due = new Date(from.getTime() + (n - 1) * INSTALLMENT_INTERVAL_DAYS * 86_400_000);
+    items.push({ n, amount, due: due.toISOString() });
+    paid = round2(paid + amount);
+  }
+  return items;
+}
+
+/** Amount charged at checkout for the chosen plan (bank transfers pay nothing up front). */
+export function dueToday(total: number, plan: PaymentPlanId, paymentMethod: PaymentMethodId): number {
+  if (paymentMethod === 'bank_transfer') return 0;
+  return plan === 'installments' ? nextInstallmentAmount(total, 0) : total;
+}

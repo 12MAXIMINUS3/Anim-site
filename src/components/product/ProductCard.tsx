@@ -11,6 +11,8 @@ import { useUiStore } from '@/store/uiStore';
 import { useShopActions } from '@/hooks/useShopActions';
 import { displayBadge, isSoldOut } from '@/lib/product';
 import { cn } from '@/lib/cn';
+import { formatCurrency } from '@/lib/format';
+import { INSTALLMENT_COUNT, nextInstallmentAmount } from '@/lib/pricing';
 
 export const ProductCard = memo(function ProductCard({ product }: { product: Product }) {
   const wished = useWishlistStore((s) => s.ids.includes(product.id));
@@ -95,6 +97,9 @@ export const ProductCard = memo(function ProductCard({ product }: { product: Pro
           currency={product.currency}
           className="mt-auto pt-1"
         />
+        <p className="text-[11px] text-ink-400">
+          or {INSTALLMENT_COUNT} × {formatCurrency(nextInstallmentAmount(product.price, 0), product.currency)}
+        </p>
       </div>
     </article>
   );

@@ -1,6 +1,7 @@
 export type ProductStatus = 'draft' | 'active' | 'archived';
 export type ProductBadge = 'new' | 'sale' | 'preorder' | 'limited' | 'sold_out';
-export type OrderStatus = 'pending' | 'paid_demo' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+export type OrderStatus = 'pending' | 'partially_paid' | 'paid_demo' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+export type PaymentPlan = 'full' | 'installments';
 export type UserRole = 'customer' | 'admin';
 
 export interface Category {
@@ -219,6 +220,19 @@ export interface Order {
   promoCode: string | null;
   createdAt: string;
   items: OrderItem[];
+  paymentPlan: PaymentPlan;
+  /** Total number of payments in the plan (1 for full payment, 4 for installments). */
+  installmentCount: number;
+  amountPaid: number;
+  payments: OrderPayment[];
+}
+
+export interface OrderPayment {
+  id: string;
+  amount: number;
+  method: string;
+  kind: 'full' | 'deposit' | 'installment' | 'balance';
+  createdAt: string;
 }
 
 export interface SiteSettings {

@@ -155,5 +155,11 @@ export function mapOrder(r: Row): Order {
     promoCode: r.promo_code ?? null,
     createdAt: r.created_at,
     items: ((r.items ?? r.order_items ?? []) as Row[]).map(mapOrderItem),
+    paymentPlan: r.payment_plan ?? 'full',
+    installmentCount: n(r.installment_count ?? 1),
+    amountPaid: n(r.amount_paid ?? 0),
+    payments: ((r.payments ?? r.order_payments ?? []) as Row[])
+      .map((p) => ({ id: p.id, amount: n(p.amount), method: p.method, kind: p.kind, createdAt: p.created_at }))
+      .sort((a, b) => a.createdAt.localeCompare(b.createdAt)),
   };
 }

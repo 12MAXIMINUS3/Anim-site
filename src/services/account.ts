@@ -71,7 +71,7 @@ export async function deleteAddress(id: string): Promise<void> {
 export async function listMyOrders(userId: string): Promise<Order[]> {
   const { data, error } = await requireSupabase()
     .from('orders')
-    .select('*, items:order_items(*)')
+    .select('*, items:order_items(*), payments:order_payments(*)')
     .eq('user_id', userId)
     .order('created_at', { ascending: false });
   throwIfError(error);

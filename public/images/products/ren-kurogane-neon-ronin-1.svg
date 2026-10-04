@@ -53,6 +53,7 @@
     <ellipse cx="400" cy="800" rx="196" ry="28" fill="none" stroke="#fff" stroke-opacity=".06" stroke-width="8"/><g>
     
     
+    
     <g transform="translate(400 300)"><path d="M-52 -48 C-120 -60 -128 40 -110 158.3 C-100 226.1 -140 246.1 -120 266.1 C-70 226.1 -74 113.1 -62 10Z" fill="url(#pr5pcy2-hair)"/>
              <circle cx="-56" cy="-50" r="11" fill="#facc15"/><path d="M52 -48 C120 -60 128 40 110 158.3 C100 226.1 140 246.1 120 266.1 C70 226.1 74 113.1 62 10Z" fill="url(#pr5pcy2-hair)"/>
              <circle cx="56" cy="-50" r="11" fill="#facc15"/><path d="M-64 -10 C-80 -96 80 -96 64 -10 L60 40 L-60 40Z" fill="url(#pr5pcy2-hair)"/></g>

@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Sailor Moon Chibi Mini Figure — original artwork">
+  <defs>
+    <radialGradient id="p191eip4-bg" cx="50%" cy="40%" r="75%">
+      <stop offset="0" stop-color="#6366f1" stop-opacity=".55"/>
+      <stop offset=".55" stop-color="#0d1330"/>
+      <stop offset="1" stop-color="#07070b"/>
+    </radialGradient>
+    <linearGradient id="p191eip4-body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#f0abfc"/>
+    </linearGradient>
+    <linearGradient id="p191eip4-base" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2e2945"/>
+      <stop offset="1" stop-color="#110f1a"/>
+    </linearGradient>
+    <filter id="p191eip4-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+    <linearGradient id="p191eip4-floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#07070b" stop-opacity="0"/>
+      <stop offset="1" stop-color="#07070b" stop-opacity=".7"/>
+    </linearGradient>
+    <pattern id="p191eip4-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".04"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="1000" fill="url(#p191eip4-bg)"/>
+  <rect width="800" height="1000" fill="url(#p191eip4-grid)"/>
+  <circle cx="400" cy="460" r="260" fill="#6366f1" opacity=".16" filter="url(#p191eip4-glow)"/>
+  <defs><linearGradient id="p191eip4-hair" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#87d7d3"/>
+      <stop offset=".55" stop-color="#5fc9c4"/>
+      <stop offset="1" stop-color="#397976"/>
+    </linearGradient>
+    <radialGradient id="p191eip4-iris" cx="50%" cy="30%" r="70%">
+      <stop offset="0" stop-color="#045062"/>
+      <stop offset=".6" stop-color="#0891b2"/>
+      <stop offset="1" stop-color="#77c3d5"/>
+    </radialGradient>
+    <linearGradient id="p191eip4-cloth" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#876bd3"/>
+      <stop offset=".6" stop-color="#6d4bc9"/>
+      <stop offset="1" stop-color="#412d79"/>
+    </linearGradient>
+    <linearGradient id="p191eip4-blade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f9a8d4"/>
+    </linearGradient>
+    <filter id="p191eip4-soft" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="12"/></filter></defs><ellipse cx="400" cy="470" rx="250" ry="330" fill="#f9a8d4" opacity=".14" filter="url(#p191eip4-soft)"/>
+    <path d="M300 0 L500 0 L640 820 L160 820Z" fill="#fff" opacity=".025"/>
+    <g><ellipse cx="400" cy="858" rx="236" ry="40" fill="#000" opacity=".5"/>
+    <path d="M182 800 L182 836 Q400 880 618 836 L618 800Z" fill="url(#p191eip4-base)"/>
+    <ellipse cx="400" cy="800" rx="218" ry="36" fill="#262038"/>
+    <ellipse cx="400" cy="800" rx="218" ry="36" fill="none" stroke="#f9a8d4" stroke-opacity=".55" stroke-width="2.5"/>
+    <ellipse cx="400" cy="800" rx="196" ry="28" fill="none" stroke="#fff" stroke-opacity=".06" stroke-width="8"/><g>
+    <g transform="translate(400 430) scale(1.9)"><path d="M-66 -18 C-84 -96 84 -96 66 -18 C86 50 92.0 64.7 70.0 107.8 Q40 137.8 18 97.8 L0 121.8 L-18 97.8 Q-40 137.8 -70 107.8 C-92 64.7 -86 50 -66 -18Z" fill="url(#p191eip4-hair)"/></g>
+    <path d="M372 700 L370 778 Q384 790 396 780 L396 700Z M404 700 L404 780 Q416 790 430 778 L428 700Z" fill="#877f5c"/>
+    <path d="M352 588 Q400 566 448 588 L462 712 Q400 728 338 712Z" fill="url(#p191eip4-cloth)"/>
+    <rect x="350" y="650" width="100" height="12" rx="4" fill="#f6e7a8"/>
+    <path d="M356 600 Q330 630 334 664" stroke="#6244b5" stroke-width="22" fill="none" stroke-linecap="round"/>
+    <circle cx="334" cy="670" r="12" fill="#f8d5c2"/>
+    <path d="M444 600 Q462 600 470 600" stroke="#6244b5" stroke-width="22" fill="none" stroke-linecap="round"/>
+    <circle cx="470" cy="600" r="12" fill="#f8d5c2"/>
+    <g transform="translate(400 430) scale(1.9)"><g>
+    <path d="M-52 -6 C-54 32 -30 62 0 72 C30 62 54 32 52 -6 C52 -60 -52 -60 -52 -6Z" fill="#f8d5c2"/>
+    <path d="M-52 -6 C-52 6 -46 14 -40 18 Q0 4 40 18 C46 14 52 6 52 -6 C40 -18 -40 -18 -52 -6Z" fill="#dabbab" opacity=".55"/>
+    <path d="M-34 -24 Q-22 -31 -10 -26" stroke="#3e837f" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+    <path d="M34 -24 Q22 -31 10 -26" stroke="#3e837f" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+    <g>
+    <path d="M-34 2 Q-21 -14 -8 -2 Q-9 22 -21 27 Q-33 22 -34 2Z" fill="#fff"/>
+    <ellipse cx="-21" cy="9" rx="11.5" ry="16" fill="url(#p191eip4-iris)"/>
+    <ellipse cx="-21" cy="11" rx="5.5" ry="8.5" fill="#160f24"/>
+    <circle cx="-17" cy="2" r="4.6" fill="#fff"/>
+    <circle cx="-25" cy="17" r="2.2" fill="#fff" opacity=".85"/>
+    <path d="M-37 0 Q-21 -19 -6 -5" stroke="#1d1428" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <path d="M-37 0 l-6 -5" stroke="#1d1428" stroke-width="3" stroke-linecap="round"/>
+    <path d="M-12 25 Q-21 29 -29 23" stroke="#5a4366" stroke-width="1.4" fill="none" opacity=".6"/>
+  </g>
+    <g>
+    <path d="M34 2 Q21 -14 8 -2 Q9 22 21 27 Q33 22 34 2Z" fill="#fff"/>
+    <ellipse cx="21" cy="9" rx="11.5" ry="16" fill="url(#p191eip4-iris)"/>
+    <ellipse cx="21" cy="11" rx="5.5" ry="8.5" fill="#160f24"/>
+    <circle cx="17" cy="2" r="4.6" fill="#fff"/>
+    <circle cx="25" cy="17" r="2.2" fill="#fff" opacity=".85"/>
+    <path d="M37 0 Q21 -19 6 -5" stroke="#1d1428" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <path d="M37 0 l6 -5" stroke="#1d1428" stroke-width="3" stroke-linecap="round"/>
+    <path d="M12 25 Q21 29 29 23" stroke="#5a4366" stroke-width="1.4" fill="none" opacity=".6"/>
+  </g>
+    <path d="M1 30 l2 5" stroke="#ae9588" stroke-width="1.6" stroke-linecap="round"/>
+    <ellipse cx="-31" cy="33" rx="9" ry="4" fill="#f58aa4" opacity=".45"/>
+    <ellipse cx="31" cy="33" rx="9" ry="4" fill="#f58aa4" opacity=".45"/>
+    <path d="M-8 45 Q0 52 8 45" stroke="#9a4a56" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    <path d="M-62 -4 C-70 -72 -30 -90 0 -88 C30 -90 70 -72 62 -4 L54 0 L46 -26 L38 8 L26 -24 L14 4 L4 -30 L-8 6 L-18 -26 L-30 8 L-40 -24 L-50 2Z" fill="url(#p191eip4-hair)"/>
+         <path d="M-62 -8 C-72 30 -68 74 -58 104 C-50 74 -48 30 -46 -2Z" fill="url(#p191eip4-hair)"/>
+         <path d="M62 -8 C72 30 68 74 58 104 C50 74 48 30 46 -2Z" fill="url(#p191eip4-hair)"/>
+    <path d="M-40 -56 Q0 -74 40 -56" stroke="#fff" stroke-opacity=".35" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M-50 -52 l6 -14 l6 14 l14 2 l-11 9 l4 14 l-13 -8 l-13 8 l4 -14 l-11 -9Z" fill="#f6e7a8" stroke="#fff" stroke-opacity=".5"/>
+  </g></g>
+    <g transform="translate(470 600) scale(.55) translate(-470 -600)"><g>
+        <line x1="470.0" y1="750.0" x2="470.0" y2="430.0" stroke="#b9ad7e" stroke-width="7" stroke-linecap="round"/>
+        <circle cx="470.0" cy="414.0" r="20" fill="#f9a8d4" opacity=".9"/>
+        <circle cx="470.0" cy="414.0" r="40" fill="#f9a8d4" opacity=".35" filter="url(#p191eip4-soft)"/>
+        <path d="M448.0 430.0 Q470.0 380.0 492.0 430.0" stroke="#f6e7a8" stroke-width="4" fill="none"/>
+      </g></g>
+  </g></g><circle cx="425.0" cy="185.7" r="3.3" fill="#f9a8d4" opacity="0.4"/><circle cx="623.5" cy="480.6" r="2.4" fill="#f9a8d4" opacity="0.3"/><circle cx="256.7" cy="216.3" r="4.9" fill="#f9a8d4" opacity="0.4"/><circle cx="506.8" cy="717.9" r="3.0" fill="#f9a8d4" opacity="0.7"/><circle cx="475.6" cy="461.4" r="3.3" fill="#f9a8d4" opacity="0.5"/><path d="M390.9 377.9 L394.1 388.6 L390.9 399.3 L387.7 388.6Z" fill="#fff" opacity="0.9"/><circle cx="685.8" cy="386.8" r="4.6" fill="#f9a8d4" opacity="0.7"/><path d="M136.5 221.5 L138.4 227.8 L136.5 234.1 L134.6 227.8Z" fill="#fff" opacity="0.6"/><path d="M278.3 597.8 L280.8 606.1 L278.3 614.5 L275.8 606.1Z" fill="#fff" opacity="0.5"/><circle cx="513.6" cy="156.1" r="2.6" fill="#f9a8d4" opacity="0.4"/><circle cx="328.5" cy="623.9" r="3.8" fill="#f9a8d4" opacity="0.5"/><circle cx="392.2" cy="413.3" r="5.3" fill="#f9a8d4" opacity="0.3"/><circle cx="144.4" cy="207.7" r="3.3" fill="#f9a8d4" opacity="0.6"/><circle cx="276.1" cy="194.0" r="4.3" fill="#f9a8d4" opacity="0.5"/><circle cx="397.7" cy="282.6" r="4.8" fill="#f9a8d4" opacity="0.6"/><circle cx="417.3" cy="516.6" r="4.3" fill="#f9a8d4" opacity="0.3"/>
+  <rect y="930" width="800" height="70" fill="url(#p191eip4-floor)"/>
+</svg>

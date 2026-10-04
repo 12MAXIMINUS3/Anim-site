@@ -7,7 +7,7 @@ import { ImageWithFallback } from '@/components/ui/ImageWithFallback';
 import { Skeleton } from '@/components/ui/States';
 import { NewsletterForm } from '@/components/layout/NewsletterForm';
 import { communityImagePath, heroFigurePaths, heroImagePath, homeVideoPath } from '@/data/seedProducts';
-import { ANIME_SERIES, seriesHref } from '@/data/series';
+import { ANIME_SERIES, HERO_SERIES, seriesHref } from '@/data/series';
 
 export function SectionHeading({ eyebrow, title, action, id }: { eyebrow?: string; title: string; action?: ReactNode; id?: string }) {
   return (
@@ -82,11 +82,20 @@ export function Hero() {
               className="relative aspect-[6/5] w-full rounded-[2rem] border border-ink-700 object-cover shadow-2xl"
             />
           )}
-          <div className="absolute -bottom-4 left-4 rounded-2xl border border-ink-700 bg-ink-900/90 px-4 py-3 shadow-xl backdrop-blur sm:left-8">
-            <p className="text-xs text-ink-400">Spotlight</p>
-            <Link to="/product/aiko-starfall-comet-gown" className="text-sm font-semibold text-white hover:text-nova-200">
-              Aiko Starfall — Comet Gown Ver.
-            </Link>
+          <div className="absolute -bottom-4 left-4 right-4 rounded-2xl border border-ink-700 bg-ink-900/90 px-4 py-3 shadow-xl backdrop-blur sm:left-8 sm:right-auto">
+            <p className="text-xs text-ink-400">Featured series</p>
+            <ul className="mt-1 flex flex-wrap gap-x-4 gap-y-1">
+              {HERO_SERIES.map((slug) => {
+                const s = ANIME_SERIES.find((x) => x.slug === slug);
+                return s ? (
+                  <li key={slug}>
+                    <Link to={seriesHref(s)} className="text-sm font-semibold text-white hover:text-nova-200">
+                      {s.name}
+                    </Link>
+                  </li>
+                ) : null;
+              })}
+            </ul>
           </div>
         </div>
       </div>

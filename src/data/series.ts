@@ -24,7 +24,13 @@ export const ANIME_SERIES: Series[] = [
   { slug: 'one-piece', name: 'One Piece', colors: ['#b91c1c', '#ca8a04'] },
   { slug: 'vinland-saga', name: 'Vinland Saga', colors: ['#334155', '#0369a1'] },
   { slug: 'yu-gi-oh', name: 'Yu-Gi-Oh!', colors: ['#6d28d9', '#b45309'] },
+  { slug: 'sailor-moon', name: 'Sailor Moon', colors: ['#7c3aed', '#ec4899'] },
+  { slug: 'fruits-basket', name: 'Fruits Basket', colors: ['#c2410c', '#65a30d'] },
+  { slug: 'cardcaptor-sakura', name: 'Cardcaptor Sakura', colors: ['#be185d', '#0891b2'] },
   { slug: 'uncategorized', name: 'Uncategorized', colors: ['#3f3f46', '#7c3aed'], sampleLabel: 'Assorted Anime' },
 ];
 
 export const seriesHref = (s: Series) => `/shop?franchise=${encodeURIComponent(s.name)}`;
+
+/** Series featured on the three platforms of the home hero banner (left, centre, right). */
+export const HERO_SERIES = ['fruits-basket', 'sailor-moon', 'cardcaptor-sakura'] as const;

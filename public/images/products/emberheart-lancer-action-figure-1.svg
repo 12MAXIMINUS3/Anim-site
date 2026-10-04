@@ -53,6 +53,7 @@
     <ellipse cx="400" cy="800" rx="196" ry="28" fill="none" stroke="#fff" stroke-opacity=".06" stroke-width="8"/><g>
     
     
+    
     <g transform="translate(400 300)"><path d="M30 -70 C110 -70 130 20 112 167.5 C104 251.2 132 279.2 116 309.2 C78 223.3 84 111.7 60 -10Z" fill="url(#p1eq9fhf-hair)"/>
         <circle cx="62" cy="-58" r="10" fill="#fde68a"/>
         <path d="M-64 -10 C-80 -96 80 -96 64 -10 L62 30 L-62 30Z" fill="url(#p1eq9fhf-hair)"/></g>

@@ -69,7 +69,7 @@ const SKIN = ['#fde4d6', '#f8d5c2', '#f1c3a6', '#d9a37f', '#b07a56'];
 
 type HairStyle = 'long' | 'twintails' | 'ponytail' | 'bob' | 'spiky';
 type Outfit = 'gown' | 'skirt' | 'coat' | 'armor';
-type Accessory = 'sword' | 'staff' | 'orb' | 'fan' | 'book' | 'shuriken' | 'axe' | 'card' | 'none';
+type Accessory = 'sword' | 'staff' | 'orb' | 'fan' | 'book' | 'shuriken' | 'axe' | 'card' | 'basket' | 'none';
 type HeadPiece = 'ribbon' | 'pin' | 'ears' | 'tiara' | 'headband' | 'plate' | 'tricorn' | 'helmet' | 'none';
 type Expression = 'smile' | 'open' | 'calm' | 'wink';
 
@@ -94,6 +94,7 @@ interface Character {
   aura: boolean;
   giant: boolean; // looming silhouette in the background
   trim: boolean; // wave trim on coat hem
+  orbitCards: boolean; // glowing cards circling the figure
 }
 
 /**
@@ -124,6 +125,12 @@ export const SERIES_THEMES: Record<string, Partial<Character>> = {
   'vinland-saga': { hair: '#4a3226', hairStyle: 'long', outfit: 'coat', primary: '#6b4e32', secondary: '#b0b6bf', accessory: 'axe', headPiece: 'helmet', shield: true, fx: '#8fd3ff' },
   // card duelist with a glowing creature card
   'yu-gi-oh': { hair: '#b8a4f0', hairStyle: 'bob', outfit: 'coat', primary: '#eef0f6', secondary: '#6d4bd8', accessory: 'card', headPiece: 'none', fx: '#c084fc' },
+  // starry magical guardian: long teal hair, violet gown, star staff (no buns, no sailor collar)
+  'sailor-moon': { hair: '#5fc9c4', hairStyle: 'long', outfit: 'gown', primary: '#6d4bc9', secondary: '#f6e7a8', accessory: 'staff', headPiece: 'pin', expression: 'smile', fx: '#f9a8d4' },
+  // gentle, cosy girl with a woven fruit basket (no zodiac animals, no ribbons)
+  'fruits-basket': { hair: '#9ad7b0', hairStyle: 'bob', outfit: 'skirt', primary: '#e8916b', secondary: '#fbe7c6', accessory: 'basket', headPiece: 'none', expression: 'smile', armAngle: -40, fx: '#fdba74' },
+  // card mage with glowing cards circling her (no winged star wand, no frilly hat)
+  'cardcaptor-sakura': { hair: '#d7d9e6', hairStyle: 'bob', outfit: 'gown', primary: '#23305e', secondary: '#e3b65c', accessory: 'orb', headPiece: 'none', orbitCards: true, expression: 'open', fx: '#67e8f9' },
 };
 
 function makeCharacter(seed: string, kind: FigureKind, fx: string, theme?: Partial<Character>): Character {
@@ -152,6 +159,7 @@ function makeCharacter(seed: string, kind: FigureKind, fx: string, theme?: Parti
     aura: false,
     giant: false,
     trim: false,
+    orbitCards: false,
   };
   const c: Character = theme ? { ...base, ...theme } : base;
   if (kind === 'chibi') c.cape = false;
@@ -302,6 +310,15 @@ function accessory(c: Character, id: string, hx: number, hy: number): string {
     case 'axe':
       return `<line x1="${f(hx - 6)}" y1="${f(hy + 70)}" x2="${f(hx + 12)}" y2="${f(hy - 130)}" stroke="#5a3d28" stroke-width="8" stroke-linecap="round"/>
         <path d="M${f(hx + 10)} ${f(hy - 126)} Q${f(hx + 66)} ${f(hy - 140)} ${f(hx + 72)} ${f(hy - 90)} Q${f(hx + 40)} ${f(hy - 96)} ${f(hx + 8)} ${f(hy - 84)}Z" fill="#cfd6de" stroke="#7d8a99" stroke-width="2"/>`;
+    case 'basket':
+      return `<g transform="translate(${f(hx)} ${f(hy + 18)})">
+        <path d="M-40 -6 Q0 -60 40 -6" stroke="#8a5a2b" stroke-width="5" fill="none"/>
+        <circle cx="-16" cy="-12" r="13" fill="#ef4444"/><circle cx="12" cy="-14" r="12" fill="#f59e0b"/><circle cx="-2" cy="-22" r="11" fill="#84cc16"/>
+        <path d="M-12 -32 q4 -8 10 -6" stroke="#4d7c0f" stroke-width="3" fill="none"/>
+        <path d="M-44 -6 L44 -6 L34 34 L-34 34Z" fill="#b7793b"/>
+        ${[-28, -14, 0, 14, 28].map((x) => `<line x1="${x}" y1="-6" x2="${x * 0.78}" y2="34" stroke="#8a5a2b" stroke-width="2"/>`).join('')}
+        ${[4, 14, 24].map((y) => `<line x1="-40" y1="${y}" x2="40" y2="${y}" stroke="#8a5a2b" stroke-width="2" opacity=".7"/>`).join('')}
+      </g>`;
     case 'card':
       return `<g transform="translate(${f(hx)} ${f(hy - 52)}) rotate(-10)">
         <rect x="-44" y="-58" width="88" height="116" rx="8" fill="${c.fx}" opacity=".35" filter="url(#${id}-soft)"/>
@@ -411,8 +428,24 @@ function fullBody(c: Character, id: string, kind: FigureKind): string {
       ? `<path d="M296 756 q17 -14 34 0 t34 0 t34 0 M436 756 q17 -14 34 0 t34 0" stroke="${c.secondary}" stroke-width="5" fill="none"/>`
       : '';
 
+  const orbit = c.orbitCards
+    ? [0, 1, 2, 3, 4, 5]
+        .map((i) => {
+          const a = (i / 6) * Math.PI * 2 + 0.4;
+          const x = 400 + Math.cos(a) * 190;
+          const y = 470 + Math.sin(a) * 120;
+          return `<g transform="translate(${f(x)} ${f(y)}) rotate(${f((a * 180) / Math.PI / 6 - 15)})">
+            <rect x="-20" y="-30" width="40" height="60" rx="5" fill="${c.fx}" opacity=".3" filter="url(#${id}-soft)"/>
+            <rect x="-15" y="-22" width="30" height="44" rx="4" fill="#1b1f3b" stroke="${c.fx}" stroke-width="2"/>
+            <circle cx="0" cy="0" r="7" fill="none" stroke="${c.secondary}" stroke-width="2"/>
+          </g>`;
+        })
+        .join('')
+    : '';
+
   return `<g>
     ${aura}
+    ${orbit}
     ${wings}
     <g transform="translate(400 300)">${backHair(c, id)}</g>
     ${cape}

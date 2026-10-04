@@ -24,7 +24,7 @@ import {
   type SeedProduct,
 } from '../src/data/seedProducts.ts';
 import { drawFigure, type DrawOptions } from './figure-art.ts';
-import { ANIME_SERIES } from '../src/data/series.ts';
+import { ANIME_SERIES, HERO_SERIES } from '../src/data/series.ts';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const out = (rel: string, content: string) => {
@@ -315,7 +315,7 @@ function heroStageSvg(): string {
 function heroSvg(): string {
   const id = 'hero';
   const pal = PALETTES[0];
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1000" role="img" aria-label="Original placeholder artwork of three stylized collectible figures on glowing pedestals">
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1000" role="img" aria-label="Three original anime-style collectible figures on glowing pedestals">
   ${defs(id, pal)}
   ${defs('h2', PALETTES[3])}
   ${defs('h3', PALETTES[2])}
@@ -323,9 +323,9 @@ function heroSvg(): string {
   <rect width="1200" height="1000" fill="url(#${id}-grid)"/>
   <circle cx="600" cy="420" r="380" fill="#8b5cf6" opacity=".18" filter="url(#${id}-glow)"/>
   <circle cx="900" cy="300" r="200" fill="#22d3ee" opacity=".12" filter="url(#${id}-glow)"/>
-  <g transform="translate(-40 160) scale(.72)">${figureGroup('action', 'hero-left', PALETTES[3], 'h2')}</g>
-  <g transform="translate(660 230) scale(.65)">${figureGroup('chibi', 'hero-right', PALETTES[2], 'h3')}</g>
-  <g transform="translate(200 -10)">${figureGroup('figure', 'hero-center', pal, id)}</g>
+  <g transform="translate(-40 160) scale(.72)">${figureGroup('figure', 'hero-left', PALETTES[3], 'h2', { theme: HERO_SERIES[0] })}</g>
+  <g transform="translate(660 160) scale(.72)">${figureGroup('figure', 'hero-right', PALETTES[2], 'h3', { theme: HERO_SERIES[2] })}</g>
+  <g transform="translate(200 -10)">${figureGroup('figure', 'hero-center', pal, id, { theme: HERO_SERIES[1] })}</g>
 </svg>
 `;
 }

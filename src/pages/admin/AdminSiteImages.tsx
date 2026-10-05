@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ImagePlus, Package, RotateCcw, Upload } from 'lucide-react';
+import { FileImage, ImagePlus, Package, RotateCcw, Upload } from 'lucide-react';
 import type { SiteImages } from '@/types';
 import { useSettings } from '@/context/SettingsContext';
 import { adminListCategories, deleteSiteFile, setCategoryImage, uploadSiteFile } from '@/services/admin';
@@ -13,6 +13,18 @@ import { ImageWithFallback } from '@/components/ui/ImageWithFallback';
 import { ErrorState, Spinner } from '@/components/ui/States';
 import { AdminPageHeader } from './AdminLayout';
 import { cn } from '@/lib/cn';
+
+/** File name from an image URL, without the upload timestamp prefix (e.g. "1791138836197-banner.png" → "banner.png"). */
+function fileName(url: string): string {
+  const last = url.split('?')[0].split('/').pop() ?? url;
+  let name = last;
+  try {
+    name = decodeURIComponent(last);
+  } catch {
+    // keep the raw segment
+  }
+  return name.replace(/^\d{10,}-/, '');
+}
 
 interface SlotProps {
   label: string;
@@ -56,7 +68,7 @@ function Slot({ label, hint, preview, custom, kind = 'image', aspect = 'aspect-[
             <ImageWithFallback src={preview} alt="" className="absolute inset-0 h-full w-full object-cover" />
           )
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center text-xs text-ink-500">{emptyText}</div>
+          <div className="absolute inset-0 flex items-center justify-center pb-6 text-xs text-ink-500">{emptyText}</div>
         )}
         <span
           className={cn(
@@ -66,12 +78,22 @@ function Slot({ label, hint, preview, custom, kind = 'image', aspect = 'aspect-[
         >
           {custom ? 'Your upload' : 'Default'}
         </span>
+        <span className="absolute inset-x-0 bottom-0 truncate bg-gradient-to-t from-ink-950/95 to-ink-950/0 px-2.5 pb-1.5 pt-5 text-xs font-semibold text-white">
+          {label}
+        </span>
         {busy && <div className="absolute inset-0 flex items-center justify-center bg-ink-950/70 text-sm text-white">{busy === 'upload' ? 'Uploading…' : 'Deleting…'}</div>}
       </div>
       <div className="flex flex-1 flex-col gap-3 p-3">
         <div>
           <p className="text-sm font-semibold text-white">{label}</p>
           {hint && <p className="mt-0.5 text-xs text-ink-400">{hint}</p>}
+          {preview && (
+            <p className="mt-1.5 flex min-w-0 items-center gap-1.5 text-xs text-ink-300" title={fileName(preview)}>
+              <FileImage className="h-3.5 w-3.5 shrink-0 text-pulse-400" aria-hidden="true" />
+              <span className="truncate">{fileName(preview)}</span>
+              {!custom && <span className="shrink-0 text-ink-500">(default)</span>}
+            </p>
+          )}
         </div>
         <div className="mt-auto flex flex-wrap gap-2">
           <input
@@ -180,7 +202,7 @@ export default function AdminSiteImages() {
 
         <Section title="Logo & browser icon" description="The logo appears in the header, footer, sign-in pages and admin. Use a transparent PNG or SVG, ideally wide (about 4:1). The browser icon shows on the tab — a square image works best.">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <Slot label="Store logo" hint="Replaces the built-in N logo" aspect="aspect-[4/1]" preview={images.logo} emptyText="Built-in logo in use" custom={!!images.logo} onUpload={setSingle('logo')} onDelete={clearSingle('logo')} />
+            <Slot label="Store logo" hint="Replaces the built-in N logo" aspect="aspect-[5/2]" preview={images.logo} emptyText="Built-in logo in use" custom={!!images.logo} onUpload={setSingle('logo')} onDelete={clearSingle('logo')} />
             <Slot label="Browser-tab icon" hint="Square, e.g. 512 × 512" aspect="aspect-square" preview={images.favicon ?? '/favicon.svg'} custom={!!images.favicon} onUpload={setSingle('favicon')} onDelete={clearSingle('favicon')} />
           </div>
         </Section>

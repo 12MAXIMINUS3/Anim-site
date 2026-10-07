@@ -15,7 +15,7 @@ export default function SearchPage() {
   return (
     <>
       <PageHeader
-        title={q ? `Results for “${q}”` : 'Search the vault'}
+        title={q ? `Results for “${q}”` : 'Search the shop'}
         crumbs={[{ label: 'Search' }]}
       >
         <SearchBox className="mt-6 max-w-xl" />

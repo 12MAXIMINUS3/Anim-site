@@ -55,7 +55,7 @@ export function CartDrawer() {
         <div className="flex flex-col items-center py-16 text-center">
           <ShoppingBag className="mb-4 h-10 w-10 text-nova-400" aria-hidden="true" />
           <p className="font-semibold text-white">Your cart is empty</p>
-          <p className="mt-1 text-sm text-ink-400">Find your next centerpiece in the vault.</p>
+          <p className="mt-1 text-sm text-ink-400">Find your next centerpiece at Figure Haven.</p>
           <Link to="/shop" onClick={close} className="btn-primary mt-6">
             Start shopping
           </Link>

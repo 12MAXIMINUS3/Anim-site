@@ -108,7 +108,7 @@ export function Footer() {
       </div>
       <div className="border-t border-ink-800">
         <div className="container-page flex flex-col items-center justify-between gap-3 py-6 text-xs text-ink-500 sm:flex-row">
-          <p>© {year} Nova Figure Vault. Demo storefront — all products and characters are fictional.</p>
+          <p>© {year} Figure Haven. Demo storefront — all products and characters are fictional.</p>
           <p>Payments are simulated. No real transactions are processed.</p>
         </div>
       </div>

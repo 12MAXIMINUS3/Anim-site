@@ -36,7 +36,7 @@ export default function LoginPage() {
       subtitle="Sign in to sync your cart and wishlist and view your orders."
       footer={
         <>
-          New to the vault?{' '}
+          New to Figure Haven?{' '}
           <Link to={`/register${redirect ? `?redirect=${encodeURIComponent(redirect)}` : ''}`} className="font-semibold text-nova-300 hover:text-pulse-300">
             Create an account
           </Link>
@@ -50,7 +50,7 @@ export default function LoginPage() {
           setError(null);
           try {
             await signIn(v.email, v.password);
-            toast.success('Signed in', 'Welcome back to the vault.');
+            toast.success('Signed in', 'Welcome back to Figure Haven.');
             navigate(redirect && redirect.startsWith('/') ? redirect : '/account', { replace: true });
           } catch (e) {
             setError(friendlyError(e));

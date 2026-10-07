@@ -30,7 +30,7 @@ export default function HomePage() {
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'Store',
-      name: 'Nova Figure Vault',
+      name: 'Figure Haven',
       url: window.location.origin,
       description: 'Demo collectible-figures storefront with original, fictional products.',
     },
@@ -59,7 +59,7 @@ export default function HomePage() {
         </section>
 
         <section aria-labelledby="collections-heading" id="collections" className="scroll-mt-28">
-          <SectionHeading id="collections-heading" eyebrow="Collections" title="Find your corner of the vault" action={viewAll('/shop', 'Shop everything')} />
+          <SectionHeading id="collections-heading" eyebrow="Collections" title="Find your corner of the haven" action={viewAll('/shop', 'Shop everything')} />
           {categories.error ? (
             <ErrorState error={categories.error} onRetry={categories.reload} />
           ) : (
@@ -96,7 +96,7 @@ export default function HomePage() {
         </section>
 
         <section aria-labelledby="community-heading">
-          <SectionHeading id="community-heading" eyebrow="#NovaFigureVault" title="From the community" />
+          <SectionHeading id="community-heading" eyebrow="#FigureHaven" title="From the community" />
           <CommunityStrip />
         </section>
       </div>

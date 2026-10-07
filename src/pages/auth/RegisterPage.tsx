@@ -76,7 +76,7 @@ export default function RegisterPage() {
             if (needsConfirmation) {
               setConfirmEmail(v.email);
             } else {
-              toast.success('Account created', 'Welcome to Nova Figure Vault!');
+              toast.success('Account created', 'Welcome to Figure Haven!');
               navigate(redirect && redirect.startsWith('/') ? redirect : '/account', { replace: true });
             }
           } catch (e) {

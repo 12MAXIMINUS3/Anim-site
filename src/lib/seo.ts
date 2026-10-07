@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
-const SITE_NAME = 'Nova Figure Vault';
+const SITE_NAME = 'Figure Haven';
 const DEFAULT_DESCRIPTION =
-  'Nova Figure Vault: scale figures, statues, chibi minis, action figures, preorders and display gear for serious collectors.';
+  'Figure Haven: scale figures, statues, chibi minis, action figures, preorders and display gear for serious collectors.';
 
 interface SeoOptions {
   title?: string;

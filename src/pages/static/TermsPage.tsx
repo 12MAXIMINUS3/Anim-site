@@ -3,7 +3,7 @@ import { LAST_UPDATED, StaticPage } from './StaticPage';
 
 export default function TermsPage() {
   return (
-    <StaticPage title="Terms & Conditions" description="The terms that apply when you use the Nova Figure Vault demo storefront." intro={`Last updated ${LAST_UPDATED}`}>
+    <StaticPage title="Terms & Conditions" description="The terms that apply when you use the Figure Haven demo storefront." intro={`Last updated ${LAST_UPDATED}`}>
       <p>
         These template terms apply to this demonstration storefront. Replace them with terms reviewed by a qualified professional before
         operating a live store.
@@ -26,7 +26,7 @@ export default function TermsPage() {
         See our <Link to="/shipping&returns">Shipping & Returns</Link> policy.
       </p>
       <h2>7. Intellectual property</h2>
-      <p>The Nova Figure Vault name, site design and original placeholder artwork belong to the site owner.</p>
+      <p>The Figure Haven name, site design and original placeholder artwork belong to the site owner.</p>
       <h2>8. Contact</h2>
       <p>
         Questions about these terms? <Link to="/contact">Contact us</Link>.

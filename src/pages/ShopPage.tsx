@@ -17,7 +17,7 @@ export default function ShopPage() {
 
   useSeo({
     title: page > 1 ? `${title} — Page ${page}` : title,
-    description: 'Browse every scale figure, statue, chibi mini, action figure and display accessory in the Nova Figure Vault catalog.',
+    description: 'Browse every scale figure, statue, chibi mini, action figure and display accessory in the Figure Haven catalog.',
   });
 
   if (pageParam !== undefined && (!Number.isInteger(page) || page < 1)) return <Navigate to="/shop" replace />;

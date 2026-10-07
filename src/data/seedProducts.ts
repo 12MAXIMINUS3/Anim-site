@@ -134,7 +134,7 @@ export const seedBrands: SeedBrand[] = [
   { slug: 'orbit-works', name: 'Orbit Works', description: 'Engineering-first action figure brand with 30+ points of articulation.' },
   { slug: 'glasshaven-studio', name: 'Glasshaven Studio', description: 'Premium polystone statues and limited dioramas in numbered runs.' },
   { slug: 'ironbloom-collectibles', name: 'Ironbloom Collectibles', description: 'Mechanical designs, die-cast parts and weathered finishes.' },
-  { slug: 'vault-select', name: 'Vault Select', description: 'Items sourced by the Nova Figure Vault team.' },
+  { slug: 'vault-select', name: 'Vault Select', description: 'Items sourced by the Figure Haven team.' },
   { slug: 'vaultline-display', name: 'Vaultline Display Co.', description: 'Display cases, stands and care accessories designed for collectors.' },
 ];
 
@@ -571,7 +571,7 @@ export const seedProducts: SeedProduct[] = [
     salesCount: 15,
     shortDescription: 'Our own mascot: a little vault guardian holding a glowing key.',
     fullDescription:
-      'Pip is the Nova Figure Vault house mascot — a small sprite who guards collectors’ shelves at night. Includes a glow-in-the-dark key, a treasure chest accessory and two faces.',
+      'Pip is the Figure Haven house mascot — a small sprite who guards collectors’ shelves at night. Includes a glow-in-the-dark key, a treasure chest accessory and two faces.',
   },
   {
     slug: 'selka-and-bubbles-chibi-set',
@@ -1155,7 +1155,7 @@ export function reviewsForProduct(index: number): SeedReview[] {
 
 export const seedSettings: SiteSettings = {
   announcement: 'Free standard shipping on orders over $200 · Use WELCOME10 for 10% off your first order',
-  storeEmail: 'hello@novafigurevault.example',
+  storeEmail: 'hello@figurehaven.example',
   storePhone: '+1 (555) 014-2290',
   storeAddress: '120 Collector Lane, Suite 4, Portland, OR 97201',
   currency: 'USD',

@@ -1,4 +1,4 @@
-# Nova Figure Vault
+# Figure Haven
 
 A dark, premium storefront for collectible figures. It is built with **React 18 + Vite + TypeScript**, **Tailwind CSS**, **React Router**, **Supabase** (Postgres, Auth and Storage), **Zustand**, **React Hook Form + Zod** and **Lucide** icons.
 

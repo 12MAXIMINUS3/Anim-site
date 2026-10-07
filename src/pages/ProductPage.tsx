@@ -65,7 +65,7 @@ export default function ProductPage() {
   const firstImage = product?.images[0]?.url;
 
   useSeo({
-    title: product?.seoTitle?.replace(/ \| Nova Figure Vault$/, '') ?? product?.name ?? 'Product',
+    title: product?.seoTitle?.replace(/ \| (Figure Haven|Nova Figure Vault)$/, '') ?? product?.name ?? 'Product',
     description: product?.seoDescription ?? product?.shortDescription,
     image: firstImage,
     jsonLd: product

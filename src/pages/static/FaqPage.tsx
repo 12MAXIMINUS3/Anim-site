@@ -28,7 +28,7 @@ const FAQS = [
   {
     id: 'authentic',
     title: 'Are your products authentic?',
-    content: 'Every product in the vault is an original design sourced directly from our studio partners. This demo catalog uses fictional products and placeholder artwork.',
+    content: 'Every product in our shop is an original design sourced directly from our studio partners. This demo catalog uses fictional products and placeholder artwork.',
   },
   {
     id: 'damage',
@@ -50,7 +50,7 @@ const FAQS = [
 export default function FaqPage() {
   useSeo({
     title: 'FAQ',
-    description: 'Answers about preorders, shipping, promo codes, returns and accounts at Nova Figure Vault.',
+    description: 'Answers about preorders, shipping, promo codes, returns and accounts at Figure Haven.',
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',

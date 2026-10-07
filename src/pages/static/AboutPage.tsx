@@ -4,12 +4,12 @@ import { StaticPage } from './StaticPage';
 export default function AboutPage() {
   return (
     <StaticPage
-      title="About Nova Figure Vault"
+      title="About Figure Haven"
       description="Who we are, how we choose what we stock and why we obsess over packaging."
       intro="A small team of collectors building the shop we always wanted to buy from."
     >
       <p>
-        Nova Figure Vault started with a cramped shelf, a cheap LED strip and a conviction: collectible figures deserve to be shopped for
+        Figure Haven started with a cramped shelf, a cheap LED strip and a conviction: collectible figures deserve to be shopped for
         the way they’re displayed — with care, good lighting and zero guesswork. We stock original scale figures, statues, chibi-style
         minis, articulated action figures and the display gear to show them off.
       </p>

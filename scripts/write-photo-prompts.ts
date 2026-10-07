@@ -41,7 +41,7 @@ function productPrompt(p: SeedProduct, view: 1 | 2): string {
 }
 
 const lines: string[] = [];
-lines.push('# Nova Figure Vault — photo prompts');
+lines.push('# Figure Haven — photo prompts');
 lines.push('');
 lines.push('Paste each prompt into your image generator (e.g. ChatGPT images), then save the result into this `photos` folder');
 lines.push('using the **exact file name** shown (.png, .jpg or .webp all work). When done, run `npm run photos:import`.');

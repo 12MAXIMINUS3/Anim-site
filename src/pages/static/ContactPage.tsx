@@ -22,7 +22,7 @@ const schema = z.object({
 type Values = z.infer<typeof schema>;
 
 export default function ContactPage() {
-  useSeo({ title: 'Contact us', description: 'Questions about an order, a preorder or a product? Get in touch with the Nova Figure Vault team.' });
+  useSeo({ title: 'Contact us', description: 'Questions about an order, a preorder or a product? Get in touch with the Figure Haven team.' });
   const { settings } = useSettings();
   const [status, setStatus] = useState<{ tone: 'success' | 'error'; text: string } | null>(null);
   const {

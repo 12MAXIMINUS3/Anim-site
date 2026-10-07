@@ -3,7 +3,7 @@ import { LAST_UPDATED, StaticPage } from './StaticPage';
 
 export default function PrivacyPage() {
   return (
-    <StaticPage title="Privacy Policy" description="How Nova Figure Vault collects, uses and protects your personal information." intro={`Last updated ${LAST_UPDATED}`}>
+    <StaticPage title="Privacy Policy" description="How Figure Haven collects, uses and protects your personal information." intro={`Last updated ${LAST_UPDATED}`}>
       <p>
         This template policy describes how this demonstration store handles personal data. Replace it with a policy reviewed by a qualified
         professional before accepting real orders.

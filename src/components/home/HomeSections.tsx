@@ -182,7 +182,7 @@ export function PromoSplit() {
 }
 
 const BENEFITS = [
-  { icon: BadgeCheck, title: 'Original designs only', text: 'Every character and sculpt in the vault is an original creation — no knock-offs.' },
+  { icon: BadgeCheck, title: 'Original designs only', text: 'Every character and sculpt in our shop is an original creation — no knock-offs.' },
   { icon: PackageCheck, title: 'Collector-grade packing', text: 'Double-boxed with foam corners so boxes arrive shelf-ready.' },
   { icon: CalendarClock, title: 'Fair preorders', text: 'Clear release windows and status updates from order to doorstep.' },
   { icon: Gift, title: 'Members get more', text: 'Drop alerts, early access and promo codes for newsletter subscribers.' },
@@ -234,7 +234,7 @@ export function CommunityStrip() {
           </li>
         ))}
       </ul>
-      <p className="mt-3 text-center text-xs text-ink-500">Community gallery uses placeholder artwork. Tag #NovaFigureVault to be featured.</p>
+      <p className="mt-3 text-center text-xs text-ink-500">Community gallery uses placeholder artwork. Tag #FigureHaven to be featured.</p>
     </div>
   );
 }

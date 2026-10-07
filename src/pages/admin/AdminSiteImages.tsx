@@ -234,7 +234,7 @@ export default function AdminSiteImages() {
           </div>
         </Section>
 
-        <Section title="Category tiles" description="Shown in “Find your corner of the vault” on the home page and on each category page.">
+        <Section title="Category tiles" description="Shown in “Find your corner of the haven” on the home page and on each category page.">
           {categories.error ? (
             <ErrorState error={categories.error} onRetry={categories.reload} />
           ) : !categories.data ? (

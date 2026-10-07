@@ -78,7 +78,7 @@ const products: Product[] = seedProducts.map((p, index) => {
     dimensions: p.dimensions,
     weight: p.weight,
     featured: p.featured,
-    seoTitle: `${p.name} | Nova Figure Vault`,
+    seoTitle: `${p.name} | Figure Haven`,
     seoDescription: p.shortDescription,
     ratingAvg: reviews.length ? Math.round((reviews.reduce((s, r) => s + r.rating, 0) / reviews.length) * 100) / 100 : 0,
     ratingCount: reviews.length,

@@ -53,9 +53,9 @@ export function Hero() {
             <Sparkles className="h-3.5 w-3.5" aria-hidden="true" /> Autumn drops are live
           </p>
           <h1 id="hero-heading" className="text-4xl font-extrabold leading-[1.05] sm:text-5xl lg:text-6xl">
-            Ultimate Anime <span className="text-gradient">Destination</span>
+            Ultimate Anime Figures &amp; <span className="text-gradient">Resin Collectibles</span>
           </h1>
-          <p className="mt-6 text-lg text-ink-300">Discover the latest releases, trending.</p>
+          <p className="mt-6 text-lg text-ink-300">New drops, trending statues, and limited editions — curated for collectors like you.</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/shop?sort=newest" className="btn-primary px-6 py-3 text-base">
               Shop New Arrivals <ArrowRight className="h-4 w-4" aria-hidden="true" />

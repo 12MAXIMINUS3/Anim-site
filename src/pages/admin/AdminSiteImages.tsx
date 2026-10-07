@@ -13,6 +13,10 @@ import { ImageWithFallback } from '@/components/ui/ImageWithFallback';
 import { ErrorState, Spinner } from '@/components/ui/States';
 import { AdminPageHeader } from './AdminLayout';
 import { cn } from '@/lib/cn';
+import { ANIME_SERIES, HERO_SERIES } from '@/data/series';
+
+/** Series name shown on each hero platform (left, centre, right), e.g. "Sailor Moon". */
+const heroName = (i: number) => ANIME_SERIES.find((x) => x.slug === HERO_SERIES[i])?.name ?? ['Left', 'Centre', 'Right'][i];
 
 /** File name from an image URL, without the upload timestamp prefix (e.g. "1791138836197-banner.png" → "banner.png"). */
 function fileName(url: string): string {
@@ -213,10 +217,10 @@ export default function AdminSiteImages() {
         >
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             <Slot label="Banner image" hint="Wide image, about 6:5" aspect="aspect-[6/5]" preview={images.hero ?? heroImagePath()} custom={!!images.hero} onUpload={setSingle('hero')} onDelete={clearSingle('hero')} />
-            <Slot label="Platforms background" hint="Behind the 3 figures" aspect="aspect-[6/5]" preview={images.heroStage ?? '/images/hero/hero-stage.svg'} custom={!!images.heroStage} onUpload={setSingle('heroStage')} onDelete={clearSingle('heroStage')} />
-            <Slot label="Left figure" hint="Fruits Basket platform" preview={images.heroLeft ?? defaultFigures.left} custom={!!images.heroLeft} onUpload={setSingle('heroLeft')} onDelete={clearSingle('heroLeft')} />
-            <Slot label="Centre figure" hint="Main, largest platform" preview={images.heroCenter ?? defaultFigures.center} custom={!!images.heroCenter} onUpload={setSingle('heroCenter')} onDelete={clearSingle('heroCenter')} />
-            <Slot label="Right figure" hint="Cardcaptor Sakura platform" preview={images.heroRight ?? defaultFigures.right} custom={!!images.heroRight} onUpload={setSingle('heroRight')} onDelete={clearSingle('heroRight')} />
+            <Slot label="Platforms background" hint="Purple stage behind the 3 series figures" aspect="aspect-[6/5]" preview={images.heroStage ?? '/images/hero/hero-stage.svg'} custom={!!images.heroStage} onUpload={setSingle('heroStage')} onDelete={clearSingle('heroStage')} />
+            <Slot label={`${heroName(0)} figure`} hint="Left platform on the home banner" preview={images.heroLeft ?? defaultFigures.left} custom={!!images.heroLeft} onUpload={setSingle('heroLeft')} onDelete={clearSingle('heroLeft')} />
+            <Slot label={`${heroName(1)} figure`} hint="Centre platform (largest) on the home banner" preview={images.heroCenter ?? defaultFigures.center} custom={!!images.heroCenter} onUpload={setSingle('heroCenter')} onDelete={clearSingle('heroCenter')} />
+            <Slot label={`${heroName(2)} figure`} hint="Right platform on the home banner" preview={images.heroRight ?? defaultFigures.right} custom={!!images.heroRight} onUpload={setSingle('heroRight')} onDelete={clearSingle('heroRight')} />
           </div>
         </Section>
 

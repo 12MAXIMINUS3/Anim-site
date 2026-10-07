@@ -1,6 +1,7 @@
 import { adminListCategories, deleteCategory, saveCategory } from '@/services/admin';
 import { TaxonomyManager } from '@/components/admin/TaxonomyManager';
 import { AdminPageHeader } from './AdminLayout';
+import { placeholderCategoryPath } from '@/data/seedProducts';
 
 export default function AdminCategories() {
   return (
@@ -9,7 +10,8 @@ export default function AdminCategories() {
       <TaxonomyManager
         singular="Category"
         ordered
-        imageLabel="Image URL"
+        imageLabel="Category image"
+        uploadFolder="categories"
         load={adminListCategories}
         save={(r, id) =>
           saveCategory(
@@ -17,7 +19,8 @@ export default function AdminCategories() {
               slug: r.slug,
               name: r.name,
               description: r.description,
-              imageUrl: r.imageUrl,
+              // No image → fall back to the built-in tile instead of an empty box.
+              imageUrl: r.imageUrl || placeholderCategoryPath(r.slug),
               position: r.position ?? 0,
               isActive: r.isActive ?? true,
             },

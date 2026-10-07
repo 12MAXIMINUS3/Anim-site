@@ -7,7 +7,7 @@ export function Logo({ className, onClick }: { className?: string; onClick?: () 
   if (images.logo) {
     return (
       <Link to="/" onClick={onClick} className={cn('flex min-w-0 items-center', className)} aria-label="Nova Figure Vault — home">
-        <img src={images.logo} alt="Nova Figure Vault" className="h-9 w-auto max-w-[170px] object-contain sm:h-10" />
+        <img src={images.logo} alt="Nova Figure Vault" className="h-12 w-auto max-w-[170px] object-contain sm:h-14" />
       </Link>
     );
   }

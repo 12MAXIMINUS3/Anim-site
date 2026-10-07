@@ -13,10 +13,9 @@ import { ImageWithFallback } from '@/components/ui/ImageWithFallback';
 import { ErrorState, Spinner } from '@/components/ui/States';
 import { AdminPageHeader } from './AdminLayout';
 import { cn } from '@/lib/cn';
-import { ANIME_SERIES, HERO_SERIES } from '@/data/series';
+import { HERO_SERIES } from '@/data/series';
 
 /** Series name shown on each hero platform (left, centre, right), e.g. "Sailor Moon". */
-const heroName = (i: number) => ANIME_SERIES.find((x) => x.slug === HERO_SERIES[i])?.name ?? ['Left', 'Centre', 'Right'][i];
 
 /** File name from an image URL, without the upload timestamp prefix (e.g. "1791138836197-banner.png" → "banner.png"). */
 function fileName(url: string): string {
@@ -46,7 +45,7 @@ interface SlotProps {
 }
 
 /** One replaceable image (or video) with preview, upload/replace and delete. */
-function Slot({ label, hint, preview, custom, kind = 'image', aspect = 'aspect-[4/5]', emptyText = 'Nothing set', onUpload, onDelete }: SlotProps) {
+export function Slot({ label, hint, preview, custom, kind = 'image', aspect = 'aspect-[4/5]', emptyText = 'Nothing set', onUpload, onDelete }: SlotProps) {
   const input = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState<'upload' | 'delete' | null>(null);
 
@@ -150,7 +149,8 @@ function Section({ title, description, children }: { title: string; description:
 type SingleKey = Exclude<keyof SiteImages, 'community' | 'series'>;
 
 export default function AdminSiteImages() {
-  const { images, refresh } = useSettings();
+  const { images, refresh, series } = useSettings();
+  const heroName = (i: number) => series.find((x) => x.slug === HERO_SERIES[i])?.name ?? ['Left', 'Centre', 'Right'][i];
   const categories = useAsync(adminListCategories, []);
   const defaultFigures = heroFigurePaths();
 
@@ -182,22 +182,6 @@ export default function AdminSiteImages() {
     const community = [...images.community];
     community[i] = null;
     await saveSiteImages({ ...images, community });
-    await deleteSiteFile(old).catch(() => undefined);
-    await refresh();
-  };
-
-  const setSeries = (slug: string) => async (file: File) => {
-    const url = await uploadSiteFile(file, `series/${slug}`);
-    const old = images.series[slug];
-    await saveSiteImages({ ...images, series: { ...images.series, [slug]: url } });
-    await deleteSiteFile(old).catch(() => undefined);
-    await refresh();
-  };
-  const clearSeries = (slug: string) => async () => {
-    const old = images.series[slug];
-    const series = { ...images.series };
-    delete series[slug];
-    await saveSiteImages({ ...images, series });
     await deleteSiteFile(old).catch(() => undefined);
     await refresh();
   };
@@ -254,24 +238,10 @@ export default function AdminSiteImages() {
           </div>
         </Section>
 
-        <Section
-          title="Home page — Shop by anime"
-          description="The series tiles under “Your favorite series, on your shelf”. Without a picture, a tile shows its colour design; upload one to use your own picture behind the series name."
-        >
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            {ANIME_SERIES.map((s) => (
-              <Slot
-                key={s.slug}
-                label={s.name}
-                hint="Shop by anime tile"
-                aspect="aspect-[16/10]"
-                preview={images.series[s.slug] ?? null}
-                emptyText="Colour tile in use"
-                custom={Boolean(images.series[s.slug])}
-                onUpload={setSeries(s.slug)}
-                onDelete={clearSeries(s.slug)}
-              />
-            ))}
+        <Section title="Home page — Shop by anime" description="Series names, order and tile pictures are managed on their own page.">
+          <div className="card flex flex-wrap items-center justify-between gap-3 p-4">
+            <p className="text-sm text-ink-300">Rename, add, delete or reorder series and upload a picture for each tile.</p>
+            <Link to="/admin/series" className="btn-secondary">Open Shop by anime</Link>
           </div>
         </Section>
 

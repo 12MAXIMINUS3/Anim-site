@@ -264,3 +264,18 @@ export interface SiteImages {
   /** "Shop by anime" tile pictures, keyed by series slug (missing = colour tile). */
   series: Record<string, string>;
 }
+
+/** Editable home-page hero text (Admin → Settings → Home page text). */
+export interface HomeText {
+  badge: string;
+  title: string;
+  /** Part of the headline shown in the purple-to-blue gradient (appended after `title`). */
+  titleHighlight: string;
+  subtitle: string;
+  primaryCta: string;
+  secondaryCta: string;
+  /** "Shop by anime" section: small label, heading and link text. */
+  seriesEyebrow: string;
+  seriesTitle: string;
+  seriesLink: string;
+}

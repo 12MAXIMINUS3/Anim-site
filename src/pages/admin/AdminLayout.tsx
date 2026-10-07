@@ -1,6 +1,6 @@
 import { Suspense, useState, type ReactNode } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
-import { ArrowLeft, FolderTree, Image, LayoutDashboard, Menu, Package, Settings, ShoppingCart, Tags, Users, X } from 'lucide-react';
+import { ArrowLeft, FolderTree, Image, LayoutDashboard, LayoutGrid, Menu, Package, Settings, ShoppingCart, Tags, Users, X } from 'lucide-react';
 import { Logo } from '@/components/layout/Logo';
 import { Spinner } from '@/components/ui/States';
 import { useAuth } from '@/context/AuthContext';
@@ -14,6 +14,7 @@ const NAV = [
   { to: '/admin/brands', label: 'Brands', icon: Tags },
   { to: '/admin/orders', label: 'Orders', icon: ShoppingCart },
   { to: '/admin/customers', label: 'Customers', icon: Users },
+  { to: '/admin/series', label: 'Shop by anime', icon: LayoutGrid },
   { to: '/admin/images', label: 'Site images', icon: Image },
   { to: '/admin/settings', label: 'Settings', icon: Settings },
 ];

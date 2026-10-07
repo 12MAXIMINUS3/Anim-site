@@ -14,7 +14,7 @@ import { Field, FormAlert } from '@/components/ui/FormField';
 import { ErrorState, Spinner } from '@/components/ui/States';
 import { ProductImagesManager } from '@/components/admin/ProductImagesManager';
 import { AdminPageHeader } from './AdminLayout';
-import { ANIME_SERIES } from '@/data/series';
+import { useSettings } from '@/context/SettingsContext';
 
 const money = z.string().trim().regex(/^\d+(\.\d{1,2})?$/, 'Enter an amount like 49.99');
 const optionalMoney = money.or(z.literal(''));
@@ -107,6 +107,7 @@ export default function AdminProductEditorPage() {
 }
 
 function AdminProductEditor({ id }: { id?: string }) {
+  const { series } = useSettings();
   const isNew = !id;
   const navigate = useNavigate();
   const taxonomy = useAsync(() => Promise.all([adminListCategories(), adminListBrands()]), []);
@@ -304,7 +305,7 @@ function AdminProductEditor({ id }: { id?: string }) {
               <input className="input" list="series-options" {...register('franchise')} />
             </Field>
             <datalist id="series-options">
-              {ANIME_SERIES.map((s) => (
+              {series.map((s) => (
                 <option key={s.slug} value={s.name} />
               ))}
             </datalist>

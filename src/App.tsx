@@ -38,6 +38,7 @@ const AdminOrders = lazy(() => import('@/pages/admin/AdminOrders'));
 const AdminCustomers = lazy(() => import('@/pages/admin/AdminCustomers'));
 const AdminSettings = lazy(() => import('@/pages/admin/AdminSettings'));
 const AdminSiteImages = lazy(() => import('@/pages/admin/AdminSiteImages'));
+const AdminSeries = lazy(() => import('@/pages/admin/AdminSeries'));
 
 export default function App() {
   useCommerceSync();
@@ -89,6 +90,7 @@ export default function App() {
           <Route path="brands" element={<AdminBrands />} />
           <Route path="orders" element={<AdminOrders />} />
           <Route path="customers" element={<AdminCustomers />} />
+          <Route path="series" element={<AdminSeries />} />
           <Route path="images" element={<AdminSiteImages />} />
           <Route path="settings" element={<AdminSettings />} />
         </Route>

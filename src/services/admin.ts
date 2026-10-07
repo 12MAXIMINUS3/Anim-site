@@ -391,3 +391,16 @@ export async function setCategoryImage(id: string, url: string | null): Promise<
   throwIfError(error);
   invalidateTaxonomyCache();
 }
+
+/** After renaming a series, move its products to the new name so they stay in that series. */
+export async function renameSeriesProducts(oldName: string, newName: string): Promise<void> {
+  if (oldName === newName) return;
+  const { error } = await requireSupabase().from('products').update({ franchise: newName }).eq('franchise', oldName);
+  throwIfError(error);
+}
+
+export async function countProductsInSeries(name: string): Promise<number> {
+  const { count, error } = await requireSupabase().from('products').select('id', { count: 'exact', head: true }).eq('franchise', name);
+  throwIfError(error);
+  return count ?? 0;
+}

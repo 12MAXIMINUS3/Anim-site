@@ -16,10 +16,12 @@ export function RequireAuth({ children }: { children: ReactNode }) {
 }
 
 export function RequireAdmin({ children }: { children: ReactNode }) {
-  const { user, isAdmin, loading, profileLoading } = useAuth();
+  const { user, profile, isAdmin, loading, profileLoading } = useAuth();
   const location = useLocation();
   if (!isSupabaseConfigured) return <SetupRequired feature="the admin dashboard" />;
-  if (loading || profileLoading) return <Spinner label="Checking permissions" className="py-32" />;
+  // Only block while the profile for *this* user is unknown. Background refreshes (token
+  // renewals, other tabs) keep the page mounted so unsaved admin edits are not lost.
+  if (loading || (profileLoading && profile?.id !== user?.id)) return <Spinner label="Checking permissions" className="py-32" />;
   if (!user) return <Navigate to={`/login?redirect=${encodeURIComponent(location.pathname)}`} replace />;
   if (!isAdmin) {
     return (

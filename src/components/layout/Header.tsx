@@ -9,7 +9,8 @@ import { useUiStore } from '@/store/uiStore';
 import { selectCartCount, useCartStore } from '@/store/cartStore';
 import { useWishlistStore } from '@/store/wishlistStore';
 import { cn } from '@/lib/cn';
-import { ANIME_SERIES, seriesHref } from '@/data/series';
+import { seriesHref } from '@/data/series';
+import { useSettings } from '@/context/SettingsContext';
 
 interface MenuItem {
   to: string;
@@ -75,10 +76,11 @@ function NavDropdown({ label, items, footer }: { label: string; items: MenuItem[
 
 /** "Shop" menu: all products plus every anime series. */
 function ShopMenu() {
+  const { series } = useSettings();
   return (
     <NavDropdown
       label="Shop"
-      items={ANIME_SERIES.map((s) => ({ to: seriesHref(s), title: s.name }))}
+      items={series.map((s) => ({ to: seriesHref(s), title: s.name }))}
       footer={{ to: '/shop', title: 'Shop all products' }}
     />
   );

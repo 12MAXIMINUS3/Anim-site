@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { catalog, makeQuery } from '@/services/catalog';
 import { useAsync } from '@/hooks/useAsync';
 import { useSeo } from '@/lib/seo';
+import { useSettings } from '@/context/SettingsContext';
 import { ProductRail } from '@/components/product/ProductRail';
 import { ProductGrid } from '@/components/product/ProductGrid';
 import { ErrorState } from '@/components/ui/States';
@@ -36,6 +37,7 @@ export default function HomePage() {
     },
   });
 
+  const { homeText } = useSettings();
   const location = useLocation();
   useEffect(() => {
     if (!location.hash) return;
@@ -54,7 +56,7 @@ export default function HomePage() {
 
       <div className="container-page space-y-24 py-16">
         <section aria-labelledby="anime-heading" id="anime" className="scroll-mt-28">
-          <SectionHeading id="anime-heading" eyebrow="Shop by anime" title="Your favorite series, on your shelf" action={viewAll('/shop', 'All figures')} />
+          <SectionHeading id="anime-heading" eyebrow={homeText.seriesEyebrow} title={homeText.seriesTitle} action={viewAll('/shop', homeText.seriesLink)} />
           <AnimeSeriesGrid />
         </section>
 

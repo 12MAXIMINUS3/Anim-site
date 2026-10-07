@@ -6,7 +6,7 @@ import { HELP_LINKS, LEGAL_LINKS } from './navigation';
 import { useSettings } from '@/context/SettingsContext';
 import { catalog } from '@/services/catalog';
 import { useAsync } from '@/hooks/useAsync';
-import { ANIME_SERIES, seriesHref } from '@/data/series';
+import { seriesHref } from '@/data/series';
 
 const SOCIALS = [
   { label: 'Instagram', href: 'https://www.instagram.com/', icon: Instagram },
@@ -16,7 +16,7 @@ const SOCIALS = [
 ];
 
 export function Footer() {
-  const { settings } = useSettings();
+  const { settings, series } = useSettings();
   const { data: categories } = useAsync(() => catalog.listCategories(), []);
   const year = new Date().getFullYear();
   const linkCls = 'inline-block py-1.5 text-sm text-ink-300 hover:text-white sm:py-0';
@@ -76,7 +76,7 @@ export function Footer() {
         <nav aria-label="Anime series">
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">Anime</h2>
           <ul className="space-y-1 sm:space-y-2.5">
-            {ANIME_SERIES.map((s) => (
+            {series.map((s) => (
               <li key={s.slug}>
                 <Link to={seriesHref(s)} className={linkCls}>
                   {s.name}

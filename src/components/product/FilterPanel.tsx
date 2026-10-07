@@ -2,8 +2,8 @@ import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import { ChevronDown } from 'lucide-react';
 import type { Brand, CatalogFacets, Category } from '@/types';
 import { formatCurrency } from '@/lib/format';
-import { ANIME_SERIES } from '@/data/series';
 import { cn } from '@/lib/cn';
+import { useSettings } from '@/context/SettingsContext';
 
 interface Props {
   params: URLSearchParams;
@@ -45,6 +45,7 @@ function Radio({ name, label, checked, onChange }: { name: string; label: string
 }
 
 export function FilterPanel({ params, onChange, categories, brands, facets, hideCategory }: Props) {
+  const { series } = useSettings();
   const [min, setMin] = useState(params.get('min') ?? '');
   const [max, setMax] = useState(params.get('max') ?? '');
   useEffect(() => {
@@ -52,7 +53,7 @@ export function FilterPanel({ params, onChange, categories, brands, facets, hide
     setMax(params.get('max') ?? '');
   }, [params]);
 
-  const seriesNames = ANIME_SERIES.map((s) => s.name);
+  const seriesNames = series.map((s) => s.name);
   // Only the store's anime series are browsable (see src/data/series.ts).
   const franchises = seriesNames;
 

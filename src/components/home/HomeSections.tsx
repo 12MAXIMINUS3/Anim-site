@@ -7,7 +7,7 @@ import { ImageWithFallback } from '@/components/ui/ImageWithFallback';
 import { Skeleton } from '@/components/ui/States';
 import { NewsletterForm } from '@/components/layout/NewsletterForm';
 import { communityImagePath, heroFigurePaths, heroImagePath, homeVideoPath } from '@/data/seedProducts';
-import { ANIME_SERIES, HERO_SERIES, seriesHref } from '@/data/series';
+import { HERO_SERIES, seriesHref } from '@/data/series';
 import { useSettings } from '@/context/SettingsContext';
 
 export function SectionHeading({ eyebrow, title, action, id }: { eyebrow?: string; title: string; action?: ReactNode; id?: string }) {
@@ -43,22 +43,25 @@ function useHomeImages() {
 
 export function Hero() {
   const home = useHomeImages();
+  const { homeText: t, series } = useSettings();
   return (
     <section className="relative overflow-hidden border-b border-ink-800" aria-labelledby="hero-heading">
       <HeroBackgroundVideo />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(139,92,246,.25),transparent_55%),radial-gradient(ellipse_at_bottom_left,rgba(34,211,238,.12),transparent_50%)]" />
       <div className="container-page relative grid items-center gap-10 py-14 lg:grid-cols-[1.05fr_1fr] lg:py-20">
         <div className="max-w-xl">
-          <p className="chip mb-6 border-nova-500/40 bg-nova-500/10 text-nova-200">
-            <Sparkles className="h-3.5 w-3.5" aria-hidden="true" /> Autumn drops are live
-          </p>
+          {t.badge && (
+            <p className="chip mb-6 border-nova-500/40 bg-nova-500/10 text-nova-200">
+              <Sparkles className="h-3.5 w-3.5" aria-hidden="true" /> {t.badge}
+            </p>
+          )}
           <h1 id="hero-heading" className="text-4xl font-extrabold leading-[1.05] sm:text-5xl lg:text-6xl">
-            Ultimate Anime Figures &amp; <span className="text-gradient">Resin Collectibles</span>
+            {t.title} {t.titleHighlight && <span className="text-gradient">{t.titleHighlight}</span>}
           </h1>
-          <p className="mt-6 text-lg text-ink-300">New drops, trending statues, and limited editions — curated for collectors like you.</p>
+          <p className="mt-6 text-lg text-ink-300">{t.subtitle}</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/shop?sort=newest" className="btn-primary px-6 py-3 text-base">
-              Shop New Arrivals <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              {t.primaryCta} <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <a
               href="#collections"
@@ -69,7 +72,7 @@ export function Hero() {
               }}
               className="btn-secondary px-6 py-3 text-base"
             >
-              Explore Collections
+              {t.secondaryCta}
             </a>
           </div>
           <dl className="mt-10 grid max-w-md grid-cols-3 gap-4 border-t border-ink-800 pt-6">
@@ -102,7 +105,7 @@ export function Hero() {
             <p className="text-xs text-ink-400">Featured series</p>
             <ul className="mt-1 flex flex-wrap gap-x-4 gap-y-1">
               {HERO_SERIES.map((slug) => {
-                const s = ANIME_SERIES.find((x) => x.slug === slug);
+                const s = series.find((x) => x.slug === slug);
                 return s ? (
                   <li key={slug}>
                     <Link to={seriesHref(s)} className="text-sm font-semibold text-white hover:text-nova-200">
@@ -238,10 +241,10 @@ export function CommunityStrip() {
 
 /** "Shop by anime" tiles — typographic designs only (no character artwork). */
 export function AnimeSeriesGrid() {
-  const { images } = useSettings();
+  const { images, series } = useSettings();
   return (
     <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
-      {ANIME_SERIES.map((s, i) => (
+      {series.map((s, i) => (
         <li key={s.slug}>
           <Link
             to={seriesHref(s)}

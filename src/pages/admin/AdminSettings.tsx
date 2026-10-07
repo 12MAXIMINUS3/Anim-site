@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useSettings } from '@/context/SettingsContext';
-import { saveSiteSettings } from '@/services/engagement';
+import { saveHomeText, saveSiteSettings } from '@/services/engagement';
 import { emailSchema } from '@/lib/schemas';
 import { friendlyError } from '@/lib/authErrors';
 import { toast } from '@/store/toastStore';
@@ -83,6 +83,80 @@ export default function AdminSettings() {
           </button>
         </div>
       </form>
+      <HomeTextForm />
     </>
+  );
+}
+
+const homeTextSchema = z.object({
+  badge: z.string().trim().max(60),
+  title: z.string().trim().min(2, 'Add a headline').max(90),
+  titleHighlight: z.string().trim().max(60),
+  subtitle: z.string().trim().max(240),
+  primaryCta: z.string().trim().min(2, 'Add button text').max(30),
+  secondaryCta: z.string().trim().min(2, 'Add button text').max(30),
+});
+type HomeTextValues = z.infer<typeof homeTextSchema>;
+
+/** Home page hero text: headline, highlighted words, sentence and buttons. */
+function HomeTextForm() {
+  const { homeText, refresh } = useSettings();
+  const [error, setError] = useState<string | null>(null);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting, isDirty },
+  } = useForm<HomeTextValues>({ resolver: zodResolver(homeTextSchema), values: homeText });
+
+  return (
+    <form
+      noValidate
+      className="card mt-6 grid max-w-3xl gap-5 p-6"
+      onSubmit={handleSubmit(async (v) => {
+        setError(null);
+        try {
+          await saveHomeText({ ...homeText, ...v });
+          await refresh();
+          reset(v);
+          toast.success('Home page text saved', 'It is live on the home page.');
+        } catch (e) {
+          setError(friendlyError(e));
+        }
+      })}
+    >
+      <div>
+        <h2 className="text-lg font-semibold">Home page text</h2>
+        <p className="mt-1 text-xs text-ink-400">The headline area at the top of the home page.</p>
+      </div>
+      <Field label="Small tag above the headline" error={errors.badge?.message} hint="Leave blank to hide it.">
+        <input className="input" {...register('badge')} />
+      </Field>
+      <div className="grid gap-5 sm:grid-cols-2">
+        <Field label="Headline" error={errors.title?.message} required>
+          <input className="input" {...register('title')} />
+        </Field>
+        <Field label="Highlighted words (purple)" error={errors.titleHighlight?.message} hint="Shown right after the headline.">
+          <input className="input" {...register('titleHighlight')} />
+        </Field>
+      </div>
+      <Field label="Sentence under the headline" error={errors.subtitle?.message}>
+        <textarea className="input min-h-20" {...register('subtitle')} />
+      </Field>
+      <div className="grid gap-5 sm:grid-cols-2">
+        <Field label="Main button" error={errors.primaryCta?.message} required>
+          <input className="input" {...register('primaryCta')} />
+        </Field>
+        <Field label="Second button" error={errors.secondaryCta?.message} required>
+          <input className="input" {...register('secondaryCta')} />
+        </Field>
+      </div>
+      <FormAlert message={error} />
+      <div>
+        <button type="submit" className="btn-primary" disabled={isSubmitting || !isDirty}>
+          {isSubmitting ? 'Saving…' : 'Save home page text'}
+        </button>
+      </div>
+    </form>
   );
 }

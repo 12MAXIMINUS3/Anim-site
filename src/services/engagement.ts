@@ -1,4 +1,5 @@
-import type { Review, SiteImages, SiteSettings } from '@/types';
+import type { HomeText, Review, SiteImages, SiteSettings } from '@/types';
+import { ANIME_SERIES, type Series } from '@/data/series';
 import { requireSupabase, supabase, throwIfError } from '@/lib/supabase';
 import { seedSettings } from '@/data/seedProducts';
 import { mapReview } from './mappers';
@@ -119,5 +120,65 @@ export async function fetchSiteImages(): Promise<SiteImages> {
 
 export async function saveSiteImages(images: SiteImages): Promise<void> {
   const { error } = await requireSupabase().from('site_settings').upsert({ key: 'site_images', value: images }, { onConflict: 'key' });
+  throwIfError(error);
+}
+
+// ─────────────────────── Series list & home text (admin-editable) ───────────────────────
+
+export const DEFAULT_HOME_TEXT: HomeText = {
+  badge: 'Autumn drops are live',
+  title: 'Ultimate Anime Figures &',
+  titleHighlight: 'Resin Collectibles',
+  subtitle: 'New drops, trending statues, and limited editions — curated for collectors like you.',
+  primaryCta: 'Shop New Arrivals',
+  secondaryCta: 'Explore Collections',
+  seriesEyebrow: 'Shop by anime',
+  seriesTitle: 'Your favorite series, on your shelf',
+  seriesLink: 'All figures',
+};
+
+/** Anime series list (site_settings `series`); falls back to the built-in list. */
+export async function fetchSeries(): Promise<Series[]> {
+  if (!supabase) return ANIME_SERIES;
+  const { data, error } = await supabase.from('site_settings').select('value').eq('key', 'series').maybeSingle();
+  throwIfError(error);
+  const list = Array.isArray(data?.value) ? (data!.value as Array<Record<string, unknown>>) : null;
+  if (!list) return ANIME_SERIES;
+  return list
+    .filter((s) => typeof s.slug === 'string' && typeof s.name === 'string' && String(s.name).trim())
+    .map((s) => ({
+      slug: String(s.slug),
+      name: String(s.name).trim(),
+      colors: Array.isArray(s.colors) && s.colors.length === 2 ? [String(s.colors[0]), String(s.colors[1])] : ['#4c1d95', '#0e7490'],
+    }));
+}
+
+export async function saveSeries(list: Series[]): Promise<void> {
+  const value = list.map(({ slug, name, colors }) => ({ slug, name, colors }));
+  const { error } = await requireSupabase().from('site_settings').upsert({ key: 'series', value }, { onConflict: 'key' });
+  throwIfError(error);
+}
+
+export async function fetchHomeText(): Promise<HomeText> {
+  if (!supabase) return DEFAULT_HOME_TEXT;
+  const { data, error } = await supabase.from('site_settings').select('value').eq('key', 'home_text').maybeSingle();
+  throwIfError(error);
+  const v = (data?.value ?? {}) as Record<string, unknown>;
+  const pick = (k: keyof HomeText) => (typeof v[k] === 'string' ? (v[k] as string) : DEFAULT_HOME_TEXT[k]);
+  return {
+    badge: pick('badge'),
+    title: pick('title'),
+    titleHighlight: pick('titleHighlight'),
+    subtitle: pick('subtitle'),
+    primaryCta: pick('primaryCta'),
+    secondaryCta: pick('secondaryCta'),
+    seriesEyebrow: pick('seriesEyebrow'),
+    seriesTitle: pick('seriesTitle'),
+    seriesLink: pick('seriesLink'),
+  };
+}
+
+export async function saveHomeText(text: HomeText): Promise<void> {
+  const { error } = await requireSupabase().from('site_settings').upsert({ key: 'home_text', value: text }, { onConflict: 'key' });
   throwIfError(error);
 }

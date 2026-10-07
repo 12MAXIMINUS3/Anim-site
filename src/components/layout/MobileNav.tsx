@@ -5,9 +5,11 @@ import { useAuth } from '@/context/AuthContext';
 import { catalog } from '@/services/catalog';
 import { useAsync } from '@/hooks/useAsync';
 import { HELP_LINKS, PRIMARY_NAV } from './navigation';
-import { ANIME_SERIES, seriesHref } from '@/data/series';
+import { seriesHref } from '@/data/series';
+import { useSettings } from '@/context/SettingsContext';
 
 export function MobileNav() {
+  const { series } = useSettings();
   const open = useUiStore((s) => s.mobileNavOpen);
   const setOpen = useUiStore((s) => s.setMobileNav);
   const { user, isAdmin } = useAuth();
@@ -30,7 +32,7 @@ export function MobileNav() {
         <div>
           <p className="eyebrow px-3 pb-2">Anime</p>
           <ul>
-            {ANIME_SERIES.map((s) => (
+            {series.map((s) => (
               <li key={s.slug}>
                 <Link to={seriesHref(s)} onClick={close} className={linkCls}>
                   {s.name}

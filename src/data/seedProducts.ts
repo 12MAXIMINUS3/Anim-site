@@ -1155,9 +1155,9 @@ export function reviewsForProduct(index: number): SeedReview[] {
 
 export const seedSettings: SiteSettings = {
   announcement: 'Free standard shipping on orders over $200 · Use WELCOME10 for 10% off your first order',
-  storeEmail: 'hello@figurehaven.example',
-  storePhone: '+1 (555) 014-2290',
-  storeAddress: '120 Collector Lane, Suite 4, Portland, OR 97201',
+  storeEmail: 'havenfigure01@gmail.com',
+  storePhone: '+44 7446 356087',
+  storeAddress: "345 Gray's Inn Road, London WC1X 8BX",
   currency: 'USD',
   shippingMessage: 'Orders ship within 2 business days. Preorders ship as soon as they arrive in our warehouse.',
 };

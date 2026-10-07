@@ -300,9 +300,9 @@ delete from public.reviews where user_id is null and product_id in (select id fr
 -- Site settings
 insert into public.site_settings (key, value) values
   ('announcement', to_jsonb('Free standard shipping on orders over $200 · Use WELCOME10 for 10% off your first order'::text)),
-  ('store_email', to_jsonb('hello@figurehaven.example'::text)),
-  ('store_phone', to_jsonb('+1 (555) 014-2290'::text)),
-  ('store_address', to_jsonb('120 Collector Lane, Suite 4, Portland, OR 97201'::text)),
+  ('store_email', to_jsonb('havenfigure01@gmail.com'::text)),
+  ('store_phone', to_jsonb('+44 7446 356087'::text)),
+  ('store_address', to_jsonb('345 Gray''s Inn Road, London WC1X 8BX'::text)),
   ('currency', to_jsonb('USD'::text)),
   ('shipping_message', to_jsonb('Orders ship within 2 business days. Preorders ship as soon as they arrive in our warehouse.'::text))
 on conflict (key) do nothing;

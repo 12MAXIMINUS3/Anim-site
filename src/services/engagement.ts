@@ -85,6 +85,7 @@ export const emptySiteImages = (): SiteImages => ({
   heroRight: null,
   homeVideo: null,
   community: Array.from({ length: COMMUNITY_SLOTS }, () => null),
+  series: {},
 });
 
 const str = (v: unknown) => (typeof v === 'string' && v.trim() ? v : null);
@@ -107,6 +108,12 @@ export async function fetchSiteImages(): Promise<SiteImages> {
     heroRight: str(v.heroRight),
     homeVideo: str(v.homeVideo),
     community: base.community.map((_, i) => str(community[i])),
+    series: Object.fromEntries(
+      Object.entries(v.series && typeof v.series === 'object' ? (v.series as Record<string, unknown>) : {}).flatMap(([k, u]) => {
+        const url = str(u);
+        return url ? [[k, url]] : [];
+      }),
+    ),
   };
 }
 

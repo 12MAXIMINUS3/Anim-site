@@ -261,4 +261,6 @@ export interface SiteImages {
   homeVideo: string | null;
   /** "From the community" gallery, 8 slots. */
   community: Array<string | null>;
+  /** "Shop by anime" tile pictures, keyed by series slug (missing = colour tile). */
+  series: Record<string, string>;
 }

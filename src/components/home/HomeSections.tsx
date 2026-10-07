@@ -241,6 +241,7 @@ export function CommunityStrip() {
 
 /** "Shop by anime" tiles — typographic designs only (no character artwork). */
 export function AnimeSeriesGrid() {
+  const { images } = useSettings();
   return (
     <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
       {ANIME_SERIES.map((s, i) => (
@@ -250,6 +251,12 @@ export function AnimeSeriesGrid() {
             className="group relative flex h-28 items-end overflow-hidden rounded-2xl border border-ink-800 p-4 transition hover:-translate-y-0.5 hover:border-nova-400/60 sm:h-32"
             style={{ backgroundImage: `linear-gradient(135deg, ${s.colors[0]}, #0c0c13 70%), radial-gradient(circle at 85% 15%, ${s.colors[1]}, transparent 55%)` }}
           >
+            {images.series[s.slug] && (
+              <>
+                <img src={images.series[s.slug]} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+                <span className="absolute inset-0 bg-gradient-to-t from-ink-950/95 via-ink-950/40 to-transparent" aria-hidden="true" />
+              </>
+            )}
             <span
               className="pointer-events-none absolute -right-2 -top-3 font-display text-7xl font-extrabold text-white/5 transition group-hover:text-white/10"
               aria-hidden="true"

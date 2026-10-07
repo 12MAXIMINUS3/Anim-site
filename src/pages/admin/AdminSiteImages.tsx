@@ -147,7 +147,7 @@ function Section({ title, description, children }: { title: string; description:
   );
 }
 
-type SingleKey = Exclude<keyof SiteImages, 'community'>;
+type SingleKey = Exclude<keyof SiteImages, 'community' | 'series'>;
 
 export default function AdminSiteImages() {
   const { images, refresh } = useSettings();
@@ -182,6 +182,22 @@ export default function AdminSiteImages() {
     const community = [...images.community];
     community[i] = null;
     await saveSiteImages({ ...images, community });
+    await deleteSiteFile(old).catch(() => undefined);
+    await refresh();
+  };
+
+  const setSeries = (slug: string) => async (file: File) => {
+    const url = await uploadSiteFile(file, `series/${slug}`);
+    const old = images.series[slug];
+    await saveSiteImages({ ...images, series: { ...images.series, [slug]: url } });
+    await deleteSiteFile(old).catch(() => undefined);
+    await refresh();
+  };
+  const clearSeries = (slug: string) => async () => {
+    const old = images.series[slug];
+    const series = { ...images.series };
+    delete series[slug];
+    await saveSiteImages({ ...images, series });
     await deleteSiteFile(old).catch(() => undefined);
     await refresh();
   };
@@ -235,6 +251,27 @@ export default function AdminSiteImages() {
               onUpload={setSingle('homeVideo', 'video')}
               onDelete={clearSingle('homeVideo')}
             />
+          </div>
+        </Section>
+
+        <Section
+          title="Home page — Shop by anime"
+          description="The series tiles under “Your favorite series, on your shelf”. Without a picture, a tile shows its colour design; upload one to use your own picture behind the series name."
+        >
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+            {ANIME_SERIES.map((s) => (
+              <Slot
+                key={s.slug}
+                label={s.name}
+                hint="Shop by anime tile"
+                aspect="aspect-[16/10]"
+                preview={images.series[s.slug] ?? null}
+                emptyText="Colour tile in use"
+                custom={Boolean(images.series[s.slug])}
+                onUpload={setSeries(s.slug)}
+                onDelete={clearSeries(s.slug)}
+              />
+            ))}
           </div>
         </Section>
 

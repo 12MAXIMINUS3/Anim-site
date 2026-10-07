@@ -1172,7 +1172,8 @@ export function productImagePaths(slug: string): string[] {
   return photos?.length ? photos : [placeholderProductPath(slug, 1), placeholderProductPath(slug, 2)];
 }
 export const categoryImagePath = (slug: string) => photoManifest.categories[slug] ?? placeholderCategoryPath(slug);
-export const heroImagePath = () => photoManifest.hero ?? '/images/hero/hero-figures.svg';
+/** Default banner: the empty stage (platforms, no figures) until an image is uploaded in Admin → Site images. */
+export const heroImagePath = () => photoManifest.hero ?? '/images/hero/hero-stage.svg';
 /** Real figure photos for the hero platforms (null when not imported). */
 export const heroFigurePaths = () => photoManifest.heroFigures;
 /** Looping background video for the home hero (null when not imported). */

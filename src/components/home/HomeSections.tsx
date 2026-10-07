@@ -96,7 +96,7 @@ export function Hero() {
           ) : (
             <ImageWithFallback
               src={home.hero}
-              alt="Original placeholder artwork of three stylized collectible figures on glowing pedestals"
+              alt="Display stage with three glowing platforms"
               loading="eager"
               className="relative aspect-[6/5] w-full rounded-[2rem] border border-ink-700 object-cover shadow-2xl"
             />
